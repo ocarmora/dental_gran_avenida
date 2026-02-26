@@ -1,4 +1,5 @@
 ---
+import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
 /*
@@ -23,6 +24,31 @@ const testimonials = [
 		name: 'Ana Pérez',
 		detail: 'Paciente desde 2020',
 	},
+	{
+		quote: '"Llevo a toda mi familia aquí. La atención es personalizada y los precios son justos. Muy contentos con los resultados."',
+		name: 'Roberto Silva',
+		detail: 'Paciente desde 2019',
+	},
+	{
+		quote: '"Me hicieron un blanqueamiento y quedó espectacular. El proceso fue rápido y sin molestias. Totalmente recomendado."',
+		name: 'Carmen Rojas',
+		detail: 'Paciente desde 2023',
+	},
+	{
+		quote: '"La ortodoncia que me pusieron cambió mi sonrisa. El equipo es muy profesional y siempre dispuesto a resolver dudas."',
+		name: 'Diego Fernández',
+		detail: 'Paciente desde 2021',
+	},
+	{
+		quote: '"Atendieron a mi hijo con mucha paciencia. Ahora va contento al dentista. Gracias por la excelente labor."',
+		name: 'Patricia López',
+		detail: 'Paciente desde 2022',
+	},
+	{
+		quote: '"Urgencia dental en la noche y me atendieron al día siguiente. Eso habla del compromiso con sus pacientes."',
+		name: 'Andrés Martínez',
+		detail: 'Paciente desde 2020',
+	},
 ];
 ---
 
@@ -30,7 +56,7 @@ const testimonials = [
 	<div class="container-site flex items-center gap-20 lg:gap-30">
 
 		<!-- Left: heading -->
-		<div class="flex-1 min-w-0 flex flex-col justify-center">
+		<div class="flex-1 min-w-0 flex flex-col items-start justify-center">
 			<SectionHeading
 				label="Testimonios"
 				title="Nuestros pacientes nos prefieren"
@@ -45,29 +71,35 @@ const testimonials = [
 			<div class="flex items-center justify-end gap-2">
 				<button
 					type="button"
+					id="testimonials-prev"
 					aria-label="Anterior"
-					class="flex items-center justify-center size-10 rounded-full bg-white hover:bg-blue-white transition-colors shrink-0"
+					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer"
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
 					</svg>
 				</button>
 				<button
 					type="button"
+					id="testimonials-next"
 					aria-label="Siguiente"
-					class="flex items-center justify-center size-10 rounded-full bg-white hover:bg-blue-white transition-colors shrink-0"
+					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer"
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
 					</svg>
 				</button>
 			</div>
 
-			<!-- Testimonial cards row (overflow clips the 4th card peek) -->
-			<div class="flex gap-6 overflow-hidden">
+			<!-- Testimonial cards row: horizontal scroll + arrow navigation -->
+			<div
+				id="testimonials-scroll"
+				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 -mx-1"
+				style="scrollbar-width: thin;"
+			>
 				{testimonials.map((t) => (
-					<div class="bg-white flex flex-col gap-6 px-8 py-10 rounded-2xl shrink-0 w-72">
-						<!-- Stars -->
+					<Card class="shrink-0 w-72 snap-center">
+						<!-- Stars + quote -->
 						<div class="flex flex-col gap-6">
 							<div class="flex gap-1" aria-label="5 de 5 estrellas">
 								{Array.from({ length: 5 }).map(() => (
@@ -79,22 +111,30 @@ const testimonials = [
 							<p class="text-base text-body">{t.quote}</p>
 						</div>
 						<!-- Author -->
-						<div class="flex gap-2 items-start">
-							<img
-								src="/images/avatar-placeholder.svg"
-								alt=""
-								aria-hidden="true"
-								class="size-8 rounded-full object-cover shrink-0"
-							/>
-							<div class="flex flex-col">
-								<p class="text-base font-medium text-body">{t.name}</p>
-								<p class="text-sm text-body/70">{t.detail}</p>
-							</div>
+						<div class="flex flex-col">
+							<p class="text-base font-medium text-body">{t.name}</p>
+							<p class="text-sm text-body/70">{t.detail}</p>
 						</div>
-					</div>
+					</Card>
 				))}
 			</div>
 
 		</div>
 	</div>
 </section>
+
+<script>
+	const scrollEl = document.getElementById('testimonials-scroll');
+	const prevBtn = document.getElementById('testimonials-prev');
+	const nextBtn = document.getElementById('testimonials-next');
+	const scrollAmount = 312; // card width (288px) + gap (24px)
+
+	if (scrollEl && prevBtn && nextBtn) {
+		prevBtn.addEventListener('click', () => {
+			scrollEl.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		});
+		nextBtn.addEventListener('click', () => {
+			scrollEl.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		});
+	}
+</script>
