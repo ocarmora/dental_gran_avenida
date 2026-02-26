@@ -1,0 +1,51 @@
+---
+import Button from './Button.astro';
+import SectionLabel from './SectionLabel.astro';
+
+const whatsappUrl = 'https://wa.me/56948446632';
+---
+
+<section class="w-full pt-16">
+	<div class="container-site flex items-center justify-between">
+
+		<div class="flex flex-col gap-6 w-full max-w-lg">
+
+			<!-- Heading group -->
+			<div class="flex flex-col gap-2 max-w-[571px]">
+				<SectionLabel label="Mes de la sonrisa" />
+
+				<h1 class="font-display font-bold text-[32px] leading-normal text-navy-blue">
+					Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés
+				</h1>
+
+				<p class="text-base text-body">
+					En Dental Gran Avenida queremos que tu única prioridad sea volver a
+					sonreír. Accede a tecnología avanzada y especialistas de primer nivel
+					con la flexibilidad que necesitas.
+				</p>
+			</div>
+
+			<!-- CTAs -->
+			<div class="flex flex-wrap gap-6 items-center">
+				<Button href={whatsappUrl} label="Agendar hora" variant="secondary" target="_blank" />
+
+				<!-- Webpay logo — clipped window, inner image offset to center artwork -->
+				<div class="relative h-[45px] w-[119px] shrink-0 overflow-hidden">
+					<img
+						src="/images/webpay.png"
+						alt="Pago con Webpay Plus: Visa, Mastercard, American Express"
+						class="absolute max-w-none"
+						style="width: 151.47%; height: 119.8%; left: -26.03%; top: -9.9%;"
+					/>
+				</div>
+			</div>
+
+		</div>
+
+		<img
+			src="/images/hero-image.png"
+			alt="Especialistas de Dental Gran Avenida"
+			class="max-w-lg h-auto"
+		/>
+	</div>
+</section>

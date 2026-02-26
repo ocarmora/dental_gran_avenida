@@ -1,31 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-	--color-dark-sea-blue: #063a8d;
-	--color-blue-white: #f2faff;
-	--color-french-ultramarine: #001bb5;
-	--color-bright-ocean: #1e8fd5;
+  /* ── Colors ──────────────────────────────────────────────────── */
+  --color-dark-sea-blue:      #063a8d;
+  --color-blue-white:         #f2faff;
+  --color-french-ultramarine: #001bb5;
+  --color-bright-ocean:       #1e8fd5;
+  --color-navy-blue:          #002e77;
+  --color-body:               #222222;
+
+  /* ── Fonts ───────────────────────────────────────────────────── */
+  /* --font-sans overrides Tailwind's preflight default,           */
+  /* making DM Sans the site-wide base font automatically.         */
+  --font-sans:    'DM Sans', sans-serif;
+  --font-display: 'Figtree', sans-serif;
+  --font-inter:   'Inter', sans-serif;
 }
 
 @layer base {
-	html {
-		scroll-behavior: smooth;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
-	.container-site {
-		width: 100%;
-		max-width: 1400px;
-		margin-inline: auto;
-		padding-inline: 1rem;
+  .container-site {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
 
-		@media (min-width: 640px) {
-			padding-inline: 1.5rem;
-		}
+    @media (min-width: 640px) {
+      padding-inline: 1.5rem;
+    }
 
-		@media (min-width: 1024px) {
-			padding-inline: 2.5rem;
-		}
-	}
+    @media (min-width: 1024px) {
+      padding-inline: 2.5rem;
+    }
+  }
 }

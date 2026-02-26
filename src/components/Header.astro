@@ -1,4 +1,6 @@
 ---
+import Button from './Button.astro';
+
 const whatsappUrl = 'https://wa.me/56948446632';
 
 const navLinks = [
@@ -22,7 +24,7 @@ const navLinks = [
 				{navLinks.map((link) => (
 					<a
 						href={link.href}
-						class="flex gap-1.5 items-center font-['Inter',sans-serif] text-base font-normal text-black hover:text-french-ultramarine transition-colors whitespace-nowrap"
+						class="flex gap-1.5 items-center font-inter text-base font-normal text-black hover:text-french-ultramarine transition-colors whitespace-nowrap"
 					>
 						{link.label}
 						{link.hasDropdown && (
@@ -48,18 +50,7 @@ const navLinks = [
 				</svg>
 			</a>
 
-			<!-- Agendar hora button -->
-			<a
-				href={whatsappUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="bg-french-ultramarine flex gap-3 h-14 items-center justify-center min-w-[200px] px-8 rounded-full shrink-0 hover:opacity-90 transition-opacity"
-			>
-				<span class="font-['DM_Sans',sans-serif] text-base font-normal text-white">Agendar hora</span>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[18px] h-[8px] shrink-0" aria-hidden="true">
-					<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z" fill="white"/>
-				</svg>
-			</a>
+			<Button href={whatsappUrl} label="Agendar hora" variant="primary" target="_blank" />
 		</div>
 
 	</div>
