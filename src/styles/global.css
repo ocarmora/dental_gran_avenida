@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @layer base {
+	:root {
+		--color-dark-sea-blue: #063a8d;
+		--color-blue-white: #f2faff;
+		--color-french-ultramarine: #1a4fbf;
+		--color-bright-ocean: #1e8fd5;
+	}
+
 	html {
 		scroll-behavior: smooth;
 	}
