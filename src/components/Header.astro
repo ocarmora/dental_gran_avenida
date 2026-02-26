@@ -10,8 +10,8 @@ const navLinks = [
 ];
 ---
 
-<header class="bg-blue-white py-5 w-full">
-	<div class="container-site flex items-center justify-between">
+<header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
+		<div class="container-site flex items-center justify-between overflow-visible">
 
 		<!-- Logo + Nav -->
 		<div class="flex gap-8 lg:gap-20 items-center">
@@ -36,9 +36,8 @@ const navLinks = [
 			</nav>
 		</div>
 
-		<!-- CTAs -->
-		<div class="flex gap-3 items-center">
-			<!-- Phone icon -->
+		<!-- CTAs — desktop -->
+		<div class="hidden md:flex gap-3 items-center">
 			<a
 				href={`tel:+${config.whatsapp.phone}`}
 				class="size-12 shrink-0 flex items-center justify-center rounded-full border border-french-ultramarine hover:bg-french-ultramarine group transition-colors"
@@ -48,9 +47,149 @@ const navLinks = [
 					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/>
 				</svg>
 			</a>
-
 			<Button href={config.whatsapp.url} label="Agendar hora" variant="primary" target="_blank" />
 		</div>
 
+		<!-- Hamburger — mobile only, se transforma en X cuando el menú está abierto -->
+		<button
+			type="button"
+			id="menu-toggle"
+			class="md:hidden flex flex-col items-center justify-center gap-1.5 size-12 min-w-12 -mr-2 rounded-lg hover:bg-navy-blue/5 transition-colors touch-manipulation overflow-visible [&.is-open_span:nth-child(1)]:rotate-45 [&.is-open_span:nth-child(1)]:translate-y-2 [&.is-open_span:nth-child(2)]:opacity-0 [&.is-open_span:nth-child(3)]:-rotate-45 [&.is-open_span:nth-child(3)]:-translate-y-2"
+			aria-label="Abrir menú"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+		>
+			<span class="block w-5 h-0.5 bg-navy-blue rounded-full transition-transform duration-300 origin-center" aria-hidden="true"></span>
+			<span class="block w-5 h-0.5 bg-navy-blue rounded-full transition-all duration-300 origin-center" aria-hidden="true"></span>
+			<span class="block w-5 h-0.5 bg-navy-blue rounded-full transition-transform duration-300 origin-center" aria-hidden="true"></span>
+		</button>
+
 	</div>
 </header>
+
+<!-- Mobile menu overlay — full screen, no scroll -->
+<div
+	id="mobile-menu"
+	class="fixed inset-0 z-40 md:hidden bg-blue-white invisible opacity-0 pointer-events-none transition-[visibility,opacity] duration-300 ease-out [&.is-open]:visible [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto"
+	aria-hidden="true"
+>
+	<div class="flex flex-col h-full overflow-hidden pt-24">
+		<!-- Nav links — vertical (el header con logo y hamburger/X queda visible encima) -->
+		<nav class="flex-1 flex flex-col justify-center container-site py-8" aria-label="Navegación móvil">
+			<ul class="flex flex-col">
+				{navLinks.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="block py-4 text-lg font-normal text-black hover:text-french-ultramarine transition-colors border-b border-navy-blue/10"
+						>
+							{link.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<!-- Redes sociales (en mobile sustituyen al TopBar) -->
+		<div class="container-site shrink-0 flex gap-3 items-center justify-center py-6">
+			<a
+				href={config.social.facebook}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="bg-dark-sea-blue flex items-center justify-center size-10 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
+				aria-label="Facebook"
+			>
+				<svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-blue-white" aria-hidden="true">
+					<path d="M4.75625 3.425C4.75625 2.78125 5.33125 2.55 5.975 2.55C6.61875 2.55 7.30625 2.75 7.30625 2.75L7.71875 0.299999C7.71875 0.299999 6.84375 0 4.75625 0C3.475 0 2.73125 0.487499 2.1875 1.20625C1.675 1.8875 1.65625 2.98125 1.65625 3.6875V5.29375H0V7.6875H1.65625V16H4.75625V7.6875H7.2125L7.39375 5.29375H4.75625V3.425Z"/>
+				</svg>
+			</a>
+			<a
+				href={config.social.instagram}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="bg-dark-sea-blue flex items-center justify-center size-10 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
+				aria-label="Instagram"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-4 fill-blue-white" aria-hidden="true">
+					<path d="M8 1.441c2.136 0 2.389.008 3.232.047.78.035 1.204.166 1.486.275.373.145.64.318.92.598s.453.546.598.92c.11.282.24.705.275 1.486.038.843.047 1.096.047 3.232s-.009 2.389-.047 3.232c-.035.78-.166 1.204-.275 1.486a2.479 2.479 0 0 1-.598.92 2.479 2.479 0 0 1-.92.598c-.282.11-.705.24-1.486.275-.843.038-1.096.047-3.232.047s-2.389-.009-3.232-.047c-.78-.035-1.204-.166-1.486-.275a2.479 2.479 0 0 1-.92-.598 2.479 2.479 0 0 1-.598-.92c-.11-.282-.24-.705-.275-1.486C1.45 10.389 1.44 10.136 1.44 8s.008-2.389.047-3.232c.035-.78.166-1.204.275-1.486.145-.373.318-.64.598-.92s.546-.453.92-.598c.282-.11.705-.24 1.486-.275.843-.038 1.096-.047 3.232-.047ZM8 0C5.827 0 5.555.009 4.702.048 3.85.087 3.268.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.917 3.917 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.702.009 5.555 0 5.827 0 8c0 2.173.009 2.445.048 3.298.039.852.174 1.433.372 1.942.204.526.478.972.923 1.417.445.445.89.719 1.417.923.509.198 1.09.333 1.942.372C5.555 15.991 5.827 16 8 16c2.173 0 2.445-.009 3.298-.048.852-.039 1.433-.174 1.942-.372a3.916 3.916 0 0 0 1.417-.923 3.916 3.916 0 0 0 .923-1.417c.198-.509.333-1.09.372-1.942C15.991 10.445 16 10.173 16 8c0-2.173-.009-2.445-.048-3.298-.039-.852-.174-1.433-.372-1.942a3.916 3.916 0 0 0-.923-1.417A3.916 3.916 0 0 0 13.24.42C12.732.222 12.15.087 11.298.048 10.445.009 10.173 0 8 0Zm0 3.892a4.108 4.108 0 1 0 0 8.216 4.108 4.108 0 0 0 0-8.216ZM8 10.667A2.667 2.667 0 1 1 8 5.333a2.667 2.667 0 0 1 0 5.334ZM13.23 3.719a.96.96 0 1 1-1.92 0 .96.96 0 0 1 1.92 0Z"/>
+				</svg>
+			</a>
+			<a
+				href={config.whatsapp.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="bg-dark-sea-blue flex items-center justify-center size-10 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
+				aria-label="WhatsApp"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-4 fill-blue-white" aria-hidden="true">
+					<path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.628 0 .07 3.558.07 7.924c0 1.396.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.367 0 7.925-3.558 7.925-7.924a7.88 7.88 0 0 0-2.322-5.613ZM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592Zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232Z"/>
+				</svg>
+			</a>
+		</div>
+
+		<!-- Bottom CTAs — Llamar y Agendar en bloque horizontal a ancho completo -->
+		<div class="container-site shrink-0 flex gap-3 w-full pb-8 pt-2">
+			<a
+				href={`tel:+${config.whatsapp.phone}`}
+				class="flex-1 min-w-0 flex items-center justify-center gap-2 h-12 rounded-full border border-french-ultramarine text-french-ultramarine hover:bg-french-ultramarine hover:text-white transition-colors touch-manipulation"
+				aria-label="Llamar"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-5 stroke-current fill-none shrink-0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/>
+				</svg>
+				<span class="text-base font-normal">Llamar</span>
+			</a>
+			<a
+				href={config.whatsapp.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex-1 min-w-0 flex items-center justify-center gap-2 h-12 rounded-full bg-french-ultramarine text-white hover:opacity-90 transition-opacity touch-manipulation [&:hover>svg]:translate-x-1"
+			>
+				<span class="text-base font-normal">Agendar hora</span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[18px] h-[8px] shrink-0 transition-transform duration-300" aria-hidden="true">
+					<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z" fill="currentColor"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', function () {
+		const toggle = document.getElementById('menu-toggle');
+		const menu = document.getElementById('mobile-menu');
+
+		function openMenu() {
+			menu?.classList.add('is-open');
+			toggle?.classList.add('is-open');
+			menu?.setAttribute('aria-hidden', 'false');
+			toggle?.setAttribute('aria-expanded', 'true');
+			toggle?.setAttribute('aria-label', 'Cerrar menú');
+			document.body.style.overflow = 'hidden';
+			document.body.style.touchAction = 'none';
+		}
+
+		function closeMenu() {
+			menu?.classList.remove('is-open');
+			toggle?.classList.remove('is-open');
+			menu?.setAttribute('aria-hidden', 'true');
+			toggle?.setAttribute('aria-expanded', 'false');
+			toggle?.setAttribute('aria-label', 'Abrir menú');
+			document.body.style.overflow = '';
+			document.body.style.touchAction = '';
+		}
+
+		toggle?.addEventListener('click', () => {
+			if (menu?.classList.contains('is-open')) closeMenu();
+			else openMenu();
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu?.classList.contains('is-open')) closeMenu();
+		});
+
+		document.querySelectorAll('#mobile-menu a[href]').forEach((link) => {
+			link.addEventListener('click', () => closeMenu());
+		});
+	});
+</script>

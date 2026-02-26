@@ -81,8 +81,8 @@ const menus = [
 			</div>
 		</div>
 
-		<!-- Menus grid: 2 columns per Figma -->
-		<nav class="grid grid-cols-2 gap-x-8 gap-y-8 shrink-0" aria-label="Footer navigation">
+		<!-- Menus grid: 1 column on narrow mobile, 2 columns from sm -->
+		<nav class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 shrink-0" aria-label="Footer navigation">
 			{menus.map((menu) => (
 				<div class="flex flex-col gap-4">
 					<h3 class="font-display text-lg font-semibold text-white">{menu.title}</h3>

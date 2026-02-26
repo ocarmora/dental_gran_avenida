@@ -4,9 +4,10 @@ interface Props {
 	label: string;
 	variant?: 'primary' | 'secondary' | 'white';
 	target?: '_blank' | '_self';
+	class?: string;
 }
 
-const { href, label, variant = 'primary', target } = Astro.props;
+const { href, label, variant = 'primary', target, class: className } = Astro.props;
 const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 ---
 
@@ -15,6 +16,7 @@ const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 	target={target}
 	rel={rel}
 	class:list={[
+		className,
 		'inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all [&:hover>svg]:translate-x-1',
 		variant === 'primary'
 			? 'bg-french-ultramarine text-white hover:opacity-90'

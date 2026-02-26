@@ -29,14 +29,15 @@ const features = [
 ---
 
 <section class="bg-blue-white py-24 w-full">
-	<div class="container-site grid grid-cols-[2fr_1fr_1fr] grid-rows-2 gap-6">
+	<div class="container-site grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] lg:grid-rows-2 gap-6">
 
-		<!-- Left column: heading + CTA — spans both rows -->
-		<div class="row-span-2 flex flex-col gap-12 items-start justify-center">
+		<!-- Left column: heading + CTA — spans both rows on desktop, full width on tablet -->
+		<div class="md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col gap-12 items-center lg:items-start justify-center">
 			<SectionHeading
 				label="Clínica dental"
 				title="Una atención que destaca"
 				description="En Dental Gran Avenida contamos con especialistas de primer nivel, tecnología avanzada y una infraestructura completa bajo un mismo techo para entregarte la mejor atención."
+				centerOnMobile
 			/>
 			<Button href={config.whatsapp.url} label="Agendar hora" variant="secondary" target="_blank" />
 		</div>

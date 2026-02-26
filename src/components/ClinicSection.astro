@@ -10,10 +10,20 @@ import SectionHeading from './SectionHeading.astro';
 ---
 
 <section class="py-24 w-full">
-	<div class="container-site flex items-center gap-20 lg:gap-30">
+	<div class="container-site flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
 
-		<!-- Video thumbnail -->
-		<div class="relative flex items-center justify-center rounded-2xl overflow-hidden shrink-0 w-[480px] h-72 lg:h-80">
+		<!-- Text content — first on mobile -->
+		<div class="flex-1 min-w-0 w-full order-1 lg:order-2 flex flex-col items-center lg:items-start">
+			<SectionHeading
+				label="Sobre nosotros"
+				title="Conoce la clínica"
+				description="Nuestra clínica cuenta con 40 años de experiencia atendiendo a familias de El Bosque y sus alrededores. Disponemos de infraestructura completa, desde scanner 3D hasta laboratorio de patología oral propio."
+				centerOnMobile
+			/>
+		</div>
+
+		<!-- Video thumbnail — second on mobile -->
+		<div class="relative flex items-center justify-center rounded-2xl overflow-hidden shrink-0 w-full max-w-full lg:w-[480px] h-56 lg:h-80 order-2 lg:order-1">
 			<!-- Decorative background -->
 			<div class="absolute inset-0" aria-hidden="true">
 				<img
@@ -33,15 +43,6 @@ import SectionHeading from './SectionHeading.astro';
 					<path d="M8 5v14l11-7z"/>
 				</svg>
 			</button>
-		</div>
-
-		<!-- Text content -->
-		<div class="flex-1 min-w-0">
-			<SectionHeading
-				label="Sobre nosotros"
-				title="Conoce la clínica"
-				description="Nuestra clínica cuenta con 40 años de experiencia atendiendo a familias de El Bosque y sus alrededores. Disponemos de infraestructura completa, desde scanner 3D hasta laboratorio de patología oral propio."
-			/>
 		</div>
 
 	</div>

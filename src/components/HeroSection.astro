@@ -4,14 +4,14 @@ import Button from './Button.astro';
 import SectionLabel from './SectionLabel.astro';
 ---
 
-<section class="w-full">
-	<div class="container-site flex items-center justify-between">
+<section class="w-full pt-24 lg:pt-0">
+	<div class="container-site flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
 
-		<div class="flex flex-col gap-6 w-full max-w-lg">
+		<div class="flex flex-col gap-6 w-full max-w-lg items-center lg:items-start text-center lg:text-left">
 
 			<!-- Heading group -->
-			<div class="flex flex-col gap-2 max-w-xl">
-				<SectionLabel label="Mes de la sonrisa" />
+			<div class="flex flex-col gap-2 max-w-xl items-center lg:items-start">
+				<SectionLabel label="Mes de la sonrisa" centerOnMobile />
 
 				<h1 class="font-display font-bold text-4xl leading-normal text-navy-blue">
 					Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés
@@ -24,11 +24,17 @@ import SectionLabel from './SectionLabel.astro';
 				</p>
 			</div>
 
-			<!-- CTAs -->
-			<div class="flex flex-wrap gap-6 items-center">
-				<Button href={config.whatsapp.url} label="Agendar hora" variant="secondary" target="_blank" />
+			<!-- CTAs — mobile: sólido; desktop: outline. Imagen abajo en mobile, al lado en desktop -->
+			<div class="flex flex-col md:flex-row gap-6 items-center justify-center lg:justify-start">
+				<Button
+					href={config.whatsapp.url}
+					label="Agendar hora"
+					variant="primary"
+					target="_blank"
+					class="md:bg-transparent md:border md:border-french-ultramarine md:text-french-ultramarine md:hover:bg-french-ultramarine md:hover:text-white"
+				/>
 
-				<!-- Webpay logo — clipped window, inner image offset to center artwork -->
+				<!-- Webpay logo — abajo en mobile, al lado en desktop -->
 				<div class="relative h-[45px] w-[119px] shrink-0 overflow-hidden">
 					<img
 						src="/images/webpay.png"
@@ -41,11 +47,11 @@ import SectionLabel from './SectionLabel.astro';
 
 		</div>
 
-		<div class="flex items-end justify-end shrink-0 h-140">
+		<div class="flex items-end justify-end shrink-0 h-auto lg:h-140 order-2 lg:order-1 w-full lg:w-auto">
 			<img
 				src="/images/hero-image.png"
 				alt="Especialistas de Dental Gran Avenida"
-				class="max-w-lg h-auto"
+				class="max-w-lg w-full lg:w-auto h-auto"
 			/>
 		</div>
 	</div>

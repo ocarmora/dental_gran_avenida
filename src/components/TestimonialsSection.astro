@@ -52,28 +52,29 @@ const testimonials = [
 ];
 ---
 
-<section class="bg-blue-white py-24 w-full">
-	<div class="container-site flex items-center gap-20 lg:gap-30">
+<section class="bg-blue-white py-24 w-full overflow-x-hidden">
+	<div class="container-site flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-20">
 
-		<!-- Left: heading -->
-		<div class="flex-1 min-w-0 flex flex-col items-start justify-center">
+		<!-- Left: heading — centered on mobile -->
+		<div class="flex-1 min-w-0 w-full flex flex-col items-center lg:items-start justify-center text-center lg:text-left">
 			<SectionHeading
 				label="Testimonios"
 				title="Nuestros pacientes nos prefieren"
 				description="Miles de familias de El Bosque y sus alrededores confían en Dental Gran Avenida para el cuidado de su salud bucal."
+				centerOnMobile
 			/>
 		</div>
 
 		<!-- Right: nav arrows + testimonial cards -->
-		<div class="flex flex-col gap-6 flex-1 min-w-0">
+		<div class="flex flex-col gap-6 flex-1 min-w-0 w-full overflow-hidden">
 
-			<!-- Nav arrows -->
-			<div class="flex items-center justify-end gap-2">
+			<!-- Nav arrows — centered on mobile -->
+			<div class="flex items-center justify-center lg:justify-end gap-2">
 				<button
 					type="button"
 					id="testimonials-prev"
 					aria-label="Anterior"
-					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer"
+					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation"
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
@@ -83,7 +84,7 @@ const testimonials = [
 					type="button"
 					id="testimonials-next"
 					aria-label="Siguiente"
-					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer"
+					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation"
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
@@ -91,14 +92,14 @@ const testimonials = [
 				</button>
 			</div>
 
-			<!-- Testimonial cards row: horizontal scroll + arrow navigation -->
+			<!-- Testimonial cards row: horizontal scroll contained within section -->
 			<div
 				id="testimonials-scroll"
-				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 -mx-1"
-				style="scrollbar-width: thin;"
+				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2"
+				style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;"
 			>
 				{testimonials.map((t) => (
-					<Card class="shrink-0 w-72 snap-center">
+					<Card class="shrink-0 min-w-[280px] w-72 snap-start">
 						<!-- Stars + quote -->
 						<div class="flex flex-col gap-6">
 							<div class="flex gap-1" aria-label="5 de 5 estrellas">
@@ -123,18 +124,22 @@ const testimonials = [
 	</div>
 </section>
 
-<script>
-	const scrollEl = document.getElementById('testimonials-scroll');
-	const prevBtn = document.getElementById('testimonials-prev');
-	const nextBtn = document.getElementById('testimonials-next');
-	const scrollAmount = 312; // card width (288px) + gap (24px)
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		const scrollEl = document.getElementById('testimonials-scroll');
+		const prevBtn = document.getElementById('testimonials-prev');
+		const nextBtn = document.getElementById('testimonials-next');
+		const scrollAmount = 304; // card width (~280px) + gap (24px)
 
-	if (scrollEl && prevBtn && nextBtn) {
-		prevBtn.addEventListener('click', () => {
-			scrollEl.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-		});
-		nextBtn.addEventListener('click', () => {
-			scrollEl.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-		});
-	}
+		if (scrollEl && prevBtn && nextBtn) {
+			prevBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				scrollEl.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+			});
+			nextBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				scrollEl.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+			});
+		}
+	});
 </script>
