@@ -1,23 +1,20 @@
 ---
 import { config } from '../config';
+import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
-/*
-  Contact card:
-  - bright-ocean top accent bar (h-1 ≈ 4px)
-  - card body: bg-blue-white with subtle bright-ocean border (18% opacity)
-  - min-h-[200px], padded
-*/
 const contacts = [
 	{
 		title: 'Atención Urgencias',
 		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted}. Atendemos el mismo día.`,
 		href: config.whatsapp.url,
+		icon: 'urgency',
 	},
 	{
 		title: 'Atención General',
 		description: 'Agenda tu hora en línea o contáctanos por WhatsApp. Próxima disponibilidad el mismo día o al día siguiente.',
 		href: config.whatsapp.url,
+		icon: 'general',
 	},
 ];
 ---
@@ -34,17 +31,30 @@ const contacts = [
 
 		<div class="grid grid-cols-2 gap-6 w-full max-w-2xl">
 			{contacts.map((c) => (
-				<div class="flex flex-col rounded-2xl overflow-hidden">
-					<!-- Top accent -->
-					<div class="bg-bright-ocean h-1" />
-					<!-- Card body -->
-					<div
-						class="flex-1 bg-blue-white border border-bright-ocean/20 flex flex-col gap-2 items-start justify-center min-h-[200px] px-8 py-10"
-					>
-						<p class="font-display font-bold text-xl text-navy-blue">{c.title}</p>
-						<p class="text-base text-body">{c.description}</p>
+				<Card variant="blue">
+					<div class="flex flex-col gap-4">
+						<div class="flex size-12 items-center justify-center rounded-xl bg-navy-blue/10 text-navy-blue shrink-0">
+							{c.icon === 'urgency' ? (
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
+									<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+									<path d="M12 8v4"/>
+									<path d="M12 16h.01"/>
+								</svg>
+							) : (
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
+									<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+									<path d="M16 2v4"/>
+									<path d="M8 2v4"/>
+									<path d="M3 10h18"/>
+								</svg>
+							)}
+						</div>
+						<div class="flex flex-col gap-2">
+							<p class="font-display font-bold text-xl text-navy-blue">{c.title}</p>
+							<p class="text-base text-body">{c.description}</p>
+						</div>
 					</div>
-				</div>
+				</Card>
 			))}
 		</div>
 
