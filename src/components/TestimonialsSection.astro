@@ -1,0 +1,100 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+/*
+  Layout: 2-column flex (heading left | testimonials right).
+  Testimonials are in a flex row that may overflow — overflow-hidden clips
+  the extra card, creating the carousel "peek" effect without JS.
+  Nav arrows are static visual elements for now.
+*/
+const testimonials = [
+	{
+		quote: '"El equipo de Dental Gran Avenida es increíble. Me trataron con mucho profesionalismo y el resultado fue exactamente lo que esperaba."',
+		name: 'María González',
+		detail: 'Paciente desde 2021',
+	},
+	{
+		quote: '"Tenía mucho miedo al dentista, pero aquí me explicaron cada paso. El tratamiento fue completamente sin dolor. Los recomiendo al 100%."',
+		name: 'Carlos Muñoz',
+		detail: 'Paciente desde 2022',
+	},
+	{
+		quote: '"La tecnología que tienen es de primer nivel. Me hicieron el scanner 3D y los implantes quedaron perfectos. Excelente atención."',
+		name: 'Ana Pérez',
+		detail: 'Paciente desde 2020',
+	},
+];
+---
+
+<section class="bg-blue-white py-24 w-full">
+	<div class="container-site flex items-center gap-20 lg:gap-30">
+
+		<!-- Left: heading -->
+		<div class="flex-1 min-w-0 flex flex-col justify-center">
+			<SectionHeading
+				label="Testimonios"
+				title="Nuestros pacientes nos prefieren"
+				description="Miles de familias de El Bosque y sus alrededores confían en Dental Gran Avenida para el cuidado de su salud bucal."
+			/>
+		</div>
+
+		<!-- Right: nav arrows + testimonial cards -->
+		<div class="flex flex-col gap-6 flex-1 min-w-0">
+
+			<!-- Nav arrows -->
+			<div class="flex items-center justify-end gap-2">
+				<button
+					type="button"
+					aria-label="Anterior"
+					class="flex items-center justify-center size-10 rounded-full bg-white hover:bg-blue-white transition-colors shrink-0"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body" aria-hidden="true">
+						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
+					</svg>
+				</button>
+				<button
+					type="button"
+					aria-label="Siguiente"
+					class="flex items-center justify-center size-10 rounded-full bg-white hover:bg-blue-white transition-colors shrink-0"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body" aria-hidden="true">
+						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
+					</svg>
+				</button>
+			</div>
+
+			<!-- Testimonial cards row (overflow clips the 4th card peek) -->
+			<div class="flex gap-6 overflow-hidden">
+				{testimonials.map((t) => (
+					<div class="bg-white flex flex-col gap-6 px-8 py-10 rounded-2xl shrink-0 w-72">
+						<!-- Stars -->
+						<div class="flex flex-col gap-6">
+							<div class="flex gap-1" aria-label="5 de 5 estrellas">
+								{Array.from({ length: 5 }).map(() => (
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="size-4 fill-amber-400" aria-hidden="true">
+										<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+									</svg>
+								))}
+							</div>
+							<p class="text-base text-body">{t.quote}</p>
+						</div>
+						<!-- Author -->
+						<div class="flex gap-2 items-start">
+							<img
+								src="/images/avatar-placeholder.svg"
+								alt=""
+								aria-hidden="true"
+								class="size-8 rounded-full object-cover shrink-0"
+							/>
+							<div class="flex flex-col">
+								<p class="text-base font-medium text-body">{t.name}</p>
+								<p class="text-sm text-body/70">{t.detail}</p>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+		</div>
+	</div>
+</section>

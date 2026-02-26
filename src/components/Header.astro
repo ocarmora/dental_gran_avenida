@@ -11,20 +11,20 @@ const navLinks = [
 ];
 ---
 
-<header class="bg-blue-white py-6 w-full">
+<header class="bg-blue-white py-5 w-full">
 	<div class="container-site flex items-center justify-between">
 
 		<!-- Logo + Nav -->
 		<div class="flex gap-8 lg:gap-20 items-center">
-			<a href="/" class="h-20 w-40 shrink-0 block" aria-label="Dental Gran Avenida - Inicio">
-				<img src="/images/logo.png" alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
+			<a href="/" class="h-14 w-32 shrink-0 block" aria-label="Dental Gran Avenida - Inicio">
+				<img src="/images/logo-transparent.png" alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
 			</a>
 
 			<nav class="hidden md:flex gap-6 lg:gap-10 items-center" aria-label="Navegación principal">
 				{navLinks.map((link) => (
 					<a
 						href={link.href}
-						class="flex gap-1.5 items-center font-inter text-base font-normal text-black hover:text-french-ultramarine transition-colors whitespace-nowrap"
+						class="flex gap-1.5 items-center text-base font-normal text-black hover:text-french-ultramarine transition-colors whitespace-nowrap"
 					>
 						{link.label}
 						{link.hasDropdown && (
@@ -42,7 +42,7 @@ const navLinks = [
 			<!-- Phone icon -->
 			<a
 				href="tel:+56948446632"
-				class="size-[52px] shrink-0 flex items-center justify-center rounded-full border border-french-ultramarine hover:bg-french-ultramarine group transition-colors"
+				class="size-12 shrink-0 flex items-center justify-center rounded-full border border-french-ultramarine hover:bg-french-ultramarine group transition-colors"
 				aria-label="Llamar"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-5 stroke-french-ultramarine group-hover:stroke-white fill-none transition-colors" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

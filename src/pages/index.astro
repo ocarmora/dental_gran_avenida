@@ -3,6 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import SpecialtiesSection from '../components/SpecialtiesSection.astro';
+import ClinicSection from '../components/ClinicSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import FooterSection from '../components/FooterSection.astro';
 ---
 
 <Layout title="Dental Gran Avenida" description="Clínica dental con 40 años de experiencia en El Bosque, Santiago.">
@@ -10,5 +17,12 @@ import HeroSection from '../components/HeroSection.astro';
 	<Header />
 	<main>
 		<HeroSection />
+		<FeaturesSection />
+		<CtaBanner />
+		<SpecialtiesSection />
+		<ClinicSection />
+		<TestimonialsSection />
+		<ContactSection />
 	</main>
+	<FooterSection />
 </Layout>

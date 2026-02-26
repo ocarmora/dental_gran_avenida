@@ -1,0 +1,34 @@
+---
+description: Code and identifiers must be in English; user-facing text may be in Spanish
+alwaysApply: true
+---
+
+# Code Language Convention
+
+All code and technical identifiers must be written in **English**. The only exception is **user-facing text** (visible to end users), which may be in Spanish or the target language of the project.
+
+## Must Be in English
+
+- **Component names**: `ContactSection`, `HeroSection`, `CtaBanner` (not `SeccionContacto`)
+- **File names**: `contact-section.astro`, `hero-section.astro`
+- **Variable and function names**: `handleSubmit`, `isLoading`, `userData`
+- **CSS class names**: `cta-button`, `section-heading`
+- **Comments and documentation**: `// Validate form before submit`
+- **Attribute names, IDs, data attributes**: `data-testid="submit-btn"`
+
+## Exception: User-Facing Text
+
+- Button labels, headings, paragraphs, alt text, meta descriptions
+- Example: `<h1>Agenda tu hora</h1>`, `alt="Clínica dental"`
+
+## Examples
+
+```astro
+<!-- ✅ GOOD -->
+<button class="cta-button">Agenda tu hora</button>
+<section id="contact-section">...</section>
+
+<!-- ❌ BAD -->
+<button class="boton-cta">Agenda tu hora</button>
+<section id="seccion-contacto">...</section>
+```

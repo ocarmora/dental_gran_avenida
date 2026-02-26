@@ -1,12 +1,15 @@
 ---
 interface Props {
 	label: string;
+	centered?: boolean;
+	variant?: 'default' | 'overlay';
 }
 
-const { label } = Astro.props;
+const { label, centered = false, variant = 'default' } = Astro.props;
+const isOverlay = variant === 'overlay';
 ---
 
-<div class="flex gap-3 items-center">
-	<div class="bg-bright-ocean h-px w-10 shrink-0"></div>
-	<span class="text-base text-body">{label}</span>
+<div class:list={['flex gap-3 items-center', centered && 'justify-center']}>
+	<div class:list={['h-px w-10 shrink-0', isOverlay ? 'bg-white/80' : 'bg-bright-ocean']}></div>
+	<span class:list={['text-base', isOverlay ? 'text-white/90' : 'text-body']}>{label}</span>
 </div>

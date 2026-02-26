@@ -5,16 +5,16 @@ import SectionLabel from './SectionLabel.astro';
 const whatsappUrl = 'https://wa.me/56948446632';
 ---
 
-<section class="w-full pt-16">
+<section class="w-full">
 	<div class="container-site flex items-center justify-between">
 
 		<div class="flex flex-col gap-6 w-full max-w-lg">
 
 			<!-- Heading group -->
-			<div class="flex flex-col gap-2 max-w-[571px]">
+			<div class="flex flex-col gap-2 max-w-xl">
 				<SectionLabel label="Mes de la sonrisa" />
 
-				<h1 class="font-display font-bold text-[32px] leading-normal text-navy-blue">
+				<h1 class="font-display font-bold text-4xl leading-normal text-navy-blue">
 					Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés
 				</h1>
 
@@ -42,10 +42,12 @@ const whatsappUrl = 'https://wa.me/56948446632';
 
 		</div>
 
-		<img
-			src="/images/hero-image.png"
-			alt="Especialistas de Dental Gran Avenida"
-			class="max-w-lg h-auto"
-		/>
+		<div class="flex items-end justify-end shrink-0 h-140">
+			<img
+				src="/images/hero-image.png"
+				alt="Especialistas de Dental Gran Avenida"
+				class="max-w-lg h-auto"
+			/>
+		</div>
 	</div>
 </section>

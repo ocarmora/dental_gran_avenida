@@ -2,7 +2,7 @@
 interface Props {
 	href: string;
 	label: string;
-	variant?: 'primary' | 'secondary';
+	variant?: 'primary' | 'secondary' | 'white';
 	target?: '_blank' | '_self';
 }
 
@@ -15,10 +15,12 @@ const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 	target={target}
 	rel={rel}
 	class:list={[
-		'inline-flex gap-3 h-14 items-center justify-center min-w-[200px] px-8 rounded-full shrink-0 text-base font-normal transition-all',
+		'inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all',
 		variant === 'primary'
 			? 'bg-french-ultramarine text-white hover:opacity-90'
-			: 'border border-french-ultramarine text-french-ultramarine hover:bg-blue-white',
+			: variant === 'white'
+			? 'bg-white text-french-ultramarine hover:bg-blue-white'
+			: 'border border-french-ultramarine text-french-ultramarine hover:bg-french-ultramarine hover:text-white',
 	]}
 >
 	{label}

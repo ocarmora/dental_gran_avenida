@@ -1,0 +1,51 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+/*
+  Contact card:
+  - bright-ocean top accent bar (h-1 ≈ 4px)
+  - card body: bg-blue-white with subtle bright-ocean border (18% opacity)
+  - min-h-[200px], padded
+*/
+const contacts = [
+	{
+		title: 'Atención Urgencias',
+		description: 'Escríbenos por WhatsApp o llámanos al +56 9 4844 6632. Atendemos el mismo día.',
+		href: 'https://wa.me/56948446632',
+	},
+	{
+		title: 'Atención General',
+		description: 'Agenda tu hora en línea o contáctanos por WhatsApp. Próxima disponibilidad el mismo día o al día siguiente.',
+		href: 'https://wa.me/56948446632',
+	},
+];
+---
+
+<section class="py-24 w-full">
+	<div class="container-site flex flex-col gap-12 items-center">
+
+		<SectionHeading
+			label="Contacto"
+			title="Canales de atención"
+			description="Elige el canal que mejor se adapte a tus necesidades. Estamos aquí para ayudarte."
+			centered
+		/>
+
+		<div class="grid grid-cols-2 gap-6 w-full max-w-2xl">
+			{contacts.map((c) => (
+				<div class="flex flex-col rounded-2xl overflow-hidden">
+					<!-- Top accent -->
+					<div class="bg-bright-ocean h-1" />
+					<!-- Card body -->
+					<div
+						class="flex-1 bg-blue-white border border-bright-ocean/20 flex flex-col gap-2 items-start justify-center min-h-[200px] px-8 py-10"
+					>
+						<p class="font-display font-bold text-xl text-navy-blue">{c.title}</p>
+						<p class="text-base text-body">{c.description}</p>
+					</div>
+				</div>
+			))}
+		</div>
+
+	</div>
+</section>

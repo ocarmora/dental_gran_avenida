@@ -2,19 +2,19 @@
 
 @theme {
   /* ── Colors ──────────────────────────────────────────────────── */
-  --color-dark-sea-blue:      #063a8d;
-  --color-blue-white:         #f2faff;
+  --color-dark-sea-blue: #063a8d;
+  --color-blue-white: #f2faff;
   --color-french-ultramarine: #001bb5;
-  --color-bright-ocean:       #1e8fd5;
-  --color-navy-blue:          #002e77;
-  --color-body:               #222222;
+  --color-bright-ocean: #1e8fd5;
+  --color-navy-blue: #002e77;
+  --color-body: #222222;
+  --color-card: #f2f2f2;
 
   /* ── Fonts ───────────────────────────────────────────────────── */
   /* --font-sans overrides Tailwind's preflight default,           */
   /* making DM Sans the site-wide base font automatically.         */
-  --font-sans:    'DM Sans', sans-serif;
-  --font-display: 'Figtree', sans-serif;
-  --font-inter:   'Inter', sans-serif;
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Figtree", sans-serif;
 }
 
 @layer base {

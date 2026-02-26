@@ -1,0 +1,20 @@
+---
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+	label?: string;
+	title: string;
+	description?: string;
+	centered?: boolean;
+	variant?: 'default' | 'overlay';
+}
+
+const { label, title, description, centered = false, variant = 'default' } = Astro.props;
+const isOverlay = variant === 'overlay';
+---
+
+<div class:list={['flex flex-col gap-2', centered && 'items-center text-center']}>
+	{label && <SectionLabel label={label} centered={centered} variant={variant} />}
+	<h2 class:list={['font-display font-bold text-3xl leading-tight', isOverlay ? 'text-white' : 'text-navy-blue']}>{title}</h2>
+	{description && <p class:list={['text-base', isOverlay ? 'text-white/90' : 'text-body']}>{description}</p>}
+</div>

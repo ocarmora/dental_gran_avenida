@@ -1,0 +1,50 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+/*
+  Specialty card layout:
+  - Card is `relative flex flex-col justify-end` with explicit h-80.
+  - Background image + gradient are inside an aria-hidden div with absolute inset-0.
+    This is purely decorative (no layout purpose), so it is safe under the
+    "no absolute for layout" rule. The text flows naturally at the bottom via flex.
+*/
+const specialties = [
+	{ label: 'Blanqueamiento Dental', image: '/images/service-placeholder.jpg' },
+	{ label: 'Implantología',          image: '/images/service-placeholder.jpg' },
+	{ label: 'Ortodoncia',             image: '/images/service-placeholder.jpg' },
+	{ label: 'Cirugía Maxilofacial',   image: '/images/service-placeholder.jpg' },
+	{ label: 'Rehabilitación Oral',    image: '/images/service-placeholder.jpg' },
+	{ label: 'Estética Facial',        image: '/images/service-placeholder.jpg' },
+];
+---
+
+<section class="bg-blue-white py-24 w-full">
+	<div class="container-site flex flex-col gap-12 items-center">
+
+		<SectionHeading
+			label="Servicios"
+			title="Conoce nuestras especialidades"
+			description="Ofrecemos tratamientos completos realizados por especialistas con años de experiencia clínica."
+			centered
+		/>
+
+		<div class="grid grid-cols-3 gap-6 w-full">
+			{specialties.map((s) => (
+				<div class="relative flex flex-col justify-end h-80 rounded-2xl overflow-hidden px-8 py-10">
+					<!-- Decorative background: image + gradient overlay -->
+					<div class="absolute inset-0" aria-hidden="true">
+						<img
+							src={s.image}
+							alt=""
+							class="w-full h-full object-cover"
+						/>
+						<div class="absolute inset-0 bg-linear-to-b from-transparent to-black/70" />
+					</div>
+					<!-- Card label in normal flow, pushed to bottom by justify-end -->
+					<p class="relative font-display font-bold text-2xl text-white">{s.label}</p>
+				</div>
+			))}
+		</div>
+
+	</div>
+</section>
