@@ -1,50 +1,79 @@
 ---
+import { config } from '../config';
 import SectionHeading from './SectionHeading.astro';
 
-/*
-  Specialty card layout:
-  - Card is `relative flex flex-col justify-end` with explicit h-80.
-  - Background image + gradient are inside an aria-hidden div with absolute inset-0.
-    This is purely decorative (no layout purpose), so it is safe under the
-    "no absolute for layout" rule. The text flows naturally at the bottom via flex.
-*/
 const specialties = [
-	{ label: 'Blanqueamiento Dental', image: '/images/service-placeholder.jpg' },
-	{ label: 'Implantología',          image: '/images/service-placeholder.jpg' },
-	{ label: 'Ortodoncia',             image: '/images/service-placeholder.jpg' },
-	{ label: 'Cirugía Maxilofacial',   image: '/images/service-placeholder.jpg' },
-	{ label: 'Rehabilitación Oral',    image: '/images/service-placeholder.jpg' },
-	{ label: 'Estética Facial',        image: '/images/service-placeholder.jpg' },
+    { label: 'Blanqueamiento Dental', description: 'Recupera el brillo natural de tu sonrisa con tratamientos profesionales seguros y efectivos.', image: '/images/service-placeholder.jpg' },
+    { label: 'Implantología', description: 'Soluciones permanentes para recuperar la funcionalidad y estética de tu dentadura con implantes de última generación.', image: '/images/service-placeholder.jpg' },
+    { label: 'Ortodoncia', description: 'Corregimos la alineación dental con brackets y alineadores invisibles para una sonrisa armónica.', image: '/images/service-placeholder.jpg' },
+    { label: 'Cirugía Maxilofacial', description: 'Procedimientos quirúrgicos especializados realizados por profesionales con amplia experiencia.', image: '/images/service-placeholder.jpg' },
+    { label: 'Rehabilitación Oral', description: 'Restauramos la función masticatoria y la estética con prótesis y rehabilitaciones integrales.', image: '/images/service-placeholder.jpg' },
+    { label: 'Estética Facial', description: 'Tratamientos de medicina estética facial para rejuvenecimiento y armonía del rostro.', image: '/images/service-placeholder.jpg' },
 ];
 ---
 
 <section class="bg-blue-white py-24 w-full">
-	<div class="container-site flex flex-col gap-12 items-center">
+    <div class="container-site flex flex-col gap-12 items-center">
 
-		<SectionHeading
-			label="Servicios"
-			title="Conoce nuestras especialidades"
-			description="Ofrecemos tratamientos completos realizados por especialistas con años de experiencia clínica."
-			centered
-		/>
+        <SectionHeading
+            label="Servicios"
+            title="Conoce nuestras especialidades"
+            description="Ofrecemos tratamientos completos realizados por especialistas con años de experiencia clínica."
+            centered
+        />
 
-		<div class="grid grid-cols-3 gap-6 w-full">
-			{specialties.map((s) => (
-				<div class="relative flex flex-col justify-end h-80 rounded-2xl overflow-hidden px-8 py-10">
-					<!-- Decorative background: image + gradient overlay -->
-					<div class="absolute inset-0" aria-hidden="true">
-						<img
-							src={s.image}
-							alt=""
-							class="w-full h-full object-cover"
-						/>
-						<div class="absolute inset-0 bg-linear-to-b from-transparent to-black/70" />
-					</div>
-					<!-- Card label in normal flow, pushed to bottom by justify-end -->
-					<p class="relative font-display font-bold text-2xl text-white">{s.label}</p>
-				</div>
-			))}
-		</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            {specialties.map((s) => (
+                <div class="group relative flex flex-col justify-end h-[400px] rounded-2xl overflow-hidden p-8 transition-all duration-500 hover:shadow-2xl">
+                    
+                    {/* Contenedor de Imagen y Overlays */}
+                    <div class="absolute inset-0 z-0">
+                        <img
+                            src={s.image}
+                            alt={s.label}
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        {/* Overlay Normal: Solo oscurece la base para que el título se lea */}
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#063a8d]/90 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500" />
+                        
+                        {/* Overlay Hover: Cubre más área para que la descripción sea legible */}
+                        <div 
+                            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                            style="background: linear-gradient(to bottom, transparent 0%, rgba(6,58,141,0.4) 30%, rgba(6,58,141,0.8) 70%, #063a8d 100%);"
+                        />
+                    </div>
 
-	</div>
+                    {/* Contenido de Texto */}
+                    <div class="relative z-10 flex flex-col">
+                        {/* Título: Posición estable */}
+                        <p class="font-display font-bold text-2xl text-white transition-transform duration-500 group-hover:-translate-y-1">
+                            {s.label}
+                        </p>
+
+                        {/* Área expansible: Descripción + Botón */}
+                        <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out group-hover:grid-rows-[1fr] group-hover:opacity-100 group-hover:mt-4">
+                            <div class="overflow-hidden">
+                                <p class="text-base text-white/90 mb-6 leading-relaxed">
+                                    {s.description}
+                                </p>
+                                
+                                <a
+                                    href={config.whatsapp.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-3 text-white font-medium group/link transition-opacity hover:opacity-80 w-fit"
+                                >
+                                    Agendar hora
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[18px] h-[8px] fill-white transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">
+                                        <path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+    </div>
 </section>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant hover (&:hover);
+
 @theme {
   /* ── Colors ──────────────────────────────────────────────────── */
   --color-dark-sea-blue: #063a8d;
