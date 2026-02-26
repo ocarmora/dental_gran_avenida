@@ -1,14 +1,31 @@
 @import "tailwindcss";
 
-@layer base {
-	:root {
-		--color-dark-sea-blue: #063a8d;
-		--color-blue-white: #f2faff;
-		--color-french-ultramarine: #1a4fbf;
-		--color-bright-ocean: #1e8fd5;
-	}
+@theme {
+	--color-dark-sea-blue: #063a8d;
+	--color-blue-white: #f2faff;
+	--color-french-ultramarine: #001bb5;
+	--color-bright-ocean: #1e8fd5;
+}
 
+@layer base {
 	html {
 		scroll-behavior: smooth;
+	}
+}
+
+@layer components {
+	.container-site {
+		width: 100%;
+		max-width: 1400px;
+		margin-inline: auto;
+		padding-inline: 1rem;
+
+		@media (min-width: 640px) {
+			padding-inline: 1.5rem;
+		}
+
+		@media (min-width: 1024px) {
+			padding-inline: 2.5rem;
+		}
 	}
 }
