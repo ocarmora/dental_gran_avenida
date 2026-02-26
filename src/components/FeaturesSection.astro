@@ -1,9 +1,8 @@
 ---
+import { config } from '../config';
 import Button from './Button.astro';
 import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
-
-const whatsappUrl = 'https://wa.me/56948446632';
 
 const features = [
 	{
@@ -39,7 +38,7 @@ const features = [
 				title="Una atención que destaca"
 				description="En Dental Gran Avenida contamos con especialistas de primer nivel, tecnología avanzada y una infraestructura completa bajo un mismo techo para entregarte la mejor atención."
 			/>
-			<Button href={whatsappUrl} label="Agendar hora" variant="secondary" target="_blank" />
+			<Button href={config.whatsapp.url} label="Agendar hora" variant="secondary" target="_blank" />
 		</div>
 
 		<!-- 4 feature cards: cols 2–3, rows 1–2 -->

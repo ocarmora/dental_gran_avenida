@@ -1,7 +1,5 @@
 ---
-const whatsappUrl = 'https://wa.me/56948446632';
-const facebookUrl = 'https://facebook.com/dentalgranvenida';
-const instagramUrl = 'https://instagram.com/dentalgranvenida';
+import { config } from '../config';
 ---
 
 <div class="bg-dark-sea-blue py-4 w-full">
@@ -10,7 +8,7 @@ const instagramUrl = 'https://instagram.com/dentalgranvenida';
 
 			<!-- Facebook -->
 			<a
-				href={facebookUrl}
+				href={config.social.facebook}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
@@ -23,7 +21,7 @@ const instagramUrl = 'https://instagram.com/dentalgranvenida';
 
 			<!-- Instagram -->
 			<a
-				href={instagramUrl}
+				href={config.social.instagram}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
@@ -36,7 +34,7 @@ const instagramUrl = 'https://instagram.com/dentalgranvenida';
 
 			<!-- WhatsApp -->
 			<a
-				href={whatsappUrl}
+				href={config.whatsapp.url}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"

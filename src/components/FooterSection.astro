@@ -1,21 +1,18 @@
 ---
+import { config } from '../config';
+
 /*
   Footer: Figma design.
   Layout: brand left | menus grid right.
   Tailwind semantic classes only, no hardcoded pixels.
 */
-const whatsappUrl = 'https://wa.me/56948446632';
-const facebookUrl = 'https://facebook.com/dentalgranavenida';
-const instagramUrl = 'https://instagram.com/dentalgranavenida';
-const mapsUrl = 'https://maps.google.com/?q=Gran+Avenida+10063+El+Bosque';
-
 const menus = [
 	{
 		title: 'Redes sociales',
 		links: [
-			{ label: 'Instagram', href: instagramUrl },
-			{ label: 'Facebook', href: facebookUrl },
-			{ label: 'WhatsApp', href: whatsappUrl },
+			{ label: 'Instagram', href: config.social.instagram },
+			{ label: 'Facebook', href: config.social.facebook },
+			{ label: 'WhatsApp', href: config.whatsapp.url },
 		],
 	},
 	{
@@ -30,8 +27,8 @@ const menus = [
 	{
 		title: 'Contacto',
 		links: [
-			{ label: 'Gran Avenida 10063, El Bosque', href: mapsUrl },
-			{ label: 'contacto@dentalgranavenida.cl', href: 'mailto:contacto@dentalgranavenida.cl' },
+			{ label: 'Gran Avenida 10063, El Bosque', href: config.location.mapsUrl },
+			{ label: config.contact.email, href: `mailto:${config.contact.email}` },
 		],
 	},
 ];
@@ -49,7 +46,7 @@ const menus = [
 			</p>
 			<div class="flex gap-3 items-center">
 				<a
-					href={facebookUrl}
+					href={config.social.facebook}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
@@ -60,7 +57,7 @@ const menus = [
 					</svg>
 				</a>
 				<a
-					href={instagramUrl}
+					href={config.social.instagram}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"
@@ -71,7 +68,7 @@ const menus = [
 					</svg>
 				</a>
 				<a
-					href={whatsappUrl}
+					href={config.whatsapp.url}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="bg-blue-white flex items-center justify-center size-8 rounded-full p-2 shrink-0 hover:opacity-80 transition-opacity"

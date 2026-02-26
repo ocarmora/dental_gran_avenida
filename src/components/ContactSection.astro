@@ -1,4 +1,5 @@
 ---
+import { config } from '../config';
 import SectionHeading from './SectionHeading.astro';
 
 /*
@@ -10,13 +11,13 @@ import SectionHeading from './SectionHeading.astro';
 const contacts = [
 	{
 		title: 'Atención Urgencias',
-		description: 'Escríbenos por WhatsApp o llámanos al +56 9 4844 6632. Atendemos el mismo día.',
-		href: 'https://wa.me/56948446632',
+		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted}. Atendemos el mismo día.`,
+		href: config.whatsapp.url,
 	},
 	{
 		title: 'Atención General',
 		description: 'Agenda tu hora en línea o contáctanos por WhatsApp. Próxima disponibilidad el mismo día o al día siguiente.',
-		href: 'https://wa.me/56948446632',
+		href: config.whatsapp.url,
 	},
 ];
 ---
