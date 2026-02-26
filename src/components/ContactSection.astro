@@ -31,9 +31,9 @@ const contacts = [
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
 			{contacts.map((c) => (
-				<Card variant="blue">
+				<Card variant={c.icon === 'urgency' ? 'red' : 'blue'}>
 					<div class="flex flex-col gap-4">
-						<div class="flex size-12 items-center justify-center rounded-xl bg-navy-blue/10 text-navy-blue shrink-0">
+						<div class={`flex size-12 items-center justify-center rounded-xl shrink-0 ${c.icon === 'urgency' ? 'bg-red-700/10 text-red-700' : 'bg-navy-blue/10 text-navy-blue'}`}>
 							{c.icon === 'urgency' ? (
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
 									<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
@@ -50,7 +50,7 @@ const contacts = [
 							)}
 						</div>
 						<div class="flex flex-col gap-2">
-							<p class="font-display font-bold text-xl text-navy-blue">{c.title}</p>
+							<p class={`font-display font-bold text-xl ${c.icon === 'urgency' ? 'text-red-700' : 'text-navy-blue'}`}>{c.title}</p>
 							<p class="text-base text-body">{c.description}</p>
 						</div>
 					</div>

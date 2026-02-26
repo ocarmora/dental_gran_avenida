@@ -15,10 +15,25 @@ import SectionHeading from './SectionHeading.astro';
 		aria-hidden="true"
 	/>
 
-	<div class="container-site relative flex flex-col items-center justify-center gap-8 py-12">
+	<div class="container-site relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-30 py-12 lg:py-0">
+
+		<!-- Photo group — solo desktop -->
+		<div class="hidden lg:flex relative items-center justify-center shrink-0 order-2 lg:order-1">
+			<img
+				src="/images/cta-bg.svg"
+				alt=""
+				aria-hidden="true"
+				class="absolute bottom-0 left-1/2 -translate-x-1/2 aspect-square w-56 h-56 lg:w-72 lg:h-72 object-contain"
+			/>
+			<img
+				src="/images/cta-doctor.png"
+				alt="Especialistas Dental Gran Avenida"
+				class="relative z-10 h-72 lg:h-88 w-auto max-w-80 object-contain object-bottom"
+			/>
+		</div>
 
 		<!-- Text content -->
-		<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg">
+		<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg order-1 lg:order-2">
 			<SectionHeading
 				title="Obtén 20% de descuento en el mes de la sonrisa"
 				description="Válido para todas las especialidades durante marzo"
