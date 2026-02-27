@@ -1,55 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import { config } from '../config';
-import Button from './Button.astro';
-import SectionLabel from './SectionLabel.astro';
-import heroImage from '../assets/images/hero-image.png';
-import logoMercadoPago from '../assets/images/logo-mercado-pago.svg';
+import HeroSlider from './HeroSlider.astro';
 ---
 
 <section class="w-full pt-24 lg:pt-0">
-	<div class="container-site flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-
-		<div class="flex flex-col gap-8 w-full max-w-lg items-center lg:items-start text-center lg:text-left">
-
-			<div class="flex flex-col gap-2 max-w-xl items-center lg:items-start">
-				<SectionLabel label="Mes de la sonrisa" centerOnMobile />
-
-				<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
-					Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés
-				</h1>
-
-				<p class="text-base text-body">
-					Queremos que tu única prioridad sea volver a sonreír. Accede a una atención dental de excelencia con Mercado Pago.
-				</p>
-			</div>
-
-			<div class="flex flex-col md:flex-row md:items-center">
-				<Button
-					href={config.whatsapp.url}
-					label="Agendar hora"
-					variant="primary"
-					target="_blank"
-					class="md:bg-transparent md:border md:border-french-ultramarine md:text-french-ultramarine md:hover:bg-french-ultramarine md:hover:text-white"
-				/>
-				<Image
-					src={logoMercadoPago}
-					alt="Mercado Pago"
-					width={120}
-					height={64}
-					class="h-16 w-auto"
-				/>
-			</div>
-
-		</div>
-
-		<div class="flex items-end justify-end shrink-0 h-auto lg:h-140 order-2 lg:order-1 w-full lg:w-auto">
-			<Image
-				src={heroImage}
-				alt="Especialistas de Dental Gran Avenida"
-				class="max-w-lg w-full lg:w-auto h-auto"
-				loading="eager"
-			/>
-		</div>
-	</div>
+	<HeroSlider />
 </section>

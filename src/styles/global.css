@@ -4,6 +4,12 @@
 
 @theme {
   --color-dark-sea-blue: #063a8d;
+  --animate-hero-progress-fill: hero-progress-fill var(--hero-progress-duration, 5s) linear forwards;
+
+  @keyframes hero-progress-fill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
   --color-blue-white: #f2faff;
   --color-french-ultramarine: #001bb5;
   --color-bright-ocean: #1e8fd5;

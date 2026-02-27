@@ -1,0 +1,201 @@
+---
+import { Image } from 'astro:assets';
+import { config } from '../config';
+import Button from './Button.astro';
+import SectionLabel from './SectionLabel.astro';
+import heroImage from '../assets/images/hero-image.png';
+import logoMercadoPago from '../assets/images/logo-mercado-pago.svg';
+
+const slides = [
+	{
+		label: 'Mes de la sonrisa',
+		title: 'Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés',
+		description: 'Queremos que tu única prioridad sea volver a sonreír. Accede a una atención dental de excelencia con Mercado Pago.',
+	},
+	{
+		label: 'Mes de la sonrisa',
+		title: 'Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés',
+		description: 'Queremos que tu única prioridad sea volver a sonreír. Accede a una atención dental de excelencia con Mercado Pago.',
+	},
+	{
+		label: 'Mes de la sonrisa',
+		title: 'Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés',
+		description: 'Queremos que tu única prioridad sea volver a sonreír. Accede a una atención dental de excelencia con Mercado Pago.',
+	},
+];
+---
+
+<hero-slider data-autoplay-interval="5000" data-animate-class="animate-hero-progress-fill" class="block w-full group/slider">
+	<div class="hero-slider-inner relative w-full">
+		<div class="slides-container relative min-h-112 lg:min-h-128">
+			<div
+				class="hero-indicators absolute bottom-6 left-1/2 -translate-x-1/2 flex gap z-10"
+				role="tablist"
+				aria-label="Slides del hero"
+			>
+				{slides.map((_, i) => (
+					<button
+						type="button"
+						class="hero-indicator group flex items-center justify-center p-1 focus-ring"
+						aria-label={`Ir al slide ${i + 1}`}
+						aria-selected={i === 0}
+						role="tab"
+						data-indicator
+						data-index={i}
+					>
+						<span class="hero-indicator-track h-2.5 w-2.5 rounded-full overflow-hidden bg-navy-blue/20 flex shrink-0 transition-[width] duration-300 ease-out group-hover:bg-navy-blue/30 group-aria-selected:w-8" aria-hidden="true">
+							<span class="hero-progress-fill block h-full min-w-0 w-0 rounded-full bg-french-ultramarine group-data-[paused]/slider:[animation-play-state:paused]" data-progress-fill aria-hidden="true" class:list={[i === 0 && 'animate-hero-progress-fill']} />
+						</span>
+					</button>
+				))}
+			</div>
+			{slides.map((slide, i) => (
+				<div
+					class="hero-slide absolute inset-0 opacity-0 pointer-events-none container-site flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 transition-opacity duration-500 data-[active]:relative data-[active]:opacity-100 data-[active]:pointer-events-auto"
+			data-slide
+				{...(i === 0 ? { 'data-active': '' } : {})}
+				aria-hidden={i !== 0 ? 'true' : undefined}
+				>
+					<div class="flex flex-col gap-8 w-full max-w-lg items-center lg:items-start text-center lg:text-left">
+						<div class="flex flex-col gap-2 max-w-xl items-center lg:items-start">
+							<SectionLabel label={slide.label} centerOnMobile />
+							<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
+								{slide.title}
+							</h1>
+							<p class="text-base text-body">
+								{slide.description}
+							</p>
+						</div>
+						<div class="flex flex-col md:flex-row md:items-center">
+							<Button
+								href={config.whatsapp.url}
+								label="Agendar hora"
+								variant="primary"
+								target="_blank"
+								class="md:bg-transparent md:border md:border-french-ultramarine md:text-french-ultramarine md:hover:bg-french-ultramarine md:hover:text-white"
+							/>
+							<Image
+								src={logoMercadoPago}
+								alt="Mercado Pago"
+								width={120}
+								height={64}
+								class="h-16 w-auto"
+							/>
+						</div>
+					</div>
+					<div class="flex items-end justify-end shrink-0 h-auto lg:h-140 order-2 lg:order-1 w-full lg:w-auto">
+						<Image
+							src={heroImage}
+							alt="Especialistas de Dental Gran Avenida"
+							class="max-w-lg w-full lg:w-auto h-auto"
+							loading={i === 0 ? 'eager' : 'lazy'}
+						/>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</hero-slider>
+
+<script>
+	class HeroSlider extends HTMLElement {
+		#autoplayTimer: ReturnType<typeof setInterval> | null = null;
+		#isPaused = false;
+
+	connectedCallback() {
+		const interval = Number(this.dataset.autoplayInterval) || 5000;
+		const slides = this.querySelectorAll<HTMLElement>('[data-slide]');
+			const indicators = this.querySelectorAll<HTMLButtonElement>('[data-indicator]');
+
+			this.style.setProperty('--hero-progress-duration', `${interval}ms`);
+			const animateClass = this.dataset.animateClass || 'animate-hero-progress-fill';
+
+			let currentIndex = 0;
+
+			const restartProgressAnimation = () => {
+				const activeIndicator = indicators[currentIndex];
+				const fill = activeIndicator?.querySelector<HTMLElement>('[data-progress-fill]');
+				if (fill) {
+					fill.classList.remove(animateClass);
+					fill.offsetHeight;
+					fill.classList.add(animateClass);
+				}
+			};
+
+			const goToSlide = (index: number) => {
+				currentIndex = ((index % slides.length) + slides.length) % slides.length;
+
+				slides.forEach((slide, i) => {
+					slide.setAttribute('aria-hidden', String(i !== currentIndex));
+					slide.toggleAttribute('data-active', i === currentIndex);
+				});
+
+				indicators.forEach((ind, i) => {
+					const isActive = i === currentIndex;
+					ind.setAttribute('aria-selected', String(isActive));
+					const fill = ind.querySelector<HTMLElement>('[data-progress-fill]');
+					if (fill) {
+						fill.classList.toggle(animateClass, isActive);
+					}
+				});
+
+				restartProgressAnimation();
+			};
+
+			const startAutoplay = () => {
+				this.removeAttribute('data-paused');
+				if (this.#autoplayTimer) clearInterval(this.#autoplayTimer);
+				this.#autoplayTimer = setInterval(() => {
+					if (!this.#isPaused) goToSlide(currentIndex + 1);
+				}, interval);
+				restartProgressAnimation();
+			};
+
+			const stopAutoplay = () => {
+				this.setAttribute('data-paused', '');
+				if (this.#autoplayTimer) {
+					clearInterval(this.#autoplayTimer);
+					this.#autoplayTimer = null;
+				}
+			};
+
+			indicators.forEach((ind, i) => {
+				ind.addEventListener('click', () => {
+					goToSlide(i);
+					this.#isPaused = true;
+					stopAutoplay();
+				});
+			});
+
+			this.addEventListener('mouseenter', () => {
+				this.#isPaused = true;
+				stopAutoplay();
+			});
+
+			this.addEventListener('mouseleave', () => {
+				this.#isPaused = false;
+				startAutoplay();
+			});
+
+			this.addEventListener('focusin', () => {
+				this.#isPaused = true;
+				stopAutoplay();
+			});
+
+			this.addEventListener('focusout', () => {
+				if (!this.contains(document.activeElement)) {
+					this.#isPaused = false;
+					startAutoplay();
+				}
+			});
+
+			startAutoplay();
+		}
+
+		disconnectedCallback() {
+			if (this.#autoplayTimer) clearInterval(this.#autoplayTimer);
+		}
+	}
+
+	customElements.define('hero-slider', HeroSlider);
+</script>
