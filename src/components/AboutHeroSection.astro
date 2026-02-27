@@ -7,7 +7,7 @@ import aboutHeroImage from '../assets/images/about-hero-video.png';
 <section class="w-full">
 
 	<div class="container-site pt-8">
-		<div class="video-overlay-wrapper focus-ring relative rounded-2xl overflow-hidden w-full aspect-video max-h-80 cursor-pointer hover:cursor-none" role="button" tabindex="0" aria-label="Reproducir video">
+		<div class="video-overlay-wrapper focus-ring relative rounded-2xl overflow-hidden w-full aspect-video max-h-80 cursor-pointer hover:cursor-none" role="button" tabindex="0" aria-label="Reproducir video" data-sal="slide-up" data-sal-duration="400">
 			<div class="absolute inset-0" aria-hidden="true">
 				<Picture
 					src={aboutHeroImage}
@@ -33,14 +33,14 @@ import aboutHeroImage from '../assets/images/about-hero-video.png';
 
 	<div class="container-site flex flex-col lg:flex-row gap-12 lg:gap-20 py-24">
 
-		<div class="flex-1 flex flex-col gap-2">
+		<div class="flex-1 flex flex-col gap-2" data-sal="slide-up" data-sal-duration="400">
 			<SectionLabel label="Quiénes somos" />
 			<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
 				En Dental Gran Avenida<br />tenemos +40 años de historia
 			</h1>
 		</div>
 
-		<div class="flex-1 flex items-center">
+		<div class="flex-1 flex items-center" data-sal="slide-up" data-sal-duration="400" data-sal-delay="100">
 			<div class="flex flex-col gap-4 text-base text-body">
 				<p>
 					En Dental Gran Avenida entendemos que una sonrisa sana y armónica impacta directamente en tu bienestar y confianza. Somos una clínica odontológica integral que combina excelencia clínica, tecnología de vanguardia y un trato humano y personalizado.

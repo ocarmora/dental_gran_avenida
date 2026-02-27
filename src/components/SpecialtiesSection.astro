@@ -24,8 +24,11 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
         />
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {specialties.map((s) => (
+            {specialties.map((s, i) => (
                 <a
+                    data-sal="slide-up"
+                    data-sal-duration="400"
+                    data-sal-delay={(i % 4) * 80}
                     href={toHref(`/especialidades/${s.slug}`)}
                     class="group relative flex flex-col justify-end min-h-[320px] lg:h-[400px] rounded-2xl overflow-hidden p-8 transition-all duration-500 hover:shadow-2xl"
                 >

@@ -27,17 +27,19 @@ const values = [
 	<div class="container-site flex flex-col lg:flex-row items-center lg:items-start gap-20">
 
 		<div class="flex flex-col sm:flex-row lg:flex-col gap-8 flex-1 order-2 lg:order-1 items-center lg:items-stretch">
-			{values.map((v) => (
-				<Card variant="blue" class="flex-1 w-full sm:w-auto">
+			{values.map((v, i) => (
+			<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={i * 100} class="flex-1 w-full sm:w-auto h-full">
+			<Card variant="blue" class="w-full sm:w-auto">
 					<div class="flex flex-col gap-2 text-center lg:text-left">
 						<h3 class="font-display font-bold text-xl text-navy-blue">{v.title}</h3>
 						<p class="text-base text-body">{v.description}</p>
 					</div>
 				</Card>
+				</div>
 			))}
 		</div>
 
-		<div class="flex-1 flex items-center lg:items-start lg:sticky lg:top-24 lg:self-start lg:pt-0 order-1 lg:order-2 w-full">
+		<div class="flex-1 flex items-center lg:items-start lg:sticky lg:top-24 lg:self-start lg:pt-0 order-1 lg:order-2 w-full" data-sal="slide-up" data-sal-duration="400">
 			<SectionHeading
 				label="Misión y más"
 				title="Conoce nuestros valores y propósito"

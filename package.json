@@ -11,6 +11,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
+    "sal.js": "^0.8.5",
     "tailwindcss": "^4.2.1",
     "video.js": "^8.23.7"
   }

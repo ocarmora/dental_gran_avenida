@@ -25,7 +25,7 @@ const { variant = 'full', title, description, ctaLabel, ctaHref } = Astro.props;
 			aria-hidden="true"
 		/>
 		<div class="container-site relative flex flex-col sm:flex-row items-center gap-4 sm:gap-40 py-10 sm:justify-center">
-			<div class="flex flex-col gap-1 text-center sm:text-left">
+			<div class="flex flex-col gap-1 text-center sm:text-left" data-sal="slide-up" data-sal-duration="400">
 				<p class="font-display font-bold text-2xl text-white">{title}</p>
 				<p class="text-base text-white/80">{description}</p>
 			</div>
@@ -58,7 +58,7 @@ const { variant = 'full', title, description, ctaLabel, ctaHref } = Astro.props;
 				/>
 			</div>
 
-			<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg order-1 lg:order-2">
+			<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg order-1 lg:order-2" data-sal="slide-up" data-sal-duration="400">
 				<SectionHeading
 					title={title}
 					description={description}

@@ -16,12 +16,14 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 <section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site flex flex-col gap-16 items-center">
 
+		<div data-sal="slide-up" data-sal-duration="400">
 		<SectionHeading
 			label="Nuestro equipo"
 			title={`Especialistas en ${specialtyLabel}`}
 			description="Profesionales con formación especializada y años de experiencia clínica que te acompañarán en todo tu tratamiento."
 			centered
 		/>
+		</div>
 
 		<TeamGrid members={members} />
 

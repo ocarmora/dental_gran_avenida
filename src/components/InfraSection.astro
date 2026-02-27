@@ -38,7 +38,7 @@ const features = [
 <section id="tecnologia" class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] lg:grid-rows-2 gap-6">
 
-		<div class="md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col items-center lg:items-start justify-center lg:justify-start gap-0 lg:sticky lg:top-24 lg:self-start">
+		<div class="md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col items-center lg:items-start justify-center lg:justify-start gap-0 lg:sticky lg:top-24 lg:self-start" data-sal="slide-up" data-sal-duration="400">
 			<SectionHeading
 				label="Clínica"
 				title="Para una atención de calidad"
@@ -47,7 +47,8 @@ const features = [
 			/>
 		</div>
 
-		{features.map((f) => (
+		{features.map((f, i) => (
+			<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={i * 80} class="h-full">
 			<Card>
 				<div class="flex flex-col gap-4">
 					<div class="flex size-16 items-center justify-center rounded-xl bg-navy-blue/10 shrink-0">
@@ -78,6 +79,7 @@ const features = [
 					</div>
 				</div>
 			</Card>
+			</div>
 		))}
 
 	</div>

@@ -46,10 +46,13 @@ const features = [
 				description="En Dental Gran Avenida contamos con especialistas de primer nivel, tecnología avanzada y una infraestructura completa bajo un mismo techo para entregarte la mejor atención."
 				centerOnMobile
 			/>
-			<Button href={config.whatsapp.url} label="Agendar hora" variant="secondary" target="_blank" />
+			<div data-sal="slide-up" data-sal-duration="400" data-sal-delay="80">
+				<Button href={config.whatsapp.url} label="Agendar hora" variant="secondary" target="_blank" />
+			</div>
 		</div>
 
-		{features.map((f) => (
+		{features.map((f, i) => (
+			<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={i * 80} class="h-full">
 			<Card>
 				<div class="flex flex-col gap-4">
 					<div class="flex size-16 items-center justify-center rounded-xl bg-navy-blue/10 shrink-0">
@@ -81,6 +84,7 @@ const features = [
 					</div>
 				</div>
 			</Card>
+			</div>
 		))}
 
 	</div>
