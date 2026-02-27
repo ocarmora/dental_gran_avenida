@@ -38,30 +38,38 @@ const hours = [
 
 		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
 			{contacts.map((c) => (
-				<Card variant={c.icon === 'urgency' ? 'red' : 'blue'}>
-					<div class="flex flex-col gap-4">
-						<div class={`flex size-12 items-center justify-center rounded-xl shrink-0 ${c.icon === 'urgency' ? 'bg-red-700/10 text-red-700' : 'bg-navy-blue/10 text-navy-blue'}`}>
-							{c.icon === 'urgency' ? (
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
-									<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-									<path d="M12 8v4"/>
-									<path d="M12 16h.01"/>
-								</svg>
-							) : (
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
-									<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-									<path d="M16 2v4"/>
-									<path d="M8 2v4"/>
-									<path d="M3 10h18"/>
-								</svg>
-							)}
+				<a
+					href={c.href}
+					target={c.href.startsWith('http') ? '_blank' : undefined}
+					rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+					class="block focus-ring rounded-2xl"
+					aria-label={c.icon === 'urgency' ? 'Contactar por urgencias' : 'Contactar para atención general'}
+				>
+					<Card variant={c.icon === 'urgency' ? 'red' : 'blue'}>
+						<div class="flex flex-col gap-4">
+							<div class={`flex size-12 items-center justify-center rounded-xl shrink-0 ${c.icon === 'urgency' ? 'bg-red-700/10 text-red-700' : 'bg-navy-blue/10 text-navy-blue'}`}>
+								{c.icon === 'urgency' ? (
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
+										<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+										<path d="M12 8v4"/>
+										<path d="M12 16h.01"/>
+									</svg>
+								) : (
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
+										<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+										<path d="M16 2v4"/>
+										<path d="M8 2v4"/>
+										<path d="M3 10h18"/>
+									</svg>
+								)}
+							</div>
+							<div class="flex flex-col gap-2">
+								<p class={`font-display font-bold text-xl ${c.icon === 'urgency' ? 'text-red-700' : 'text-navy-blue'}`}>{c.title}</p>
+								<p class="text-base text-body">{c.description}</p>
+							</div>
 						</div>
-						<div class="flex flex-col gap-2">
-							<p class={`font-display font-bold text-xl ${c.icon === 'urgency' ? 'text-red-700' : 'text-navy-blue'}`}>{c.title}</p>
-							<p class="text-base text-body">{c.description}</p>
-						</div>
-					</div>
-				</Card>
+					</Card>
+				</a>
 			))}
 		</div>
 

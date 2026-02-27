@@ -74,7 +74,7 @@ const testimonials = [
 					id="testimonials-prev"
 					aria-label="Anterior"
 					class:list={[
-						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation',
+						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring',
 						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
 					]}
 				>
@@ -87,7 +87,7 @@ const testimonials = [
 					id="testimonials-next"
 					aria-label="Siguiente"
 					class:list={[
-						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation',
+						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring',
 						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
 					]}
 				>
@@ -99,6 +99,9 @@ const testimonials = [
 
 			<div
 				id="testimonials-scroll"
+				role="region"
+				aria-label="Testimonios de pacientes"
+				tabindex="0"
 				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2"
 				style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;"
 			>

@@ -4,7 +4,7 @@ import { config } from '../config';
 import Button from './Button.astro';
 import SectionLabel from './SectionLabel.astro';
 import heroImage from '../assets/images/hero-image.png';
-import webpayLogo from '../assets/images/webpay.png';
+import logoMercadoPago from '../assets/images/logo-mercado-pago.svg';
 ---
 
 <section class="w-full pt-24 lg:pt-0">
@@ -32,9 +32,11 @@ import webpayLogo from '../assets/images/webpay.png';
 					target="_blank"
 					class="md:bg-transparent md:border md:border-french-ultramarine md:text-french-ultramarine md:hover:bg-french-ultramarine md:hover:text-white"
 				/>
-				<img
-					src="/images/logo-mercado-pago.svg"
+				<Image
+					src={logoMercadoPago}
 					alt="Mercado Pago"
+					width={120}
+					height={64}
 					class="h-16 w-auto"
 				/>
 			</div>
@@ -46,6 +48,7 @@ import webpayLogo from '../assets/images/webpay.png';
 				src={heroImage}
 				alt="Especialistas de Dental Gran Avenida"
 				class="max-w-lg w-full lg:w-auto h-auto"
+				loading="eager"
 			/>
 		</div>
 	</div>

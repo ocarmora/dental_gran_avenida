@@ -17,7 +17,7 @@ const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
 	rel={rel}
 	class:list={[
 		className,
-		'inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all [&:hover>svg]:translate-x-1',
+		'inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all [&:hover>svg]:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-french-ultramarine focus-visible:ring-offset-2',
 		variant === 'primary'
 			? 'bg-french-ultramarine text-white hover:opacity-90'
 			: variant === 'white'

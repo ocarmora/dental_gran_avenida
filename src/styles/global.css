@@ -19,9 +19,21 @@
   html {
     scroll-behavior: smooth;
   }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @layer components {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-french-ultramarine focus-visible:ring-offset-2;
+  }
+
+  .focus-ring-on-dark {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-white focus-visible:ring-offset-2 focus-visible:ring-offset-dark-sea-blue;
+  }
+
   .container-site {
     width: 100%;
     max-width: 1280px;
