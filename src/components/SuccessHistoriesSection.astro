@@ -1,7 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import SectionHeading from './SectionHeading.astro';
-import servicePlaceholder from '../assets/images/service-placeholder.jpg';
+import instagramTestimonyOne from '../assets/images/instagram-testimony-one.png';
+import instagramTestimonyTwo from '../assets/images/instagram-testimony-two.png';
+import instagramTestimonyThree from '../assets/images/instagram-testimony-three.png';
+
+const testimonyImages = [instagramTestimonyOne, instagramTestimonyTwo, instagramTestimonyThree];
 
 interface Props {
 	background?: 'white' | 'blue-white';
@@ -27,16 +31,16 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 			{[0, 1, 2].map((i) => (
 				<div
 					class:list={[
-						'rounded-2xl overflow-hidden shrink-0 snap-center aspect-[3/4] w-[min(85vw,280px)] lg:w-[200px]',
+						'rounded-2xl overflow-hidden shrink-0 snap-center aspect-[390/844] w-[min(85vw,280px)] lg:w-[200px] border border-navy-blue/10',
 						i === 1 && 'lg:mt-8',
 					]}
 				>
 					<Image
-						src={servicePlaceholder}
+						src={testimonyImages[i]}
 						alt={`Caso de éxito ${i + 1}`}
 						class="w-full h-full object-cover"
-						width={200}
-						height={267}
+						width={390}
+						height={844}
 					/>
 				</div>
 			))}
