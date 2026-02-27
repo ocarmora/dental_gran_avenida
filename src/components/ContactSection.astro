@@ -36,7 +36,7 @@ const hours = [
 <section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
 
-		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full order-2 lg:order-1">
 			{contacts.map((c) => (
 				<a
 					href={c.href}
@@ -73,7 +73,7 @@ const hours = [
 			))}
 		</div>
 
-		<div class="flex-1 flex flex-col gap-6">
+		<div class="flex-1 flex flex-col gap-6 order-1 lg:order-2">
 			<SectionHeading
 				label="Contacto"
 				title="Nuestros canales de atención"
