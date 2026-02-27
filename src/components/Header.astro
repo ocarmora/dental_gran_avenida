@@ -22,6 +22,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const toHref = (path: string) => (path === '/' ? base : `${base}${path}`);
 const isActive = (href: string) => {
 	const full = toHref(href);
+	if (href === '/') return pathname === full;
 	return pathname === full || pathname.startsWith(full + '/');
 };
 const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);

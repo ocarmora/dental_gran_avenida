@@ -1,5 +1,6 @@
 ---
-const HLS_SOURCE = '/videos/spot-dental-gran-avenida/master.m3u8';
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
+const HLS_SOURCE = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
 ---
 
 <div
@@ -79,10 +80,8 @@ const HLS_SOURCE = '/videos/spot-dental-gran-avenida/master.m3u8';
 		background: rgba(242, 250, 255, 0.3);
 	}
 </style>
-<script>
+<script define:vars={{ HLS_SOURCE }}>
 	import videojs from 'video.js';
-
-	const HLS_SOURCE = '/videos/spot-dental-gran-avenida/master.m3u8';
 	const modal = document.getElementById('video-player-modal');
 	const container = document.getElementById('video-player-container');
 	const closeBtn = document.getElementById('video-modal-close');
