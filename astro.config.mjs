@@ -1,14 +1,24 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 // For GitHub Pages: site + base per https://docs.astro.build/en/guides/deploy/github/
 export default defineConfig({
-  site: 'https://ocarmora.github.io',
-  base: '/dental_gran_avenida',
+  site: "https://ocarmora.github.io",
+  base: "/dental_gran_avenida",
+
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
+
+  integrations: [
+    sitemap({
+      changefreq: "monthly",
+      lastmod: new Date(),
+    }),
+  ],
 });
