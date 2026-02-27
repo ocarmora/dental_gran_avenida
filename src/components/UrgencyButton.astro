@@ -9,6 +9,7 @@ interface Props {
    * Mobile sticky header: compact height (h-10) with smaller text.
    */
   compact?: boolean;
+  target?: '_blank' | '_self';
   class?: string;
 }
 
@@ -16,12 +17,15 @@ const {
   href,
   expandable = false,
   compact = false,
+  target,
   class: className,
 } = Astro.props;
 ---
 
 <a
   href={href}
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   class:list={[
     className,
     "group flex items-center rounded-full border border-red-700/30 bg-red-50 text-red-700 hover:bg-red-700 hover:border-red-700 hover:text-white transition-colors focus-ring",

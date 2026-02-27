@@ -134,7 +134,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
     </div>
 
     <div class="hidden md:flex gap-3 items-center">
-      <UrgencyButton href={`tel:+${config.whatsapp.phone}`} expandable />
+      <UrgencyButton href={config.whatsapp.url} expandable target="_blank" />
       <Button
         href={config.whatsapp.url}
         label="Agendar hora"
@@ -183,7 +183,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
       />
     </a>
     <div class="flex gap-2 items-center shrink-0">
-      <UrgencyButton href={`tel:+${config.whatsapp.phone}`} compact />
+      <UrgencyButton href={config.whatsapp.url} compact target="_blank" />
     </div>
   </div>
 </div>
@@ -198,7 +198,8 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
   >
     <div class="container-site shrink-0 flex gap-3 w-full pt-6 pb-2">
       <UrgencyButton
-        href={`tel:+${config.whatsapp.phone}`}
+        href={config.whatsapp.url}
+        target="_blank"
         class="flex-1 min-w-0 touch-manipulation justify-center"
       />
       <Button
