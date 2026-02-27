@@ -1,49 +1,71 @@
 ---
 import { Image } from 'astro:assets';
-import { config } from '../config';
 import Button from './Button.astro';
 import SectionHeading from './SectionHeading.astro';
 import ctaDoctor from '../assets/images/cta-doctor.png';
+
+interface Props {
+	variant?: 'full' | 'simple';
+	title: string;
+	description: string;
+	ctaLabel: string;
+	ctaHref: string;
+}
+
+const { variant = 'full', title, description, ctaLabel, ctaHref } = Astro.props;
 ---
 
-<section
-	class="relative w-full overflow-hidden"
-	style="background: radial-gradient(ellipse 80% 120% at 30% 50%, #18aee0 0%, #1289d5 25%, #0c65cb 50%, #0640c0 75%, #001bb5 100%);"
->
-	<!-- Decorative pattern overlay -->
-	<div
-		class="absolute inset-0 opacity-20 pointer-events-none bg-top-left bg-repeat"
-		style="background-size: 613px 613px; background-image: url('/images/cta-pattern.png');"
-		aria-hidden="true"
-	/>
-
-	<div class="container-site relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-30 py-12 lg:py-0">
-
-		<!-- Photo group — solo desktop -->
-		<div class="hidden lg:flex relative items-center justify-center shrink-0 order-2 lg:order-1">
-			<img
-				src="/images/cta-bg.svg"
-				alt=""
-				aria-hidden="true"
-				class="absolute bottom-0 left-1/2 -translate-x-1/2 aspect-square w-56 h-56 lg:w-72 lg:h-72 object-contain"
-			/>
-			<Image
-				src={ctaDoctor}
-				alt="Especialistas Dental Gran Avenida"
-				class="relative z-10 h-72 lg:h-88 w-auto max-w-80 object-contain object-bottom"
-			/>
+{variant === 'simple' ? (
+	<!-- Simple: slim horizontal gradient banner -->
+	<section class="relative w-full overflow-hidden bg-linear-to-r from-french-ultramarine to-bright-ocean">
+		<div
+			class="absolute inset-0 opacity-20 pointer-events-none bg-[url('/images/cta-pattern.png')] bg-size-[494px_494px] bg-top-left bg-repeat"
+			aria-hidden="true"
+		/>
+		<div class="container-site relative flex flex-col sm:flex-row items-center gap-4 sm:gap-40 py-10 sm:justify-center">
+			<div class="flex flex-col gap-1 text-center sm:text-left">
+				<p class="font-display font-bold text-2xl text-white">{title}</p>
+				<p class="text-base text-white/80">{description}</p>
+			</div>
+			<Button href={ctaHref} label={ctaLabel} variant="white" target="_blank" />
 		</div>
+	</section>
+) : (
+	<!-- Full: tall banner with doctor photo -->
+	<section class="relative w-full overflow-hidden bg-[radial-gradient(ellipse_80%_120%_at_30%_50%,#18aee0_0%,#1289d5_25%,#0c65cb_50%,#0640c0_75%,#001bb5_100%)]">
+		<div
+			class="absolute inset-0 opacity-20 pointer-events-none bg-[url('/images/cta-pattern.png')] bg-size-[613px_613px] bg-top-left bg-repeat"
+			aria-hidden="true"
+		/>
 
-		<!-- Text content -->
-		<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg order-1 lg:order-2">
-			<SectionHeading
-				title="Obtén 20% de descuento en el mes de la sonrisa"
-				description="Válido para todas las especialidades durante marzo"
-				variant="overlay"
-				centerOnMobile
-			/>
-			<Button href={config.whatsapp.url} label="Agendar hora" variant="white" target="_blank" />
+		<div class="container-site relative flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-30 py-12 lg:py-0">
+
+			<!-- Photo group — desktop only -->
+			<div class="hidden lg:flex relative items-center justify-center shrink-0 order-2 lg:order-1">
+				<img
+					src="/images/cta-bg.svg"
+					alt=""
+					aria-hidden="true"
+					class="absolute bottom-0 left-1/2 -translate-x-1/2 aspect-square w-56 h-56 lg:w-72 lg:h-72 object-contain"
+				/>
+				<Image
+					src={ctaDoctor}
+					alt="Especialistas Dental Gran Avenida"
+					class="relative z-10 h-72 lg:h-88 w-auto max-w-80 object-contain object-bottom"
+				/>
+			</div>
+
+			<!-- Text content -->
+			<div class="flex flex-col gap-8 shrink-0 text-center lg:text-left items-center lg:items-start w-full max-w-lg order-1 lg:order-2">
+				<SectionHeading
+					title={title}
+					description={description}
+					variant="overlay"
+					centerOnMobile
+				/>
+				<Button href={ctaHref} label={ctaLabel} variant="white" target="_blank" />
+			</div>
+
 		</div>
-
-	</div>
-</section>
+	</section>
+)}

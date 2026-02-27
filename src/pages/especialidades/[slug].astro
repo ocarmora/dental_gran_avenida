@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Header from '../../components/Header.astro';
+import SpecialtyHeroSection from '../../components/SpecialtyHeroSection.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import SuccessHistoriesSection from '../../components/SuccessHistoriesSection.astro';
+import SpecialtyTeamSection from '../../components/SpecialtyTeamSection.astro';
+import TestimonialsSection from '../../components/TestimonialsSection.astro';
+import SpecialtiesSection from '../../components/SpecialtiesSection.astro';
+import FooterSection from '../../components/FooterSection.astro';
+import { specialties } from '../../data/specialties';
+import { teamMembers } from '../../data/team';
+import { config } from '../../config';
+
+export async function getStaticPaths() {
+	return specialties.map((specialty) => ({
+		params: { slug: specialty.slug },
+		props: { specialty },
+	}));
+}
+
+const { specialty } = Astro.props;
+
+const specialtyMembers = teamMembers.filter((m) =>
+	specialty.teamMemberSlugs.includes(m.slug)
+);
+---
+
+<Layout
+	title={`${specialty.label} · Dental Gran Avenida`}
+	description={`${specialty.heroDescription} Agenda tu hora en Dental Gran Avenida, Gran Avenida 10063, El Bosque.`}
+>
+	<TopBar />
+	<Header />
+	<main>
+		<SpecialtyHeroSection specialty={specialty} />
+		<CtaBanner
+			variant="simple"
+			title="20% de descuento en el mes de la sonrisa"
+			description="Además, paga en 6 cuotas sin interés"
+			ctaLabel="Agendar hora"
+			ctaHref={config.whatsapp.url}
+		/>
+		<SuccessHistoriesSection specialtyLabel={specialty.label} />
+		<SpecialtyTeamSection
+			specialtyLabel={specialty.label}
+			members={specialtyMembers}
+		/>
+		<TestimonialsSection background="white" />
+		<SpecialtiesSection />
+	</main>
+	<FooterSection />
+</Layout>

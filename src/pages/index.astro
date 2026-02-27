@@ -10,6 +10,7 @@ import ClinicSection from '../components/ClinicSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import FooterSection from '../components/FooterSection.astro';
+import { config } from '../config';
 ---
 
 <Layout title="Dental Gran Avenida" description="Clínica dental con 40 años de experiencia en El Bosque, Santiago.">
@@ -18,7 +19,13 @@ import FooterSection from '../components/FooterSection.astro';
 	<main>
 		<HeroSection />
 		<FeaturesSection />
-		<CtaBanner />
+		<CtaBanner
+			variant="full"
+			title="Obtén 20% de descuento en el mes de la sonrisa"
+			description="Válido para todas las especialidades durante marzo"
+			ctaLabel="Agendar hora"
+			ctaHref={config.whatsapp.url}
+		/>
 		<SpecialtiesSection />
 		<ClinicSection />
 		<TestimonialsSection />

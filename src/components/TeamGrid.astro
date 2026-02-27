@@ -1,0 +1,17 @@
+---
+import TeamCard from './TeamCard.astro';
+import type { TeamMember } from '../data/team';
+
+interface Props {
+	members: TeamMember[];
+}
+
+const { members } = Astro.props;
+---
+
+<!-- flex + justify-center: max 4 cols (card max-w-64), centered when fewer. Data-driven. -->
+<div class="flex flex-wrap justify-center gap-8 w-full">
+	{members.map((member) => (
+		<TeamCard member={member} />
+	))}
+</div>

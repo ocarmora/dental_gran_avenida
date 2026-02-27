@@ -3,10 +3,15 @@ import { Image } from 'astro:assets';
 import { config } from '../config';
 import Button from './Button.astro';
 import logo from '../assets/images/logo-transparent.png';
+import { specialties } from '../data/specialties';
 
-const navLinks = [
+type NavLink =
+	| { href: string; label: string; hasDropdown: false }
+	| { label: string; hasDropdown: true };
+
+const navLinks: NavLink[] = [
 	{ href: '/', label: 'Inicio', hasDropdown: false },
-	{ href: '/especialidades', label: 'Especialidades', hasDropdown: true },
+	{ label: 'Especialidades', hasDropdown: true },
 	{ href: '/quienes-somos', label: 'Conoce la Clínica', hasDropdown: false },
 	{ href: '/contacto', label: 'Contacto', hasDropdown: false },
 ];
@@ -16,6 +21,7 @@ const isActive = (href: string) => {
 	if (href === '/') return pathname === '/';
 	return pathname === href || pathname.startsWith(href + '/');
 };
+const isSpecialtiesActive = pathname.startsWith('/especialidades');
 ---
 
 <header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
@@ -29,23 +35,64 @@ const isActive = (href: string) => {
 
 			<nav class="hidden md:flex gap-6 lg:gap-10 items-center" aria-label="Navegación principal">
 				{navLinks.map((link) => (
-					<a
-						href={link.href}
-						class:list={[
-							'flex gap-1.5 items-center text-base transition-colors whitespace-nowrap',
-							isActive(link.href)
-								? 'text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8'
-								: 'text-black font-normal hover:text-french-ultramarine',
-						]}
-						aria-current={isActive(link.href) ? 'page' : undefined}
-					>
-						{link.label}
-						{link.hasDropdown && (
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5" class="w-[9px] h-[5px] shrink-0 fill-current" aria-hidden="true">
-								<path d="M0.5 0.5L4.5 4.5L8.5 0.5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						)}
-					</a>
+					link.hasDropdown ? (
+						<div class="relative group" id="nav-specialties">
+							<button
+								type="button"
+								class:list={[
+									'flex gap-1.5 items-center text-base transition-colors whitespace-nowrap py-2 bg-transparent border-none cursor-pointer font-inherit',
+									isSpecialtiesActive
+										? 'text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8'
+										: 'text-black font-normal hover:text-french-ultramarine',
+								]}
+								aria-haspopup="true"
+								aria-expanded="false"
+								aria-label="Especialidades, desplegar menú"
+							>
+								{link.label}
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5" class="w-[9px] h-[5px] shrink-0 fill-current transition-transform group-hover:rotate-180" aria-hidden="true">
+									<path d="M0.5 0.5L4.5 4.5L8.5 0.5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+							<div
+								class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-[opacity,visibility] duration-200"
+								role="menu"
+							>
+								<ul class="bg-white rounded-xl shadow-lg border border-navy-blue/10 py-2 min-w-72">
+									{specialties.map((s) => (
+										<li role="none">
+											<a
+												href={`/especialidades/${s.slug}`}
+												class:list={[
+													'flex items-center gap-2 px-4 py-2.5 text-base transition-colors',
+													pathname === `/especialidades/${s.slug}` ? 'text-french-ultramarine bg-blue-white' : 'text-body hover:bg-blue-white hover:text-french-ultramarine',
+												]}
+												role="menuitem"
+											>
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400.141 400.141" class="size-4 shrink-0 fill-current" aria-hidden="true">
+													<path d="M344.879,30.971C327.039,11,302.484,0,275.737,0c-20.946,0-43.379,12.377-59.76,21.414 c-5.425,2.992-13.523,7.894-15.911,7.895c-2.377,0.001-10.438-4.889-15.84-7.879C167.88,12.387,145.494,0,124.401,0 C97.654,0,73.099,11,55.26,30.971C38.308,49.951,28.972,74.93,28.972,101.303c0,16.988,3.122,36.946,8.017,59.606 c4.605,21.32,19.205,39.269,50.061,52.85c9.321,4.104,26.044,7.305,29.044,10.305c3.605,3.605,7.458,16.625,7.458,16.625 s0.875,3.068-0.412,3.068c-7.122,0-12.916,5.795-12.916,12.916s5.794,12.916,12.916,12.916c0,0,6.215,0,8.287,0 c1.625,0,2.154,1.67,2.154,1.67l4.472,13.805c0,0,0.375,2.533-2.6,2.533c-7.121,0-12.914,5.793-12.914,12.914 s5.793,12.916,12.914,12.916c0,0,7.669,0,10.225,0c1.875,0,2.501,1.512,2.501,1.512l5.201,15.561c0,0,0.298,0.936-0.827,0.936 c-1.17,0-4.682,0-4.682,0c-7.123,0-12.916,5.795-12.916,12.916c0,7.123,5.793,12.916,12.916,12.916c0,0,9.668,0,12.891,0 c1.75,0,2.022,1.373,2.022,1.373l7.974,23.855l0.047,0.125c4.757,11.623,14.385,17.52,28.617,17.52h0.791 c14.231,0,23.858-5.896,28.649-17.605c0,0,5.98-18.223,8.19-24.219c0.438-1.189,1.25-1.049,1.25-1.049h13.966 c7.121,0,12.915-5.793,12.915-12.916c0-7.121-3.506-12.916-12.915-12.916c-1.981,0-3.93,0.006-4.778,0.006 c-1.313,0-0.5-2.25-0.5-2.25l4.75-14.313c0,0,0.25-1.449,1.626-1.449c2.829,0,11.318,0,11.318,0 c7.121,0,12.915-5.795,12.915-12.916c0-7.12-5.176-12.913-12.297-12.913c-1.515,0-2.042,0.049-2.625,0.049 c-1.562,0-0.688-1.771-0.688-1.771s3.381-11.144,4.812-15.438c0.313-0.938,1.313-0.85,1.313-0.85h8.882 c7.121,0,12.914-5.795,12.914-12.916s-5.793-12.916-12.914-12.916c-1.132,0-0.92-1.494-0.736-2.234 c1.167-4.709,3.348-14.395,7.5-17.459c3.922-2.895,19.721-6.291,28.842-10.305c30.191-13.291,45.991-33.361,49.961-51.629 c5.019-23.091,8.604-43.98,8.604-60.828C371.168,74.93,361.832,49.954,344.879,30.971z M213.749,376.484 c-2.825,6.844-11.379,7.375-13.932,7.375c-2.548,0-11.065-0.529-13.913-7.324l-6.142-18.416c0,0-0.147-0.854,1.041-0.854 c9.864,0,29.086,0,38.78,0c0.688,0,0.541,0.396,0.541,0.396L213.749,376.484z M228.573,331.434c-14.224,0-42.562,0-56.896,0 c-0.875,0-1.063-0.869-1.063-0.869l-5.535-16.475c0,0-0.09-0.662,1.035-0.662c17.249,0,51.266,0,68.354,0 c0.646,0,0.48,0.477,0.48,0.477l-5.839,17.229C229.112,331.133,228.948,331.434,228.573,331.434z M244.136,286.982 c0,0-0.146,0.615-0.792,0.615c-6.161,0-65.66,0-86.208,0c-0.917,0-1.125-0.574-1.125-0.574l-5.42-16.388 c0,0-0.351-1.071,1.024-1.071c26.875,0,73.109,0.025,97.479,0.025c0.875,0,0.64,0.676,0.64,0.676L244.136,286.982z M256.928,243.753c-28.567,0-113.958-0.063-113.958-0.063s-0.875,0-1.292-0.875c-1.202-2.522-3.542-8.791-4.489-12.369 c-0.525-1.983,1.364-1.381,1.364-1.381c19.971,3.822,39.268,5.351,61.273,5.351c22.32,0,42.439-1.672,62.644-5.601 c0,0,1.417-0.25,1.087,0.653c-1.098,3.009-3.308,9.647-4.316,12.7C258.915,243.148,257.928,243.753,256.928,243.753z M348.261,157.066c-0.691,3.012-2.895,8.507-4.036,11.595c-4.261,11.532-18.773,21.91-38.087,30.414 c-9.916,4.365-21.131,8.088-33.332,11.064l-2.128,0.514c-21.528,5.049-46.028,7.717-70.853,7.717 c-24.134,0-48.009-2.529-69.107-7.318l-2.075-0.477c-12.884-3.041-24.7-6.908-35.129-11.498 c-18.93-8.334-34.325-19.907-38.899-31.041c-1.469-3.577-3.938-12.219-3.938-12.219c-4.931-21.021-5.661-39.273-5.661-54.512 c0-41.91,29.694-85.258,79.384-85.258c12.896,0,29.882,5.902,45.442,15.789c2.272,1.445,5.513,3.936,8.646,6.346 c1.245,0.957,2.473,1.9,3.618,2.764c3.715,2.779,8.735,6.418,14.615,9.879c3.093,1.826,5.907,3.445,9.021,4.768 c12.738,5.406,26.244,8.148,40.142,8.148c14.181,0,31.599-3.445,31.359-5.414c-0.24-1.969-29.273-1.969-48.604-7.09 c-7.717-2.043-16.462-5.355-16.462-7.17c0-1.935,2.729-3.453,4.871-4.732c1.868-1.117,3.987-2.383,6.688-3.873 c14.851-8.193,35.188-19.414,52-19.414c49.69,0,79.384,43.348,79.384,85.258C355.121,116.336,353.147,135.788,348.261,157.066z"/>
+												</svg>
+												{s.label}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					) : (
+						<a
+							href={link.href}
+							class:list={[
+								'flex gap-1.5 items-center text-base transition-colors whitespace-nowrap',
+								isActive(link.href)
+									? 'text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8'
+									: 'text-black font-normal hover:text-french-ultramarine',
+							]}
+							aria-current={isActive(link.href) ? 'page' : undefined}
+						>
+							{link.label}
+						</a>
+					)
 				))}
 			</nav>
 		</div>
@@ -64,7 +111,7 @@ const isActive = (href: string) => {
 			<Button href={config.whatsapp.url} label="Agendar hora" variant="primary" target="_blank" />
 		</div>
 
-		<!-- Hamburger — mobile only, se transforma en X cuando el menú está abierto -->
+		<!-- Hamburger — mobile only, transforms to X when open -->
 		<button
 			type="button"
 			id="menu-toggle"
@@ -84,28 +131,69 @@ const isActive = (href: string) => {
 <!-- Mobile menu overlay — full screen, no scroll -->
 <div
 	id="mobile-menu"
-	class="fixed inset-0 z-40 md:hidden bg-blue-white invisible opacity-0 pointer-events-none transition-[visibility,opacity] duration-300 ease-out [&.is-open]:visible [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto"
+	class="fixed inset-0 z-40 md:hidden bg-blue-white invisible opacity-0 pointer-events-none transition-[visibility,opacity] duration-300 ease-out [&.is-open]:visible [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto overflow-x-hidden"
 	aria-hidden="true"
 >
-	<div class="flex flex-col h-full overflow-hidden pt-24">
-		<!-- Nav links — vertical (el header con logo y hamburger/X queda visible encima) -->
-		<nav class="flex-1 flex flex-col justify-center container-site py-8" aria-label="Navegación móvil">
-			<ul class="flex flex-col">
+	<div class="flex flex-col h-full overflow-hidden min-w-0 pt-24 w-full max-w-full">
+		<!-- Nav links — vertical -->
+		<nav class="flex-1 flex flex-col justify-center container-site py-8 min-w-0 w-full" aria-label="Navegación móvil">
+			<ul class="flex flex-col w-full min-w-0">
 				{navLinks.map((link) => (
-					<li>
-						<a
-							href={link.href}
-							class:list={[
-								'block py-4 text-lg transition-colors border-b border-navy-blue/10',
-								isActive(link.href)
-									? 'text-french-ultramarine underline-dash'
-									: 'text-black font-normal hover:text-french-ultramarine',
-							]}
-							aria-current={isActive(link.href) ? 'page' : undefined}
-						>
-							{link.label}
-						</a>
-					</li>
+					link.hasDropdown ? (
+						<li class="border-b border-navy-blue/10">
+							<button
+								type="button"
+								id="mobile-specialties-toggle"
+								class="flex w-full items-center justify-between py-4 text-lg text-left transition-colors"
+								aria-expanded="false"
+								aria-controls="mobile-specialties-list"
+								aria-label="Especialidades, expandir menú"
+							>
+								<span class:list={[
+									isSpecialtiesActive ? 'text-french-ultramarine' : 'text-black font-normal',
+								]}>
+									{link.label}
+								</span>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 5" class="w-[9px] h-[5px] shrink-0 fill-current transition-transform duration-200" aria-hidden="true">
+									<path d="M0.5 0.5L4.5 4.5L8.5 0.5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+							<ul id="mobile-specialties-list" class="hidden flex-col pb-2" aria-hidden="true">
+								{specialties.map((s) => (
+									<li>
+										<a
+											href={`/especialidades/${s.slug}`}
+											class:list={[
+												'flex items-center gap-2 py-3 pl-4 text-base transition-colors border-l-2 -ml-px',
+												pathname === `/especialidades/${s.slug}` ? 'text-french-ultramarine border-french-ultramarine' : 'text-body border-transparent hover:text-french-ultramarine hover:border-french-ultramarine',
+											]}
+											aria-current={pathname === `/especialidades/${s.slug}` ? 'page' : undefined}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400.141 400.141" class="size-4 shrink-0 fill-current" aria-hidden="true">
+												<path d="M344.879,30.971C327.039,11,302.484,0,275.737,0c-20.946,0-43.379,12.377-59.76,21.414 c-5.425,2.992-13.523,7.894-15.911,7.895c-2.377,0.001-10.438-4.889-15.84-7.879C167.88,12.387,145.494,0,124.401,0 C97.654,0,73.099,11,55.26,30.971C38.308,49.951,28.972,74.93,28.972,101.303c0,16.988,3.122,36.946,8.017,59.606 c4.605,21.32,19.205,39.269,50.061,52.85c9.321,4.104,26.044,7.305,29.044,10.305c3.605,3.605,7.458,16.625,7.458,16.625 s0.875,3.068-0.412,3.068c-7.122,0-12.916,5.795-12.916,12.916s5.794,12.916,12.916,12.916c0,0,6.215,0,8.287,0 c1.625,0,2.154,1.67,2.154,1.67l4.472,13.805c0,0,0.375,2.533-2.6,2.533c-7.121,0-12.914,5.793-12.914,12.914 s5.793,12.916,12.914,12.916c0,0,7.669,0,10.225,0c1.875,0,2.501,1.512,2.501,1.512l5.201,15.561c0,0,0.298,0.936-0.827,0.936 c-1.17,0-4.682,0-4.682,0c-7.123,0-12.916,5.795-12.916,12.916c0,7.123,5.793,12.916,12.916,12.916c0,0,9.668,0,12.891,0 c1.75,0,2.022,1.373,2.022,1.373l7.974,23.855l0.047,0.125c4.757,11.623,14.385,17.52,28.617,17.52h0.791 c14.231,0,23.858-5.896,28.649-17.605c0,0,5.98-18.223,8.19-24.219c0.438-1.189,1.25-1.049,1.25-1.049h13.966 c7.121,0,12.915-5.793,12.915-12.916c0-7.121-3.506-12.916-12.915-12.916c-1.981,0-3.93,0.006-4.778,0.006 c-1.313,0-0.5-2.25-0.5-2.25l4.75-14.313c0,0,0.25-1.449,1.626-1.449c2.829,0,11.318,0,11.318,0 c7.121,0,12.915-5.795,12.915-12.916c0-7.12-5.176-12.913-12.297-12.913c-1.515,0-2.042,0.049-2.625,0.049 c-1.562,0-0.688-1.771-0.688-1.771s3.381-11.144,4.812-15.438c0.313-0.938,1.313-0.85,1.313-0.85h8.882 c7.121,0,12.914-5.795,12.914-12.916s-5.793-12.916-12.914-12.916c-1.132,0-0.92-1.494-0.736-2.234 c1.167-4.709,3.348-14.395,7.5-17.459c3.922-2.895,19.721-6.291,28.842-10.305c30.191-13.291,45.991-33.361,49.961-51.629 c5.019-23.091,8.604-43.98,8.604-60.828C371.168,74.93,361.832,49.954,344.879,30.971z M213.749,376.484 c-2.825,6.844-11.379,7.375-13.932,7.375c-2.548,0-11.065-0.529-13.913-7.324l-6.142-18.416c0,0-0.147-0.854,1.041-0.854 c9.864,0,29.086,0,38.78,0c0.688,0,0.541,0.396,0.541,0.396L213.749,376.484z M228.573,331.434c-14.224,0-42.562,0-56.896,0 c-0.875,0-1.063-0.869-1.063-0.869l-5.535-16.475c0,0-0.09-0.662,1.035-0.662c17.249,0,51.266,0,68.354,0 c0.646,0,0.48,0.477,0.48,0.477l-5.839,17.229C229.112,331.133,228.948,331.434,228.573,331.434z M244.136,286.982 c0,0-0.146,0.615-0.792,0.615c-6.161,0-65.66,0-86.208,0c-0.917,0-1.125-0.574-1.125-0.574l-5.42-16.388 c0,0-0.351-1.071,1.024-1.071c26.875,0,73.109,0.025,97.479,0.025c0.875,0,0.64,0.676,0.64,0.676L244.136,286.982z M256.928,243.753c-28.567,0-113.958-0.063-113.958-0.063s-0.875,0-1.292-0.875c-1.202-2.522-3.542-8.791-4.489-12.369 c-0.525-1.983,1.364-1.381,1.364-1.381c19.971,3.822,39.268,5.351,61.273,5.351c22.32,0,42.439-1.672,62.644-5.601 c0,0,1.417-0.25,1.087,0.653c-1.098,3.009-3.308,9.647-4.316,12.7C258.915,243.148,257.928,243.753,256.928,243.753z M348.261,157.066c-0.691,3.012-2.895,8.507-4.036,11.595c-4.261,11.532-18.773,21.91-38.087,30.414 c-9.916,4.365-21.131,8.088-33.332,11.064l-2.128,0.514c-21.528,5.049-46.028,7.717-70.853,7.717 c-24.134,0-48.009-2.529-69.107-7.318l-2.075-0.477c-12.884-3.041-24.7-6.908-35.129-11.498 c-18.93-8.334-34.325-19.907-38.899-31.041c-1.469-3.577-3.938-12.219-3.938-12.219c-4.931-21.021-5.661-39.273-5.661-54.512 c0-41.91,29.694-85.258,79.384-85.258c12.896,0,29.882,5.902,45.442,15.789c2.272,1.445,5.513,3.936,8.646,6.346 c1.245,0.957,2.473,1.9,3.618,2.764c3.715,2.779,8.735,6.418,14.615,9.879c3.093,1.826,5.907,3.445,9.021,4.768 c12.738,5.406,26.244,8.148,40.142,8.148c14.181,0,31.599-3.445,31.359-5.414c-0.24-1.969-29.273-1.969-48.604-7.09 c-7.717-2.043-16.462-5.355-16.462-7.17c0-1.935,2.729-3.453,4.871-4.732c1.868-1.117,3.987-2.383,6.688-3.873 c14.851-8.193,35.188-19.414,52-19.414c49.69,0,79.384,43.348,79.384,85.258C355.121,116.336,353.147,135.788,348.261,157.066z"/>
+											</svg>
+											{s.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						</li>
+					) : (
+						<li>
+							<a
+								href={link.href}
+								class:list={[
+									'block py-4 text-lg transition-colors border-b border-navy-blue/10',
+									isActive(link.href)
+										? 'text-french-ultramarine underline-dash'
+										: 'text-black font-normal hover:text-french-ultramarine',
+								]}
+								aria-current={isActive(link.href) ? 'page' : undefined}
+							>
+								{link.label}
+							</a>
+						</li>
+					)
 				))}
 			</ul>
 		</nav>
@@ -147,7 +235,7 @@ const isActive = (href: string) => {
 			</a>
 		</div>
 
-		<!-- Bottom CTAs — Llamar y Agendar en bloque horizontal a ancho completo -->
+		<!-- Bottom CTAs -->
 		<div class="container-site shrink-0 flex gap-3 w-full pb-8 pt-2">
 			<a
 				href={`tel:+${config.whatsapp.phone}`}
@@ -185,6 +273,7 @@ const isActive = (href: string) => {
 			menu?.setAttribute('aria-hidden', 'false');
 			toggle?.setAttribute('aria-expanded', 'true');
 			toggle?.setAttribute('aria-label', 'Cerrar menú');
+			document.documentElement.style.overflow = 'hidden';
 			document.body.style.overflow = 'hidden';
 			document.body.style.touchAction = 'none';
 		}
@@ -195,6 +284,7 @@ const isActive = (href: string) => {
 			menu?.setAttribute('aria-hidden', 'true');
 			toggle?.setAttribute('aria-expanded', 'false');
 			toggle?.setAttribute('aria-label', 'Abrir menú');
+			document.documentElement.style.overflow = '';
 			document.body.style.overflow = '';
 			document.body.style.touchAction = '';
 		}
@@ -211,5 +301,19 @@ const isActive = (href: string) => {
 		document.querySelectorAll('#mobile-menu a[href]').forEach((link) => {
 			link.addEventListener('click', () => closeMenu());
 		});
+
+		// Mobile specialties dropdown
+		const specialtiesToggle = document.getElementById('mobile-specialties-toggle');
+		const specialtiesList = document.getElementById('mobile-specialties-list');
+		if (specialtiesToggle && specialtiesList) {
+			specialtiesToggle.addEventListener('click', () => {
+				const isExpanded = specialtiesToggle.getAttribute('aria-expanded') === 'true';
+				specialtiesToggle.setAttribute('aria-expanded', String(!isExpanded));
+				specialtiesList.classList.toggle('hidden', isExpanded);
+				specialtiesList.classList.toggle('flex', !isExpanded);
+				specialtiesList.setAttribute('aria-hidden', String(isExpanded));
+				specialtiesToggle.querySelector('svg')?.classList.toggle('rotate-180', !isExpanded);
+			});
+		}
 	});
 </script>

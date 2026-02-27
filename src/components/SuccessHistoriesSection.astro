@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import servicePlaceholder from '../assets/images/service-placeholder.jpg';
+
+interface Props {
+	background?: 'white' | 'blue-white';
+	specialtyLabel?: string;
+}
+
+const { background = 'white', specialtyLabel } = Astro.props;
+const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+---
+
+<section class:list={[bgClass, 'py-24 w-full']}>
+	<div class="container-site flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+
+		<!-- Left: heading -->
+		<div class="flex-1 flex flex-col items-start">
+			<SectionHeading
+				label="Casos de éxito"
+				title={`Historias reales de personas como tú`}
+				description={`Nuestros pacientes son la mejor evidencia. Conoce los resultados de sus tratamientos${specialtyLabel ? ` de ${specialtyLabel}` : ''} y cómo mejoramos su calidad de vida.`}
+			/>
+		</div>
+
+		<!-- Right: before/after photos -->
+		<div class="flex gap-4 shrink-0">
+			{[0, 1, 2].map((i) => (
+				<div
+					class="rounded-2xl overflow-hidden w-[180px] h-[280px] lg:w-[200px] lg:h-[320px]"
+					style={i === 1 ? 'margin-top: 32px;' : ''}
+				>
+					<Image
+						src={servicePlaceholder}
+						alt={`Caso de éxito ${i + 1}`}
+						class="w-full h-full object-cover"
+						width={200}
+						height={320}
+					/>
+				</div>
+			))}
+		</div>
+
+	</div>
+</section>
