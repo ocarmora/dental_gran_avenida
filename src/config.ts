@@ -17,6 +17,8 @@ export const config = {
 	},
 	contact: {
 		email: env.PUBLIC_CONTACT_EMAIL ?? 'contacto@dentalgranavenida.cl',
+		phoneLandline: env.PUBLIC_PHONE_LANDLINE ?? '56225272911',
+		phoneLandlineFormatted: '+56 2 2527 2911',
 	},
 	social: {
 		facebook: env.PUBLIC_FACEBOOK_URL ?? 'https://facebook.com/dentalgranavenida',

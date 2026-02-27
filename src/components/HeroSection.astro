@@ -16,19 +16,17 @@ import webpayLogo from '../assets/images/webpay.png';
 			<div class="flex flex-col gap-2 max-w-xl items-center lg:items-start">
 				<SectionLabel label="Mes de la sonrisa" centerOnMobile />
 
-				<h1 class="font-display font-bold text-4xl leading-normal text-navy-blue">
+				<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
 					Paga Tu Tratamiento Dental En 6 Cuotas Sin Interés
 				</h1>
 
 				<p class="text-base text-body">
-					En Dental Gran Avenida queremos que tu única prioridad sea volver a
-					sonreír. Accede a tecnología avanzada y especialistas de primer nivel
-					con la flexibilidad que necesitas.
+					Queremos que tu única prioridad sea volver a sonreír. Accede a una atención dental de excelencia con Mercado Pago.
 				</p>
 			</div>
 
 			<!-- CTAs — mobile: solid; desktop: outline. Image below on mobile, beside on desktop -->
-			<div class="flex flex-col md:flex-row gap-6 items-center justify-center lg:justify-start">
+			<div class="flex flex-col md:flex-row md:items-center">
 				<Button
 					href={config.whatsapp.url}
 					label="Agendar hora"
@@ -36,16 +34,11 @@ import webpayLogo from '../assets/images/webpay.png';
 					target="_blank"
 					class="md:bg-transparent md:border md:border-french-ultramarine md:text-french-ultramarine md:hover:bg-french-ultramarine md:hover:text-white"
 				/>
-
-				<!-- Webpay logo — abajo en mobile, al lado en desktop -->
-				<div class="relative h-[45px] w-[119px] shrink-0 overflow-hidden">
-					<Image
-						src={webpayLogo}
-						alt="Pago con Webpay Plus: Visa, Mastercard, American Express"
-						class="absolute max-w-none"
-						style="width: 151.47%; height: 119.8%; left: -26.03%; top: -9.9%;"
-					/>
-				</div>
+				<img
+					src="/images/logo-mercado-pago.svg"
+					alt="Mercado Pago"
+					class="h-16 w-auto"
+				/>
 			</div>
 
 		</div>

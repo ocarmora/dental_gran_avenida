@@ -31,7 +31,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
                     {/* Image and overlays container */}
                     <div class="absolute inset-0 z-0">
                         <Image
-                            src={servicePlaceholder}
+                            src={s.image ?? servicePlaceholder}
                             alt={s.label}
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />

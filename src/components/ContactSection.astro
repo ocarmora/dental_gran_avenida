@@ -13,7 +13,7 @@ const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
 const contacts = [
 	{
 		title: 'Atención Urgencias',
-		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted}. Atendemos el mismo día.`,
+		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted} o ${config.contact.phoneLandlineFormatted}. Atendemos el mismo día.`,
 		href: config.whatsapp.url,
 		icon: 'urgency',
 	},
@@ -26,8 +26,9 @@ const contacts = [
 ];
 
 const hours = [
-	{ day: 'Lunes a Viernes', time: '09:00 a 19:00 hrs.' },
-	{ day: 'Sábado', time: '09:00 a 14:00 hrs.' },
+	{ day: 'Lunes a jueves', time: '09:00 a 19:00 hrs.' },
+	{ day: 'Viernes', time: '09:00 a 18:00 hrs.' },
+	{ day: 'Sábados', time: '08:00 a 13:00 hrs.' },
 	{ day: 'Domingos y feriados', time: 'Cerrado' },
 ];
 ---

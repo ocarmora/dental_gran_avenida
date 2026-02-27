@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export type Specialty = {
 	slug: string;
 	label: string;
@@ -6,6 +8,8 @@ export type Specialty = {
 	/** Longer description shown in the specialty hero */
 	heroDescription: string;
 	teamMemberSlugs: string[];
+	/** Optional: image for specialty card. Falls back to placeholder when absent. */
+	image?: ImageMetadata;
 };
 
 export const specialties: Specialty[] = [
