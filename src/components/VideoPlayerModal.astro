@@ -1,167 +1,147 @@
 ---
+// Public folder path with base prefix per https://docs.astro.build/en/reference/configuration-reference/#base
 const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
-const HLS_SOURCE = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
+const hlsSrc = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
 ---
 
-<div
-	id="video-player-modal"
-	class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4"
-	role="dialog"
-	aria-modal="true"
-	aria-label="Reproductor de video"
-	aria-hidden="true"
->
-	<div class="relative w-full max-w-4xl">
-		<button
-			type="button"
-			id="video-modal-close"
-			class="absolute -top-12 right-0 z-10 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
-			aria-label="Cerrar reproductor"
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true">
-				<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-			</svg>
-		</button>
-		<div id="video-player-container" class="aspect-video w-full overflow-hidden rounded-lg bg-black" />
+<video-player-modal data-hls-src={hlsSrc}>
+	<div
+		class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4"
+		role="dialog"
+		aria-modal="true"
+		aria-label="Reproductor de video"
+		aria-hidden="true"
+	>
+		<div class="relative w-full max-w-4xl">
+			<button
+				type="button"
+				class="video-modal-close absolute -top-12 right-0 z-10 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+				aria-label="Cerrar reproductor"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true">
+					<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+				</svg>
+			</button>
+			<div class="video-player-container aspect-video w-full overflow-hidden rounded-lg bg-black" />
+		</div>
 	</div>
-</div>
+</video-player-modal>
 
 <link rel="stylesheet" href="https://vjs.zencdn.net/8.10.0/video-js.css" />
 <style is:global>
-	/* Video.js skin - Dental Gran Avenida brand colors */
 	.vjs-dental-gran-avenida.video-js {
 		color: #f2faff;
 	}
-
 	.vjs-dental-gran-avenida .vjs-big-play-button {
 		border-color: #1e8fd5;
 		background-color: rgba(43, 51, 63, 0.7);
 	}
-
 	.vjs-dental-gran-avenida:hover .vjs-big-play-button,
 	.vjs-dental-gran-avenida .vjs-big-play-button:hover,
 	.vjs-dental-gran-avenida .vjs-big-play-button:focus {
 		border-color: #001bb5;
 		background-color: rgba(43, 51, 63, 0.9);
 	}
-
 	.vjs-dental-gran-avenida .vjs-volume-level,
 	.vjs-dental-gran-avenida .vjs-play-progress,
 	.vjs-dental-gran-avenida .vjs-slider-bar {
 		background-color: #1e8fd5;
 	}
-
 	.vjs-dental-gran-avenida .vjs-control-bar {
-		background: linear-gradient(
-			to top,
-			rgba(0, 46, 119, 0.9),
-			rgba(0, 46, 119, 0.7)
-		);
+		background: linear-gradient(to top, rgba(0, 46, 119, 0.9), rgba(0, 46, 119, 0.7));
 	}
-
-	/* Center the seek handle circle on the progress bar */
 	.vjs-dental-gran-avenida .vjs-play-progress .vjs-svg-icon {
 		top: 50%;
 		right: -0.4em;
 		transform: translateY(-50%);
 	}
-
 	.vjs-dental-gran-avenida .vjs-slider:focus .vjs-slider-handle {
 		text-shadow: 0 0 1em #f2faff;
 		box-shadow: 0 0 1em #1e8fd5;
 	}
-
 	.vjs-dental-gran-avenida .vjs-button:hover,
 	.vjs-dental-gran-avenida .vjs-button:focus {
 		color: #1e8fd5;
 	}
-
 	.vjs-dental-gran-avenida .vjs-load-progress {
 		background: rgba(242, 250, 255, 0.3);
 	}
 </style>
-<script define:vars={{ HLS_SOURCE }}>
+<script>
 	import videojs from 'video.js';
-	const modal = document.getElementById('video-player-modal');
-	const container = document.getElementById('video-player-container');
-	const closeBtn = document.getElementById('video-modal-close');
 
-	let player: ReturnType<typeof videojs> | null = null;
+	class VideoPlayerModal extends HTMLElement {
+		connectedCallback() {
+			const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
+			const defaultSrc = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
+			const hlsSrc = this.dataset.hlsSrc || defaultSrc;
+			const modal = this.querySelector('[role="dialog"]');
+			const container = this.querySelector('.video-player-container');
+			const closeBtn = this.querySelector('.video-modal-close');
 
-	function openModal() {
-		if (!modal || !container) return;
-		modal.classList.remove('hidden');
-		modal.classList.add('flex');
-		modal.setAttribute('aria-hidden', 'false');
-		document.body.style.overflow = 'hidden';
+			let player: ReturnType<typeof videojs> | null = null;
 
-		const videoEl = document.createElement('video');
-		videoEl.className = 'video-js vjs-big-play-centered vjs-dental-gran-avenida';
-		videoEl.controls = true;
-		videoEl.preload = 'auto';
-		videoEl.playsInline = true;
-		videoEl.setAttribute('data-setup', '{}');
-		container.appendChild(videoEl);
+			const openModal = () => {
+				if (!modal || !container) return;
+				modal.classList.remove('hidden');
+				modal.classList.add('flex');
+				modal.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
 
-		player = videojs(videoEl, {
-			fluid: true,
-			html5: {
-				vhs: {
-					enableLowInitialPlaylist: true, // Empezar por la calidad más baja siempre
-					fastStart: true,
-				},
-			},
-			sources: [{ src: HLS_SOURCE, type: 'application/x-mpegURL' }],
-		});
-		player.play();
-		closeBtn?.focus();
-	}
+				const videoEl = document.createElement('video');
+				videoEl.className = 'video-js vjs-big-play-centered vjs-dental-gran-avenida';
+				videoEl.controls = true;
+				videoEl.preload = 'auto';
+				videoEl.playsInline = true;
+				videoEl.setAttribute('data-setup', '{}');
+				container.appendChild(videoEl);
 
-	function closeModal() {
-		if (!modal) return;
-		modal.classList.add('hidden');
-		modal.classList.remove('flex');
-		modal.setAttribute('aria-hidden', 'true');
-		document.body.style.overflow = '';
+				player = videojs(videoEl, {
+					fluid: true,
+					html5: {
+						vhs: { enableLowInitialPlaylist: true, fastStart: true },
+					},
+					sources: [{ src: hlsSrc, type: 'application/x-mpegURL' }],
+				});
+				player.play();
+				(closeBtn as HTMLElement)?.focus();
+			};
 
-		if (player && !player.isDisposed()) {
-			player.dispose();
-			player = null;
+			const closeModal = () => {
+				if (!modal) return;
+				modal.classList.add('hidden');
+				modal.classList.remove('flex');
+				modal.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+				if (player && !player.isDisposed()) {
+					player.dispose();
+					player = null;
+				}
+			};
+
+			document.querySelectorAll('.video-overlay-wrapper, [aria-label*="Reproducir video"]').forEach((trigger) => {
+				trigger.addEventListener('click', (e) => {
+					if (e instanceof KeyboardEvent && e.key !== 'Enter' && e.key !== ' ') return;
+					if (e instanceof KeyboardEvent) e.preventDefault();
+					openModal();
+				});
+				trigger.addEventListener('keydown', (e) => {
+					if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+						e.preventDefault();
+						openModal();
+					}
+				});
+			});
+
+			closeBtn?.addEventListener('click', closeModal);
+			modal?.addEventListener('click', (e) => {
+				if (e.target === modal) closeModal();
+			});
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && modal?.classList.contains('flex')) closeModal();
+			});
 		}
 	}
 
-	function init() {
-		const triggers = document.querySelectorAll(
-			'.video-overlay-wrapper, [aria-label*="Reproducir video"]'
-		);
-
-		function handleTrigger(e: Event) {
-			if (e instanceof KeyboardEvent && e.key !== 'Enter' && e.key !== ' ') return;
-			if (e instanceof KeyboardEvent) e.preventDefault();
-			openModal();
-		}
-
-		triggers.forEach((trigger) => {
-			trigger.addEventListener('click', handleTrigger);
-			trigger.addEventListener('keydown', handleTrigger);
-		});
-
-		closeBtn?.addEventListener('click', closeModal);
-
-		modal?.addEventListener('click', (e) => {
-			if (e.target === modal) closeModal();
-		});
-
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && modal?.classList.contains('flex')) {
-				closeModal();
-			}
-		});
-	}
-
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', init);
-	} else {
-		init();
-	}
+	customElements.define('video-player-modal', VideoPlayerModal);
 </script>
