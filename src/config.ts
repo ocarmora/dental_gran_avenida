@@ -23,6 +23,6 @@ export const config = {
 		instagram: env.PUBLIC_INSTAGRAM_URL ?? 'https://instagram.com/dentalgranavenida',
 	},
 	location: {
-		mapsUrl: env.PUBLIC_MAPS_URL ?? 'https://maps.google.com/?q=Gran+Avenida+10063+El+Bosque',
+		mapsUrl: env.PUBLIC_MAPS_URL ?? 'https://maps.app.goo.gl/ZuKAfvAUwmX4s5j78',
 	},
 } as const;

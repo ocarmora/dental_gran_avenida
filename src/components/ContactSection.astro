@@ -24,19 +24,39 @@ const contacts = [
 		icon: 'general',
 	},
 ];
+
+const hours = [
+	{ day: 'Lunes a Viernes', time: '09:00 a 19:00 hrs.' },
+	{ day: 'Sábado', time: '09:00 a 14:00 hrs.' },
+	{ day: 'Domingos y feriados', time: 'Cerrado' },
+];
 ---
 
 <section class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col gap-12 items-center">
+	<div class="container-site flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
 
-		<SectionHeading
-			label="Contacto"
-			title="Canales de atención"
-			description="Elige el canal que mejor se adapte a tus necesidades. Estamos aquí para ayudarte."
-			centered
-		/>
+		<!-- Left: heading + hours -->
+		<div class="flex-1 flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+			<SectionHeading
+				label="Contacto"
+				title="Nuestros canales de atención"
+			/>
+			<div class="flex flex-col gap-2">
+				<p class="text-base text-body">
+					Si tienes dudas o necesitas asistencia, nuestro equipo está disponible en los siguientes horarios:
+				</p>
+				<ul class="flex flex-col gap-1 mt-2">
+					{hours.map((h) => (
+						<li class="text-base text-body">
+							<span class="font-semibold text-navy-blue">{h.day}:</span> {h.time}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+		<!-- Right: two cards -->
+		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
 			{contacts.map((c) => (
 				<Card variant={c.icon === 'urgency' ? 'red' : 'blue'}>
 					<div class="flex flex-col gap-4">
