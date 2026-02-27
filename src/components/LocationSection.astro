@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { config } from '../config';
 import SectionHeading from './SectionHeading.astro';
 import Button from './Button.astro';
-import locationMap from '../assets/images/location-map.png';
+import mapImage from '../assets/images/map-simple.png';
 
 interface Props {
 	background?: 'white' | 'blue-white';
@@ -40,7 +40,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 			>
 				<div class="absolute inset-0 bg-white/80" aria-hidden="true" />
 				<Image
-					src={locationMap}
+					src={mapImage}
 					alt="Mapa de ubicación de Dental Gran Avenida, Gran Avenida 10063, El Bosque"
 					class="absolute inset-0 w-full h-full object-contain p-6"
 				/>

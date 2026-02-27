@@ -13,14 +13,14 @@ const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
 const contacts = [
 	{
 		title: 'Atención Urgencias',
-		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted} o ${config.contact.phoneLandlineFormatted}. Atendemos el mismo día.`,
+		description: `Escríbenos por WhatsApp o llámanos al ${config.whatsapp.phoneFormatted}.`,
 		href: config.whatsapp.url,
 		icon: 'urgency',
 	},
 	{
 		title: 'Atención General',
-		description: 'Agenda tu hora en línea o contáctanos por WhatsApp. Próxima disponibilidad el mismo día o al día siguiente.',
-		href: config.whatsapp.url,
+		description: `Agenda tu hora o contáctanos al ${config.contact.phoneLandlineFormatted}.`,
+		href: `tel:${config.contact.phoneLandline}`,
 		icon: 'general',
 	},
 ];
