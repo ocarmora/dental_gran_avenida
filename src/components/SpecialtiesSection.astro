@@ -28,23 +28,19 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
                     href={`/especialidades/${s.slug}`}
                     class="group relative flex flex-col justify-end min-h-[320px] lg:h-[400px] rounded-2xl overflow-hidden p-8 transition-all duration-500 hover:shadow-2xl"
                 >
-                    {/* Image and overlays container */}
                     <div class="absolute inset-0 z-0">
                         <Image
                             src={s.image ?? servicePlaceholder}
                             alt={s.label}
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        {/* Overlay Normal */}
                         <div class="absolute inset-0 bg-linear-to-t from-black/90 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500" />
-                        {/* Overlay Hover */}
                         <div
                             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                             style="background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0.95) 100%);"
                         />
                     </div>
 
-                    {/* Text content */}
                     <div class="relative z-10 flex flex-col">
                         <p class="font-display font-bold text-xl text-white transition-transform duration-500 group-hover:-translate-y-1">
                             {s.label}

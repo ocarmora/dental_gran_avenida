@@ -4,17 +4,12 @@ import SectionHeading from './SectionHeading.astro';
 
 interface Props {
 	background?: 'white' | 'blue-white';
+	cardVariant?: 'default' | 'blue';
 }
 
-const { background = 'blue-white' } = Astro.props;
+const { background = 'blue-white', cardVariant = 'default' } = Astro.props;
 const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 
-/*
-  Layout: 2-column flex (heading left | testimonials right).
-  Testimonials are in a flex row that may overflow — overflow-hidden clips
-  the extra card, creating the carousel "peek" effect without JS.
-  Nav arrows are static visual elements for now.
-*/
 const testimonials = [
 	{
 		quote: '"El equipo de Dental Gran Avenida es increíble. Me trataron con mucho profesionalismo y el resultado fue exactamente lo que esperaba."',
@@ -62,7 +57,6 @@ const testimonials = [
 <section class:list={[bgClass, 'py-24 w-full overflow-x-hidden']}>
 	<div class="container-site flex flex-col lg:flex-row items-center lg:items-center gap-8 lg:gap-20">
 
-		<!-- Left: heading — centered on mobile -->
 		<div class="flex-1 min-w-0 w-full flex flex-col items-center lg:items-start justify-center text-center lg:text-left">
 			<SectionHeading
 				label="Testimonios"
@@ -72,16 +66,17 @@ const testimonials = [
 			/>
 		</div>
 
-		<!-- Right: nav arrows + testimonial cards -->
 		<div class="flex flex-col gap-6 flex-1 min-w-0 w-full overflow-hidden">
 
-			<!-- Nav arrows — centered on mobile -->
 			<div class="flex items-center justify-center lg:justify-end gap-2">
 				<button
 					type="button"
 					id="testimonials-prev"
 					aria-label="Anterior"
-					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation"
+					class:list={[
+						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation',
+						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
+					]}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
@@ -91,7 +86,10 @@ const testimonials = [
 					type="button"
 					id="testimonials-next"
 					aria-label="Siguiente"
-					class="group flex items-center justify-center size-10 rounded-full bg-white hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation"
+					class:list={[
+						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation',
+						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
+					]}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body group-hover:fill-white transition-colors" aria-hidden="true">
 						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
@@ -99,15 +97,13 @@ const testimonials = [
 				</button>
 			</div>
 
-			<!-- Testimonial cards row: horizontal scroll contained within section -->
 			<div
 				id="testimonials-scroll"
 				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2"
 				style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;"
 			>
 				{testimonials.map((t) => (
-					<Card class="shrink-0 min-w-[280px] w-72 snap-start">
-						<!-- Stars + quote -->
+					<Card variant={cardVariant === 'blue' ? 'blue' : 'default'} class="shrink-0 min-w-[280px] w-72 snap-start">
 						<div class="flex flex-col gap-6">
 							<div class="flex gap-1" aria-label="5 de 5 estrellas">
 								{Array.from({ length: 5 }).map(() => (
@@ -118,7 +114,6 @@ const testimonials = [
 							</div>
 							<p class="text-base text-body">{t.quote}</p>
 						</div>
-						<!-- Author -->
 						<div class="flex flex-col">
 							<p class="text-base font-medium text-body">{t.name}</p>
 							<p class="text-sm text-body/70">{t.detail}</p>
@@ -136,7 +131,7 @@ const testimonials = [
 		const scrollEl = document.getElementById('testimonials-scroll');
 		const prevBtn = document.getElementById('testimonials-prev');
 		const nextBtn = document.getElementById('testimonials-next');
-		const scrollAmount = 304; // card width (~280px) + gap (24px)
+		const scrollAmount = 304;
 
 		if (scrollEl && prevBtn && nextBtn) {
 			prevBtn.addEventListener('click', (e) => {

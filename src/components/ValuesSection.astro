@@ -26,7 +26,6 @@ const values = [
 <section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site flex flex-col lg:flex-row items-center lg:items-start gap-20">
 
-		<!-- Left: Mission + Vision cards — order-2 on mobile so heading appears first -->
 		<div class="flex flex-col sm:flex-row lg:flex-col gap-8 flex-1 order-2 lg:order-1 items-center lg:items-stretch">
 			{values.map((v) => (
 				<Card variant="blue" class="flex-1 w-full sm:w-auto">
@@ -38,7 +37,6 @@ const values = [
 			))}
 		</div>
 
-		<!-- Right: Section heading — first on mobile, sticky on desktop -->
 		<div class="flex-1 flex items-center lg:items-start lg:sticky lg:top-24 lg:self-start lg:pt-0 order-1 lg:order-2 w-full">
 			<SectionHeading
 				label="Misión y más"

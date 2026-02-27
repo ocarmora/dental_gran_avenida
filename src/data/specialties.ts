@@ -3,12 +3,9 @@ import type { ImageMetadata } from 'astro';
 export type Specialty = {
 	slug: string;
 	label: string;
-	/** Short description used in the specialty grid cards */
 	description: string;
-	/** Longer description shown in the specialty hero */
 	heroDescription: string;
 	teamMemberSlugs: string[];
-	/** Optional: image for specialty card. Falls back to placeholder when absent. */
 	image?: ImageMetadata;
 };
 

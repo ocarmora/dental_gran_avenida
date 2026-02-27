@@ -16,32 +16,22 @@ const { specialty } = Astro.props;
 <section class="w-full py-24 overflow-hidden">
 	<div class="container-site flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 lg:w-fit lg:mx-auto">
 
-		<!-- Left: image with decorative blob -->
 		<div class="relative flex items-center justify-center shrink-0 w-full max-w-sm lg:w-96">
-			<!-- Decorative circle blob -->
 			<div
 				class="absolute -top-10 -left-12 size-96 rounded-full bg-blue-white"
 				aria-hidden="true"
 			/>
-			<!-- Image -->
 			<div class="relative z-10 rounded-2xl overflow-hidden w-full max-w-sm aspect-square">
 				<Image
-					src={servicePlaceholder}
+					src={specialty.image ?? servicePlaceholder}
 					alt={specialty.label}
 					class="w-full h-full object-cover"
 					width={400}
 					height={400}
 				/>
 			</div>
-			<!-- Slider dots -->
-			<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10" aria-hidden="true">
-				<span class="w-6 h-1.5 rounded-full bg-french-ultramarine"></span>
-				<span class="size-1.5 rounded-full bg-navy-blue/30"></span>
-				<span class="size-1.5 rounded-full bg-navy-blue/30"></span>
-			</div>
 		</div>
 
-		<!-- Right: heading + description + CTA -->
 		<div class="flex flex-col gap-8 items-center justify-center lg:items-start text-center lg:text-left w-full max-w-lg shrink-0">
 			<div class="flex flex-col gap-2 w-full">
 				<SectionLabel label="Especialidades" centerOnMobile />

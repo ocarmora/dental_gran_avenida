@@ -27,7 +27,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 <header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
 		<div class="container-site flex items-center justify-between overflow-visible">
 
-		<!-- Logo + Nav -->
 		<div class="flex gap-8 lg:gap-20 items-center">
 			<a href="/" class="h-14 w-32 shrink-0 block" aria-label="Dental Gran Avenida - Inicio">
 				<Image src={logo} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
@@ -97,7 +96,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 			</nav>
 		</div>
 
-		<!-- CTAs — desktop -->
 		<div class="hidden md:flex gap-3 items-center">
 			<a
 				href={`tel:+${config.whatsapp.phone}`}
@@ -111,7 +109,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 			<Button href={config.whatsapp.url} label="Agendar hora" variant="primary" target="_blank" />
 		</div>
 
-		<!-- Hamburger — mobile only, transforms to X when open -->
 		<button
 			type="button"
 			id="menu-toggle"
@@ -128,14 +125,12 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 	</div>
 </header>
 
-<!-- Mobile menu overlay — full screen, no scroll -->
 <div
 	id="mobile-menu"
 	class="fixed inset-0 z-40 md:hidden bg-blue-white invisible opacity-0 pointer-events-none transition-[visibility,opacity] duration-300 ease-out [&.is-open]:visible [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto overflow-x-hidden"
 	aria-hidden="true"
 >
 	<div class="flex flex-col h-full overflow-hidden min-w-0 pt-24 w-full max-w-full">
-		<!-- Nav links — vertical -->
 		<nav class="flex-1 flex flex-col justify-center container-site py-8 min-w-0 w-full" aria-label="Navegación móvil">
 			<ul class="flex flex-col w-full min-w-0">
 				{navLinks.map((link) => (
@@ -198,7 +193,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 			</ul>
 		</nav>
 
-		<!-- Redes sociales (en mobile sustituyen al TopBar) -->
 		<div class="container-site shrink-0 flex gap-3 items-center justify-center py-6">
 			<a
 				href={config.social.facebook}
@@ -235,7 +229,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 			</a>
 		</div>
 
-		<!-- Bottom CTAs -->
 		<div class="container-site shrink-0 flex gap-3 w-full pb-8 pt-2">
 			<a
 				href={`tel:+${config.whatsapp.phone}`}
@@ -302,7 +295,6 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 			link.addEventListener('click', () => closeMenu());
 		});
 
-		// Mobile specialties dropdown
 		const specialtiesToggle = document.getElementById('mobile-specialties-toggle');
 		const specialtiesList = document.getElementById('mobile-specialties-list');
 		if (specialtiesToggle && specialtiesList) {

@@ -3,11 +3,6 @@ import { Image } from 'astro:assets';
 import { config } from '../config';
 import logoWhite from '../assets/images/logo-white.png';
 
-/*
-  Footer: Figma design.
-  Layout: brand left | menus grid right.
-  Tailwind semantic classes only, no hardcoded pixels.
-*/
 const menus = [
 	{
 		title: 'Redes sociales',
@@ -40,7 +35,6 @@ const menus = [
 
 <footer class="bg-dark-sea-blue w-full flex flex-col gap-20 pt-20 pb-10">
 	<div class="container-site flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-12">
-		<!-- Brand column -->
 		<div class="flex flex-col gap-4 shrink-0 max-w-xl">
 			<a href="/" aria-label="Dental Gran Avenida - Inicio" class="block h-14 w-32 shrink-0">
 				<Image src={logoWhite} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
@@ -85,7 +79,6 @@ const menus = [
 			</div>
 		</div>
 
-		<!-- Menus grid: 1 column on narrow mobile, 2 columns from sm. Max width 2/5 on desktop -->
 		<nav class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 shrink-0 lg:max-w-[40%]" aria-label="Footer navigation">
 			{menus.map((menu) => (
 				<div class="flex flex-col gap-4">
@@ -109,7 +102,6 @@ const menus = [
 		</nav>
 	</div>
 
-	<!-- Divider + copyright -->
 	<div class="container-site border-t border-white/10 pt-10 flex justify-center">
 		<p class="text-base text-white/80 text-center">
 			&copy; 2026 Dental Gran Avenida. Todos los derechos reservados.

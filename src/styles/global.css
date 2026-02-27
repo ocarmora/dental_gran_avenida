@@ -3,7 +3,6 @@
 @custom-variant hover (&:hover);
 
 @theme {
-  /* ── Colors ──────────────────────────────────────────────────── */
   --color-dark-sea-blue: #063a8d;
   --color-blue-white: #f2faff;
   --color-french-ultramarine: #001bb5;
@@ -12,9 +11,6 @@
   --color-body: #222222;
   --color-card: #f2f2f2;
 
-  /* ── Fonts ───────────────────────────────────────────────────── */
-  /* --font-sans overrides Tailwind's preflight default,           */
-  /* making DM Sans the site-wide base font automatically.         */
   --font-sans: "DM Sans", sans-serif;
   --font-display: "Figtree", sans-serif;
 }
