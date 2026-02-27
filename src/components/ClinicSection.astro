@@ -34,10 +34,13 @@ const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
 				<div class="absolute inset-0 bg-black/40" />
 			</div>
 			<span
-				class="video-overlay-label absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 text-sm font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+				class="video-overlay-label absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 pointer-events-none z-10 text-sm font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
 				aria-hidden="true"
 			>
-				▶ Reproducir video
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-5 shrink-0 fill-current" aria-hidden="true">
+					<path d="M8 5v14l11-7z"/>
+				</svg>
+				Reproducir video
 			</span>
 		</div>
 
