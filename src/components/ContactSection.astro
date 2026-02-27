@@ -3,6 +3,13 @@ import { config } from '../config';
 import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
+interface Props {
+	background?: 'white' | 'blue-white';
+}
+
+const { background = 'white' } = Astro.props;
+const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
+
 const contacts = [
 	{
 		title: 'Atención Urgencias',
@@ -19,7 +26,7 @@ const contacts = [
 ];
 ---
 
-<section class="py-24 w-full">
+<section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site flex flex-col gap-12 items-center">
 
 		<SectionHeading

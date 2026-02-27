@@ -1,0 +1,109 @@
+---
+import { Picture } from 'astro:assets';
+import SectionLabel from './SectionLabel.astro';
+import aboutHeroImage from '../assets/images/about-hero-video.png';
+---
+
+<section class="w-full">
+
+	<!-- Hero banner image with video overlay -->
+	<div id="hero-video-wrapper" class="hero-video-wrapper relative w-full h-48 overflow-hidden">
+		<Picture
+			src={aboutHeroImage}
+			formats={['avif', 'webp']}
+			alt="Equipo de Dental Gran Avenida"
+			class="w-full h-full object-cover object-center"
+			width={1024}
+			height={576}
+		/>
+		<div class="hero-video-overlay" aria-hidden="true" />
+		<span id="hero-video-label" class="hero-video-label" aria-hidden="true">
+			▶ Ver video
+		</span>
+	</div>
+
+	<!-- Two-column text block -->
+	<div class="container-site flex flex-col lg:flex-row gap-12 lg:gap-20 py-24">
+
+		<!-- Left: label + h1 -->
+		<div class="flex-1 flex flex-col gap-2">
+			<SectionLabel label="Quiénes somos" />
+			<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
+				En Dental Gran Avenida<br />tenemos +40 años de historia
+			</h1>
+		</div>
+
+		<!-- Right: description -->
+		<div class="flex-1 flex items-center">
+			<div class="flex flex-col gap-4 text-base text-body">
+				<p>
+					Dental Gran Avenida es una clínica odontológica integral, donde entregamos una atención de calidad a toda la familia. Contamos con modernas instalaciones, equipos de alta tecnología y tratamientos dentales de vanguardia.
+				</p>
+				<p>
+					Somos tu dentista en Gran Avenida con profesionales altamente capacitados, entregamos a nuestros pacientes una excelente atención en estética dental, tratamientos dentales y urgencia dental.
+				</p>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<style>
+	.hero-video-wrapper {
+		position: relative;
+	}
+
+	.hero-video-wrapper:hover {
+		cursor: none;
+	}
+
+	.hero-video-wrapper .hero-video-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.4);
+		pointer-events: none;
+	}
+
+	.hero-video-wrapper .hero-video-label {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		z-index: 9999;
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: white;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+		white-space: nowrap;
+	}
+
+	.hero-video-wrapper.is-hovering .hero-video-label {
+		position: fixed;
+		transform: translate(-50%, -50%);
+	}
+</style>
+
+<script>
+	const wrapper = document.getElementById('hero-video-wrapper');
+	const label = document.getElementById('hero-video-label');
+
+	if (wrapper && label) {
+		wrapper.addEventListener('mouseenter', () => {
+			wrapper.classList.add('is-hovering');
+		});
+
+		wrapper.addEventListener('mouseleave', () => {
+			wrapper.classList.remove('is-hovering');
+			label.style.left = '';
+			label.style.top = '';
+		});
+
+		wrapper.addEventListener('mousemove', (e: MouseEvent) => {
+			if (wrapper.classList.contains('is-hovering')) {
+				label.style.left = `${e.clientX}px`;
+				label.style.top = `${e.clientY}px`;
+			}
+		});
+	}
+</script>

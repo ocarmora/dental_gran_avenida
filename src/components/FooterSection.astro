@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { config } from '../config';
+import logoWhite from '../assets/images/logo-white.png';
 
 /*
   Footer: Figma design.
@@ -39,7 +41,7 @@ const menus = [
 		<!-- Brand column -->
 		<div class="flex flex-col gap-4 shrink-0 max-w-xl">
 			<a href="/" aria-label="Dental Gran Avenida - Inicio" class="block h-14 w-32 shrink-0">
-				<img src="/images/logo-white.png" alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
+				<Image src={logoWhite} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
 			</a>
 			<p class="text-base text-white/90">
 				40 años cuidando la sonrisa de las familias de El Bosque y sus alrededores.

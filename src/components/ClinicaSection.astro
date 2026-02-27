@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import SectionHeading from './SectionHeading.astro';
+import clinicVideoThumb from '../assets/images/clinic-video.jpg';
 
 /*
   Video thumbnail:
@@ -16,8 +18,8 @@ import SectionHeading from './SectionHeading.astro';
 		<div class="relative flex items-center justify-center rounded-2xl overflow-hidden shrink-0 w-[480px] h-72 lg:h-80">
 			<!-- Decorative background -->
 			<div class="absolute inset-0" aria-hidden="true">
-				<img
-					src="/images/clinic-video.jpg"
+				<Image
+					src={clinicVideoThumb}
 					alt=""
 					class="w-full h-full object-cover opacity-80"
 				/>

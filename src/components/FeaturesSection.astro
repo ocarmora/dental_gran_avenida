@@ -4,6 +4,12 @@ import Button from './Button.astro';
 import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
+interface Props {
+	background?: 'white' | 'blue-white';
+}
+
+const { background = 'blue-white' } = Astro.props;
+const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 const iconClass = 'size-10 shrink-0 text-navy-blue';
 
 const features = [
@@ -30,7 +36,7 @@ const features = [
 ];
 ---
 
-<section class="bg-blue-white py-24 w-full">
+<section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] lg:grid-rows-2 gap-6">
 
 		<!-- Left column: heading + CTA — spans both rows on desktop, full width on tablet -->

@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { config } from '../config';
 import Button from './Button.astro';
+import logo from '../assets/images/logo-transparent.png';
 
 const navLinks = [
 	{ href: '/', label: 'Inicio', hasDropdown: false },
@@ -16,7 +18,7 @@ const navLinks = [
 		<!-- Logo + Nav -->
 		<div class="flex gap-8 lg:gap-20 items-center">
 			<a href="/" class="h-14 w-32 shrink-0 block" aria-label="Dental Gran Avenida - Inicio">
-				<img src="/images/logo-transparent.png" alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
+				<Image src={logo} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
 			</a>
 
 			<nav class="hidden md:flex gap-6 lg:gap-10 items-center" aria-label="Navegación principal">

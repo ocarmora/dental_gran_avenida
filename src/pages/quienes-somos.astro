@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import AboutHeroSection from '../components/AboutHeroSection.astro';
+import TeamMembersSection from '../components/TeamMembersSection.astro';
+import ValuesSection from '../components/ValuesSection.astro';
+import InfraSection from '../components/InfraSection.astro';
+import SpecialtiesSection from '../components/SpecialtiesSection.astro';
+import FooterSection from '../components/FooterSection.astro';
+---
+
+<Layout
+	title="Quiénes somos · Dental Gran Avenida"
+	description="Conoce al equipo de Dental Gran Avenida: 9 especialistas con más de 40 años de experiencia al servicio de las familias de El Bosque."
+>
+	<TopBar />
+	<Header />
+	<main>
+		<AboutHeroSection />
+		<TeamMembersSection />
+		<ValuesSection />
+		<InfraSection />
+		<SpecialtiesSection background="white" />
+	</main>
+	<FooterSection />
+</Layout>

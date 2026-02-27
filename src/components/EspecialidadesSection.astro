@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import SectionHeading from './SectionHeading.astro';
+import servicePlaceholder from '../assets/images/service-placeholder.jpg';
 
 /*
   Specialty card layout:
@@ -9,12 +11,12 @@ import SectionHeading from './SectionHeading.astro';
     "no absolute for layout" rule. The text flows naturally at the bottom via flex.
 */
 const specialties = [
-	{ label: 'Blanqueamiento Dental', image: '/images/service-placeholder.jpg' },
-	{ label: 'Implantología',          image: '/images/service-placeholder.jpg' },
-	{ label: 'Ortodoncia',             image: '/images/service-placeholder.jpg' },
-	{ label: 'Cirugía Maxilofacial',   image: '/images/service-placeholder.jpg' },
-	{ label: 'Rehabilitación Oral',    image: '/images/service-placeholder.jpg' },
-	{ label: 'Estética Facial',        image: '/images/service-placeholder.jpg' },
+	{ label: 'Blanqueamiento Dental' },
+	{ label: 'Implantología' },
+	{ label: 'Ortodoncia' },
+	{ label: 'Cirugía Maxilofacial' },
+	{ label: 'Rehabilitación Oral' },
+	{ label: 'Estética Facial' },
 ];
 ---
 
@@ -33,8 +35,8 @@ const specialties = [
 				<div class="relative flex flex-col justify-end h-80 rounded-2xl overflow-hidden px-8 py-10">
 					<!-- Decorative background: image + gradient overlay -->
 					<div class="absolute inset-0" aria-hidden="true">
-						<img
-							src={s.image}
+						<Image
+							src={servicePlaceholder}
 							alt=""
 							class="w-full h-full object-cover"
 						/>

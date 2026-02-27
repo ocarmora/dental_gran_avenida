@@ -2,6 +2,13 @@
 import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
+interface Props {
+	background?: 'white' | 'blue-white';
+}
+
+const { background = 'blue-white' } = Astro.props;
+const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+
 /*
   Layout: 2-column flex (heading left | testimonials right).
   Testimonials are in a flex row that may overflow — overflow-hidden clips
@@ -52,7 +59,7 @@ const testimonials = [
 ];
 ---
 
-<section class="bg-blue-white py-24 w-full overflow-x-hidden">
+<section class:list={[bgClass, 'py-24 w-full overflow-x-hidden']}>
 	<div class="container-site flex flex-col lg:flex-row items-center lg:items-center gap-8 lg:gap-20">
 
 		<!-- Left: heading — centered on mobile -->

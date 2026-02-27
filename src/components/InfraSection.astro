@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import Card from './Card.astro';
+import SectionHeading from './SectionHeading.astro';
+import featurePlaceholder from '../assets/images/feature-placeholder.jpg';
+
+interface Props {
+	background?: 'white' | 'blue-white';
+}
+
+const { background = 'blue-white' } = Astro.props;
+const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+
+const features = [
+	{
+		title: 'Sala de rayos',
+		description: 'Radiografías digitales y scanner 3D de última generación para diagnósticos precisos y rápidos.',
+	},
+	{
+		title: 'Estacionamiento',
+		description: 'Estacionamiento gratuito disponible para todos nuestros pacientes durante su visita.',
+	},
+	{
+		title: 'Acceso Universal',
+		description: 'Instalaciones con acceso para personas con movilidad reducida en todos nuestros espacios.',
+	},
+	{
+		title: 'Medios de pago',
+		description: 'Aceptamos Webpay Plus, débito, crédito y facilitamos cuotas sin interés para tu tratamiento.',
+	},
+];
+---
+
+<section class:list={[bgClass, 'py-24 w-full']}>
+	<div class="container-site grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] lg:grid-rows-2 gap-6">
+
+		<!-- Left col: heading spans 2 rows — sticky on desktop -->
+		<div class="md:col-span-2 lg:col-span-1 lg:row-span-2 flex flex-col items-center lg:items-start justify-center lg:justify-start gap-0 lg:sticky lg:top-24 lg:self-start">
+			<SectionHeading
+				label="Clínica"
+				title="Para una atención de calidad"
+				description="Contamos con infraestructura completa bajo un mismo techo para que tu visita sea cómoda y eficiente."
+				centerOnMobile
+			/>
+		</div>
+
+		<!-- 4 feature cards -->
+		{features.map((f) => (
+			<Card>
+				<div class="size-40 rounded-xl overflow-hidden shrink-0 bg-card">
+					<Image
+						src={featurePlaceholder}
+						alt={f.title}
+						class="w-full h-full object-cover"
+					/>
+				</div>
+				<div class="flex flex-col gap-2">
+					<p class="font-display font-bold text-xl text-navy-blue">{f.title}</p>
+					<p class="text-base text-body">{f.description}</p>
+				</div>
+			</Card>
+		))}
+
+	</div>
+</section>
