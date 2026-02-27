@@ -7,9 +7,15 @@ import logo from '../assets/images/logo-transparent.png';
 const navLinks = [
 	{ href: '/', label: 'Inicio', hasDropdown: false },
 	{ href: '/especialidades', label: 'Especialidades', hasDropdown: true },
-	{ href: '/conoce-la-clinica', label: 'Conoce la Clínica', hasDropdown: false },
+	{ href: '/quienes-somos', label: 'Conoce la Clínica', hasDropdown: false },
 	{ href: '/contacto', label: 'Contacto', hasDropdown: false },
 ];
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+	if (href === '/') return pathname === '/';
+	return pathname === href || pathname.startsWith(href + '/');
+};
 ---
 
 <header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
@@ -25,7 +31,13 @@ const navLinks = [
 				{navLinks.map((link) => (
 					<a
 						href={link.href}
-						class="flex gap-1.5 items-center text-base font-normal text-black hover:text-french-ultramarine transition-colors whitespace-nowrap"
+						class:list={[
+							'flex gap-1.5 items-center text-base transition-colors whitespace-nowrap',
+							isActive(link.href)
+								? 'text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8'
+								: 'text-black font-normal hover:text-french-ultramarine',
+						]}
+						aria-current={isActive(link.href) ? 'page' : undefined}
 					>
 						{link.label}
 						{link.hasDropdown && (
@@ -83,7 +95,13 @@ const navLinks = [
 					<li>
 						<a
 							href={link.href}
-							class="block py-4 text-lg font-normal text-black hover:text-french-ultramarine transition-colors border-b border-navy-blue/10"
+							class:list={[
+								'block py-4 text-lg transition-colors border-b border-navy-blue/10',
+								isActive(link.href)
+									? 'text-french-ultramarine underline-dash'
+									: 'text-black font-normal hover:text-french-ultramarine',
+							]}
+							aria-current={isActive(link.href) ? 'page' : undefined}
 						>
 							{link.label}
 						</a>
