@@ -52,13 +52,18 @@ const { slideCount, autoplayInterval = 5000 } = Astro.props;
 
 <script>
   class HeroSlider extends HTMLElement {
-    #autoplayTimer: ReturnType<typeof setInterval> | null = null;
-    #isPaused = false;
+    #timeout: ReturnType<typeof setTimeout> | null = null;
+    #idleTimeout: ReturnType<typeof setTimeout> | null = null;
+    #remaining = 0;
+    #epochStart = 0;
+    #isHovering = false;
+    #isFocused = false;
 
     connectedCallback() {
       const interval = Number(this.dataset.autoplayInterval) || 5000;
       const animateClass =
         this.dataset.animateClass || "animate-hero-progress-fill";
+      const IDLE_MS = 300;
 
       const slides = this.querySelectorAll<HTMLElement>("[data-slide]");
       const indicators =
@@ -110,56 +115,122 @@ const { slideCount, autoplayInterval = 5000 } = Astro.props;
         playEntranceAnimations(currentIndex);
       };
 
-      const startAutoplay = () => {
-        this.removeAttribute("data-paused");
-        if (this.#autoplayTimer) clearInterval(this.#autoplayTimer);
-        this.#autoplayTimer = setInterval(() => {
-          if (!this.#isPaused) goToSlide(currentIndex + 1);
-        }, interval);
-        restartProgressAnimation();
-      };
+      /* ── Resumable timer ─────────────────────────────────── */
 
-      const stopAutoplay = () => {
-        this.setAttribute("data-paused", "");
-        if (this.#autoplayTimer) {
-          clearInterval(this.#autoplayTimer);
-          this.#autoplayTimer = null;
+      const clearSchedule = () => {
+        if (this.#timeout) {
+          clearTimeout(this.#timeout);
+          this.#timeout = null;
         }
       };
+
+      const schedule = (delay: number) => {
+        clearSchedule();
+        this.#remaining = delay;
+        this.#epochStart = performance.now();
+        this.removeAttribute("data-paused");
+        this.#timeout = setTimeout(() => {
+          goToSlide(currentIndex + 1);
+          schedule(interval);
+        }, delay);
+      };
+
+      const pause = () => {
+        if (!this.#timeout) return;
+        clearSchedule();
+        this.#remaining = Math.max(
+          0,
+          this.#remaining - (performance.now() - this.#epochStart),
+        );
+        this.setAttribute("data-paused", "");
+      };
+
+      const resume = () => {
+        if (this.#isFocused) return;
+        if (this.#remaining <= 0) {
+          goToSlide(currentIndex + 1);
+          schedule(interval);
+        } else {
+          schedule(this.#remaining);
+        }
+      };
+
+      /* ── Mouse-idle detection ────────────────────────────── */
+
+      const clearIdle = () => {
+        if (this.#idleTimeout) {
+          clearTimeout(this.#idleTimeout);
+          this.#idleTimeout = null;
+        }
+      };
+
+      const resetIdle = () => {
+        clearIdle();
+        this.#idleTimeout = setTimeout(() => {
+          if (this.#isHovering && !this.#isFocused) resume();
+        }, IDLE_MS);
+      };
+
+      /* ── Indicator clicks ────────────────────────────────── */
 
       indicators.forEach((ind, i) => {
         ind.addEventListener("click", () => {
           goToSlide(i);
-          this.#isPaused = true;
-          stopAutoplay();
+          schedule(interval);
+          if (this.#isHovering || this.#isFocused) {
+            pause();
+            if (this.#isHovering && !this.#isFocused) resetIdle();
+          }
         });
       });
 
+      /* ── Hover: pause while moving, resume when idle ─────── */
+
       this.addEventListener("mouseenter", () => {
-        this.#isPaused = true;
-        stopAutoplay();
+        this.#isHovering = true;
+        pause();
+        resetIdle();
       });
+
+      this.addEventListener("mousemove", () => {
+        if (!this.#isHovering) return;
+        if (this.#timeout) pause();
+        resetIdle();
+      });
+
       this.addEventListener("mouseleave", () => {
-        this.#isPaused = false;
-        startAutoplay();
+        this.#isHovering = false;
+        clearIdle();
+        if (!this.#isFocused) resume();
       });
+
+      /* ── Focus (keyboard / assistive tech) ───────────────── */
+
       this.addEventListener("focusin", () => {
-        this.#isPaused = true;
-        stopAutoplay();
+        this.#isFocused = true;
+        clearIdle();
+        pause();
       });
+
       this.addEventListener("focusout", () => {
-        if (!this.contains(document.activeElement)) {
-          this.#isPaused = false;
-          startAutoplay();
+        if (this.contains(document.activeElement)) return;
+        this.#isFocused = false;
+        if (this.#isHovering) {
+          resetIdle();
+        } else {
+          resume();
         }
       });
 
+      /* ── Init ────────────────────────────────────────────── */
+
       playEntranceAnimations(0);
-      startAutoplay();
+      schedule(interval);
     }
 
     disconnectedCallback() {
-      if (this.#autoplayTimer) clearInterval(this.#autoplayTimer);
+      if (this.#timeout) clearTimeout(this.#timeout);
+      if (this.#idleTimeout) clearTimeout(this.#idleTimeout);
     }
   }
 
