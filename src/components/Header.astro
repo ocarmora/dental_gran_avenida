@@ -5,6 +5,8 @@ import Button from './Button.astro';
 import logo from '../assets/images/logo-transparent.png';
 import { specialties } from '../data/specialties';
 
+const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
+
 type NavLink =
 	| { href: string; label: string; hasDropdown: false }
 	| { label: string; hasDropdown: true };
@@ -17,18 +19,19 @@ const navLinks: NavLink[] = [
 ];
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const toHref = (path: string) => (path === '/' ? base : `${base}${path}`);
 const isActive = (href: string) => {
-	if (href === '/') return pathname === '/';
-	return pathname === href || pathname.startsWith(href + '/');
+	const full = toHref(href);
+	return pathname === full || pathname.startsWith(full + '/');
 };
-const isSpecialtiesActive = pathname.startsWith('/especialidades');
+const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
 ---
 
 <header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
 		<div class="container-site flex items-center justify-between overflow-visible">
 
 		<div class="flex gap-8 lg:gap-20 items-center">
-			<a href="/" class="h-14 w-32 shrink-0 block focus-ring rounded-lg" aria-label="Dental Gran Avenida - Inicio">
+			<a href={base} class="h-14 w-32 shrink-0 block focus-ring rounded-lg" aria-label="Dental Gran Avenida - Inicio">
 				<Image src={logo} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" loading="eager" />
 			</a>
 
@@ -62,10 +65,10 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 									{specialties.map((s) => (
 										<li role="none">
 											<a
-												href={`/especialidades/${s.slug}`}
+												href={toHref(`/especialidades/${s.slug}`)}
 												class:list={[
 													'flex items-center gap-2 px-4 py-2.5 text-base transition-colors',
-													pathname === `/especialidades/${s.slug}` ? 'text-french-ultramarine bg-blue-white' : 'text-body hover:bg-blue-white hover:text-french-ultramarine',
+													pathname === toHref(`/especialidades/${s.slug}`) ? 'text-french-ultramarine bg-blue-white' : 'text-body hover:bg-blue-white hover:text-french-ultramarine',
 												]}
 												role="menuitem"
 												aria-label={`Ir a ${s.label}`}
@@ -79,7 +82,7 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 						</div>
 					) : (
 						<a
-							href={link.href}
+							href={toHref(link.href)}
 							class:list={[
 								'flex gap-1.5 items-center text-base transition-colors whitespace-nowrap focus-ring rounded',
 								isActive(link.href)
@@ -156,12 +159,12 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 								{specialties.map((s) => (
 									<li>
 										<a
-											href={`/especialidades/${s.slug}`}
+											href={toHref(`/especialidades/${s.slug}`)}
 											class:list={[
 												'flex items-center gap-2 py-3 pl-4 text-base transition-colors border-l-2 -ml-px focus-ring rounded-r',
-												pathname === `/especialidades/${s.slug}` ? 'text-french-ultramarine border-french-ultramarine' : 'text-body border-transparent hover:text-french-ultramarine hover:border-french-ultramarine',
+												pathname === toHref(`/especialidades/${s.slug}`) ? 'text-french-ultramarine border-french-ultramarine' : 'text-body border-transparent hover:text-french-ultramarine hover:border-french-ultramarine',
 											]}
-											aria-current={pathname === `/especialidades/${s.slug}` ? 'page' : undefined}
+											aria-current={pathname === toHref(`/especialidades/${s.slug}`) ? 'page' : undefined}
 											aria-label={`Ir a ${s.label}`}
 										>
 											{s.label}
@@ -173,7 +176,7 @@ const isSpecialtiesActive = pathname.startsWith('/especialidades');
 					) : (
 						<li>
 							<a
-								href={link.href}
+								href={toHref(link.href)}
 								class:list={[
 									'block py-4 text-lg transition-colors border-b border-navy-blue/10 focus-ring rounded',
 									isActive(link.href)
