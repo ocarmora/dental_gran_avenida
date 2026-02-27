@@ -1,5 +1,14 @@
 const env = import.meta.env;
 
+/**
+ * Resolves an internal path against Astro's configured base URL.
+ * Use this for every internal href instead of hardcoding the path.
+ * The base is set in astro.config.mjs and exposed via import.meta.env.BASE_URL.
+ */
+const _base = (env.BASE_URL || '/').replace(/\/$/, '') || '/';
+export const toHref = (path: string): string =>
+	path === '/' ? _base : `${_base}${path}`;
+
 export const config = {
 	whatsapp: {
 		phone: env.PUBLIC_WHATSAPP_PHONE ?? '56948446632',

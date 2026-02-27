@@ -1,7 +1,6 @@
 ---
-// Public folder path with base prefix per https://docs.astro.build/en/reference/configuration-reference/#base
-const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
-const hlsSrc = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
+import { toHref } from '../config';
+const hlsSrc = toHref('/videos/spot-dental-gran-avenida/master.m3u8');
 ---
 
 <video-player-modal data-hls-src={hlsSrc}>
@@ -72,9 +71,7 @@ const hlsSrc = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
 
 	class VideoPlayerModal extends HTMLElement {
 		connectedCallback() {
-			const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
-			const defaultSrc = `${base}/videos/spot-dental-gran-avenida/master.m3u8`;
-			const hlsSrc = this.dataset.hlsSrc || defaultSrc;
+			const hlsSrc = this.dataset.hlsSrc!;
 			const modal = this.querySelector('[role="dialog"]');
 			const container = this.querySelector('.video-player-container');
 			const closeBtn = this.querySelector('.video-modal-close');

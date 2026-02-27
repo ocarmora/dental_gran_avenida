@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { config } from "../config";
+import { config, toHref } from "../config";
 import Button from "./Button.astro";
 import HeroSlider from "./HeroSlider.astro";
 import HeroSlide from "./HeroSlide.astro";
@@ -27,15 +27,15 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
             data-animate-delay="80"
             class="opacity-0 font-display font-bold text-4xl leading-tight text-navy-blue"
           >
-            20% de descuento en tratamientos de ortodoncia
+            20% De Descuento En Tu Tratamiento De Ortodoncia
           </h1>
           <p
             data-animate
             data-animate-delay="160"
             class="opacity-0 text-base text-body"
           >
-            Agenda tu consulta de evaluación ahora y aprovecha la oferta
-            limitada.
+            Agenda tu consulta de evaluación ahora y accede a un tratamiento de
+            ortodoncia de calidad.
           </p>
         </div>
         <div
@@ -48,6 +48,11 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
             label="Agendar hora"
             variant="primary"
             target="_blank"
+          />
+          <Button
+            href={toHref("/especialidades/ortodoncia")}
+            label="Más información"
+            variant="link"
           />
         </div>
       </div>
@@ -174,7 +179,7 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
             target="_blank"
           />
           <Button
-            href="/conoce-la-clinica#equipo"
+            href={toHref("/conoce-la-clinica#equipo")}
             label="Conoce el equipo"
             variant="link"
           />
@@ -186,7 +191,7 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
         class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-140"
       >
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-32 aspect-square w-[100%] rounded-full bg-sky-200"
+          class="absolute left-1/2 -translate-x-1/2 -bottom-32 aspect-square w-full rounded-full bg-sky-200"
         >
         </div>
         <Image

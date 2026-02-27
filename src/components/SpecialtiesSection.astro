@@ -3,9 +3,7 @@ import { Image } from 'astro:assets';
 import SectionHeading from './SectionHeading.astro';
 import servicePlaceholder from '../assets/images/service-placeholder.jpg';
 import { specialties } from '../data/specialties';
-
-const base = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') || '/';
-const toHref = (path: string) => (path === '/' ? base : `${base}${path}`);
+import { toHref } from '../config';
 
 interface Props {
 	background?: 'white' | 'blue-white';

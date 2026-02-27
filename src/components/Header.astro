@@ -1,11 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { config } from "../config";
+import { config, toHref } from "../config";
 import Button from "./Button.astro";
+import UrgencyButton from "./UrgencyButton.astro";
 import logo from "../assets/images/logo-transparent.png";
 import { specialties } from "../data/specialties";
-
-const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "/";
 
 type NavLink =
   | { href: string; label: string; hasDropdown: false }
@@ -23,13 +22,12 @@ const navLinks: NavLink[] = [
 ];
 
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
-const toHref = (path: string) => (path === "/" ? base : `${base}${path}`);
 const isActive = (href: string) => {
   const full = toHref(href);
   if (href === "/") return pathname === full;
   return pathname === full || pathname.startsWith(full + "/");
 };
-const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
+const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
 ---
 
 <header
@@ -41,7 +39,7 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
   >
     <div class="flex gap-8 lg:gap-20 items-center">
       <a
-        href={base}
+        href={toHref('/')}
         class="h-14 w-32 shrink-0 block focus-ring rounded-lg"
         aria-label="Dental Gran Avenida - Inicio"
       >
@@ -136,18 +134,7 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
     </div>
 
     <div class="hidden md:flex gap-3 items-center">
-      <a
-        href={`tel:+${config.whatsapp.phone}`}
-        class="group flex items-center h-12 rounded-full border border-red-700/30 bg-red-50 text-red-700 shrink-0 focus-ring"
-        aria-label="Urgencias"
-      >
-        <span class="flex items-center justify-center size-12 shrink-0" aria-hidden="true">
-          <svg viewBox="0 0 32 32" class="size-5 fill-current">
-            <path d="M17,6h-2V4h2V6z M25.899,8.515L24.485,7.1l-1.414,1.414l1.414,1.414L25.899,8.515z M8.929,8.515 L7.515,7.1L6.101,8.515l1.414,1.414L8.929,8.515z M26,26h3v2H3v-2h3v-9c0-5.523,4.556-10,10-10s10,4.477,10,10V26z M24,17 c0-4.411-3.589-8-8-8s-8,3.589-8,8v9h16V17z M5,16H3v2h2V16z M27,16v2h2v-2H27z M10,17v7h2v-7c0-2.209,1.791-4,4-4v-2 C12.686,11,10,13.686,10,17z"/>
-          </svg>
-        </span>
-        <span class="overflow-hidden whitespace-nowrap text-base font-normal max-w-0 group-hover:max-w-[6rem] pr-0 group-hover:pr-6 transition-[max-width,padding-right] duration-300">Urgencias</span>
-      </a>
+      <UrgencyButton href={`tel:+${config.whatsapp.phone}`} expandable />
       <Button
         href={config.whatsapp.url}
         label="Agendar hora"
@@ -184,7 +171,7 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
 >
   <div class="container-site flex items-center justify-between gap-2">
     <a
-      href={base}
+      href={toHref('/')}
       class="h-10 w-24 shrink-0 block focus-ring rounded-lg"
       aria-label="Dental Gran Avenida - Inicio"
     >
@@ -196,22 +183,7 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
       />
     </a>
     <div class="flex gap-2 items-center shrink-0">
-      <a
-        href={`tel:+${config.whatsapp.phone}`}
-        class="flex items-center gap-2 h-10 px-4 rounded-full border border-red-700/30 bg-red-50 text-red-700 shrink-0 focus-ring"
-        aria-label="Urgencias"
-      >
-        <svg
-          viewBox="0 0 32 32"
-          class="size-5 shrink-0 fill-current"
-          aria-hidden="true"
-        >
-          <path
-            d="M17,6h-2V4h2V6z M25.899,8.515L24.485,7.1l-1.414,1.414l1.414,1.414L25.899,8.515z M8.929,8.515 L7.515,7.1L6.101,8.515l1.414,1.414L8.929,8.515z M26,26h3v2H3v-2h3v-9c0-5.523,4.556-10,10-10s10,4.477,10,10V26z M24,17 c0-4.411-3.589-8-8-8s-8,3.589-8,8v9h16V17z M5,16H3v2h2V16z M27,16v2h2v-2H27z M10,17v7h2v-7c0-2.209,1.791-4,4-4v-2 C12.686,11,10,13.686,10,17z"
-          ></path>
-        </svg>
-        <span class="text-sm font-normal whitespace-nowrap">Urgencias</span>
-      </a>
+      <UrgencyButton href={`tel:+${config.whatsapp.phone}`} compact />
     </div>
   </div>
 </div>
@@ -225,27 +197,17 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
     class="flex flex-col h-full overflow-hidden min-w-0 pt-24 w-full max-w-full overscroll-contain"
   >
     <div class="container-site shrink-0 flex gap-3 w-full pt-6 pb-2">
-      <a
+      <UrgencyButton
         href={`tel:+${config.whatsapp.phone}`}
-        class="flex-1 min-w-0 flex items-center justify-center gap-2 h-12 rounded-full border border-red-700/30 bg-red-50 text-red-700 touch-manipulation focus-ring"
-        aria-label="Urgencias"
-      >
-        <svg viewBox="0 0 32 32" class="size-5 shrink-0 fill-current" aria-hidden="true">
-          <path d="M17,6h-2V4h2V6z M25.899,8.515L24.485,7.1l-1.414,1.414l1.414,1.414L25.899,8.515z M8.929,8.515 L7.515,7.1L6.101,8.515l1.414,1.414L8.929,8.515z M26,26h3v2H3v-2h3v-9c0-5.523,4.556-10,10-10s10,4.477,10,10V26z M24,17 c0-4.411-3.589-8-8-8s-8,3.589-8,8v9h16V17z M5,16H3v2h2V16z M27,16v2h2v-2H27z M10,17v7h2v-7c0-2.209,1.791-4,4-4v-2 C12.686,11,10,13.686,10,17z"/>
-        </svg>
-        <span class="text-base font-normal">Urgencias</span>
-      </a>
-      <a
+        class="flex-1 min-w-0 touch-manipulation justify-center"
+      />
+      <Button
         href={config.whatsapp.url}
+        label="Agendar hora"
+        variant="primary"
         target="_blank"
-        rel="noopener noreferrer"
-        class="flex-1 min-w-0 flex items-center justify-center gap-2 h-12 rounded-full bg-french-ultramarine text-white hover:opacity-90 transition-opacity touch-manipulation focus-ring [&:hover>svg]:translate-x-1"
-      >
-        <span class="text-base font-normal">Agendar hora</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[18px] h-[8px] shrink-0 transition-transform duration-300" aria-hidden="true">
-          <path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z" fill="currentColor"/>
-        </svg>
-      </a>
+        class="flex-1 min-w-0 touch-manipulation"
+      />
     </div>
 
     <nav

@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  label?: string;
+  target?: "_blank" | "_self";
+  variant?: "default" | "on-dark";
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  target,
+  variant = "default",
+  class: className,
+} = Astro.props;
+
+const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class:list={[
+    className,
+    "text-base transition-colors rounded",
+    variant === "on-dark"
+      ? "text-white/80 hover:text-white focus-ring-on-dark"
+      : "text-french-ultramarine hover:opacity-70 focus-ring",
+  ]}
+>
+  {label ?? <slot />}
+</a>
