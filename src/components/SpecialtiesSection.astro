@@ -22,7 +22,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
             centered
         />
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {specialties.map((s) => (
                 <a
                     href={`/especialidades/${s.slug}`}
@@ -46,7 +46,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 
                     {/* Text content */}
                     <div class="relative z-10 flex flex-col">
-                        <p class="font-display font-bold text-2xl text-white transition-transform duration-500 group-hover:-translate-y-1">
+                        <p class="font-display font-bold text-xl text-white transition-transform duration-500 group-hover:-translate-y-1">
                             {s.label}
                         </p>
 
@@ -56,7 +56,7 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
                                     {s.description}
                                 </p>
                                 <span class="inline-flex items-center gap-3 text-white font-medium group/link transition-opacity hover:opacity-80 w-fit">
-                                    Ver especialidad
+                                    Más información
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[18px] h-[8px] fill-white transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">
                                         <path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
                                     </svg>

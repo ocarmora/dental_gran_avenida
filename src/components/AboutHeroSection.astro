@@ -6,20 +6,29 @@ import aboutHeroImage from '../assets/images/about-hero-video.png';
 
 <section class="w-full">
 
-	<!-- Hero banner image with video overlay -->
-	<div id="hero-video-wrapper" class="hero-video-wrapper relative w-full h-48 overflow-hidden">
-		<Picture
-			src={aboutHeroImage}
-			formats={['avif', 'webp']}
-			alt="Equipo de Dental Gran Avenida"
-			class="w-full h-full object-cover object-center"
-			width={1024}
-			height={576}
-		/>
-		<div class="hero-video-overlay" aria-hidden="true" />
-		<span id="hero-video-label" class="hero-video-label" aria-hidden="true">
-			▶ Ver video
-		</span>
+	<!-- Video thumbnail — overlay with "Reproducir video" label that follows cursor -->
+	<div class="container-site pt-8">
+		<div class="video-overlay-wrapper relative rounded-2xl overflow-hidden w-full aspect-video max-h-80 cursor-pointer hover:cursor-none">
+			<!-- Decorative background -->
+			<div class="absolute inset-0" aria-hidden="true">
+				<Picture
+					src={aboutHeroImage}
+					formats={['avif', 'webp']}
+					alt=""
+					class="w-full h-full object-cover opacity-80"
+					width={1024}
+					height={576}
+				/>
+				<div class="absolute inset-0 bg-black/40" />
+			</div>
+			<!-- Label — centered by default, follows cursor on hover -->
+			<span
+				class="video-overlay-label absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 text-sm font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+				aria-hidden="true"
+			>
+				▶ Reproducir video
+			</span>
+		</div>
 	</div>
 
 	<!-- Two-column text block -->
@@ -48,53 +57,21 @@ import aboutHeroImage from '../assets/images/about-hero-video.png';
 	</div>
 </section>
 
-<style>
-	.hero-video-wrapper {
-		position: relative;
-	}
-
-	.hero-video-wrapper:hover {
-		cursor: none;
-	}
-
-	.hero-video-wrapper .hero-video-overlay {
-		position: absolute;
-		inset: 0;
-		background: rgba(0, 0, 0, 0.4);
-		pointer-events: none;
-	}
-
-	.hero-video-wrapper .hero-video-label {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		pointer-events: none;
-		z-index: 10;
-		font-size: 0.875rem;
-		font-weight: 600;
-		color: white;
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-		white-space: nowrap;
-	}
-
-	.hero-video-wrapper.is-hovering .hero-video-label {
-		position: fixed;
-		transform: translate(-50%, -50%);
-	}
-</style>
-
 <script>
-	const wrapper = document.getElementById('hero-video-wrapper');
-	const label = document.getElementById('hero-video-label');
+	document.querySelectorAll('.video-overlay-wrapper').forEach((wrapper) => {
+		const label = wrapper.querySelector('.video-overlay-label');
+		if (!label) return;
 
-	if (wrapper && label) {
 		wrapper.addEventListener('mouseenter', () => {
 			wrapper.classList.add('is-hovering');
+			label.classList.add('fixed', '-translate-x-1/2', '-translate-y-1/2');
+			label.classList.remove('absolute', 'left-1/2', 'top-1/2');
 		});
 
 		wrapper.addEventListener('mouseleave', () => {
 			wrapper.classList.remove('is-hovering');
+			label.classList.remove('fixed');
+			label.classList.add('absolute', 'left-1/2', 'top-1/2', '-translate-x-1/2', '-translate-y-1/2');
 			label.style.left = '';
 			label.style.top = '';
 		});
@@ -105,5 +82,5 @@ import aboutHeroImage from '../assets/images/about-hero-video.png';
 				label.style.top = `${e.clientY}px`;
 			}
 		});
-	}
+	});
 </script>

@@ -16,8 +16,22 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 <section class:list={[bgClass, 'py-24 w-full']}>
 	<div class="container-site flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-		<!-- Map image -->
-		<div class="flex-1 w-full">
+		<!-- Text + button — left on desktop -->
+		<div class="flex-1 flex flex-col gap-6 items-start order-2 lg:order-1">
+			<SectionHeading
+				title="Estamos en la comuna de El Bosque"
+				description="A solo pasos del paradero PG-12 y Estación de Metro El Bosque y Observatorio. Con estacionamiento gratuito disponible para pacientes."
+			/>
+			<Button
+				href={config.location.mapsUrl}
+				label="Ver Google Maps"
+				variant="primary"
+				target="_blank"
+			/>
+		</div>
+
+		<!-- Map image — right on desktop -->
+		<div class="flex-1 w-full order-1 lg:order-2">
 			<a
 				id="map-wrapper"
 				href={config.location.mapsUrl}
@@ -37,20 +51,6 @@ const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 					Ver Google Maps
 				</span>
 			</a>
-		</div>
-
-		<!-- Text + button -->
-		<div class="flex-1 flex flex-col gap-6 items-start">
-			<SectionHeading
-				title="Estamos en la comuna de El Bosque"
-				description="A solo pasos del paradero PG-12 y Estación de Metro El Bosque y Observatorio. Con estacionamiento gratuito disponible para pacientes."
-			/>
-			<Button
-				href={config.location.mapsUrl}
-				label="Ver Google Maps"
-				variant="primary"
-				target="_blank"
-			/>
 		</div>
 
 	</div>
