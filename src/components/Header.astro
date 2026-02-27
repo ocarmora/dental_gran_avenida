@@ -28,7 +28,7 @@ const isActive = (href: string) => {
 const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
 ---
 
-<header class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
+<header id="main-header" class="bg-blue-white py-5 w-full relative z-50 overflow-visible">
 		<div class="container-site flex items-center justify-between overflow-visible">
 
 		<div class="flex gap-8 lg:gap-20 items-center">
@@ -127,6 +127,40 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
 
 	</div>
 </header>
+
+<div
+	id="mobile-sticky-header"
+	class="md:hidden fixed top-0 left-0 right-0 z-40 bg-blue-white py-3 shadow-md transition-transform duration-300 -translate-y-full"
+	aria-hidden="true"
+>
+	<div class="container-site flex items-center justify-between gap-2">
+		<a href={base} class="h-10 w-24 shrink-0 block focus-ring rounded-lg" aria-label="Dental Gran Avenida - Inicio">
+			<Image src={logo} alt="" class="h-full w-auto object-contain object-left" loading="eager" />
+		</a>
+		<div class="flex gap-2 items-center shrink-0">
+			<a
+				href={`tel:+${config.whatsapp.phone}`}
+				class="size-10 shrink-0 flex items-center justify-center rounded-full border border-french-ultramarine hover:bg-french-ultramarine group transition-colors focus-ring"
+				aria-label="Llamar"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-5 stroke-french-ultramarine group-hover:stroke-white fill-none transition-colors" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/>
+				</svg>
+			</a>
+			<a
+				href={config.whatsapp.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="h-10 px-4 rounded-full bg-french-ultramarine text-white text-sm font-normal flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity focus-ring shrink-0"
+			>
+				Agendar hora
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-[14px] h-[6px] shrink-0" aria-hidden="true">
+					<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z" fill="currentColor"/>
+				</svg>
+			</a>
+		</div>
+	</div>
+</div>
 
 <div
 	id="mobile-menu"
@@ -260,6 +294,39 @@ const isSpecialtiesActive = pathname.startsWith(`${base}/especialidades`);
 	document.addEventListener('DOMContentLoaded', function () {
 		const toggle = document.getElementById('menu-toggle');
 		const menu = document.getElementById('mobile-menu');
+		const mainHeader = document.getElementById('main-header');
+		const stickyHeader = document.getElementById('mobile-sticky-header');
+
+		if (mainHeader && stickyHeader) {
+			let observer = null;
+			const mediaQuery = window.matchMedia('(max-width: 767px)');
+
+			function setupStickyHeader() {
+				if (!mediaQuery.matches) {
+					stickyHeader.classList.add('-translate-y-full');
+					stickyHeader.classList.remove('translate-y-0');
+					stickyHeader.setAttribute('aria-hidden', 'true');
+					if (observer) {
+						observer.disconnect();
+						observer = null;
+					}
+					return;
+				}
+				observer = new IntersectionObserver(
+					([entry]) => {
+						const headerInView = entry.isIntersecting;
+						stickyHeader.classList.toggle('-translate-y-full', headerInView);
+						stickyHeader.classList.toggle('translate-y-0', !headerInView);
+						stickyHeader.setAttribute('aria-hidden', String(headerInView));
+					},
+					{ threshold: 0 }
+				);
+				observer.observe(mainHeader);
+			}
+
+			mediaQuery.addEventListener('change', setupStickyHeader);
+			setupStickyHeader();
+		}
 
 		function openMenu() {
 			menu?.classList.add('is-open');
