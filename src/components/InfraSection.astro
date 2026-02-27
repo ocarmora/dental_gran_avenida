@@ -1,8 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
-import featurePlaceholder from '../assets/images/feature-placeholder.jpg';
 
 interface Props {
 	background?: 'white' | 'blue-white';
@@ -11,22 +9,28 @@ interface Props {
 const { background = 'blue-white' } = Astro.props;
 const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
 
+const iconClass = 'size-10 shrink-0 text-navy-blue';
+
 const features = [
 	{
 		title: 'Sala de rayos',
 		description: 'Radiografías digitales y scanner 3D de última generación para diagnósticos precisos y rápidos.',
+		icon: 'scanner',
 	},
 	{
 		title: 'Estacionamiento',
 		description: 'Estacionamiento gratuito disponible para todos nuestros pacientes durante su visita.',
+		icon: 'parking',
 	},
 	{
 		title: 'Acceso Universal',
 		description: 'Instalaciones con acceso para personas con movilidad reducida en todos nuestros espacios.',
+		icon: 'accessibility',
 	},
 	{
 		title: 'Medios de pago',
 		description: 'Aceptamos Webpay Plus, débito, crédito y facilitamos cuotas sin interés para tu tratamiento.',
+		icon: 'payment',
 	},
 ];
 ---
@@ -47,16 +51,33 @@ const features = [
 		<!-- 4 feature cards -->
 		{features.map((f) => (
 			<Card>
-				<div class="size-40 rounded-xl overflow-hidden shrink-0 bg-card">
-					<Image
-						src={featurePlaceholder}
-						alt={f.title}
-						class="w-full h-full object-cover"
-					/>
-				</div>
-				<div class="flex flex-col gap-2">
-					<p class="font-display font-bold text-xl text-navy-blue">{f.title}</p>
-					<p class="text-base text-body">{f.description}</p>
+				<div class="flex flex-col gap-4">
+					<div class="flex size-16 items-center justify-center rounded-xl bg-navy-blue/10 shrink-0">
+						{f.icon === 'scanner' && (
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.996 510.996" fill="currentColor" class={iconClass} aria-hidden="true">
+								<path d="M501.935,380.954L370.93,279.059c-12.488-9.709-28.076-15.056-43.893-15.056H223.975c-5.421,0-10.762-1.832-15.04-5.158 L77.939,156.957c-4.955-3.859-11.117-5.554-17.351-4.773c-2.405,0.301-4.705,0.965-6.849,1.942L46.123,137.9 c1.888-1.503,3.56-3.295,4.937-5.361c3.481-5.223,4.72-11.489,3.488-17.643l-8-39.999c-1.233-6.169-4.791-11.485-10.019-14.966 c-5.218-3.475-11.484-4.707-17.628-3.47C12.744,57.69,7.435,61.244,3.953,66.468c-3.481,5.223-4.72,11.489-3.488,17.643l8,39.999 c2.188,10.95,11.872,18.898,23.026,18.898c0.151,0,0.302-0.008,0.454-0.011l10.432,22.223c-4.757,9.771-2.211,21.898,6.701,28.833 l131.005,101.896c12.488,9.708,28.076,15.055,43.893,15.055h0.031v97h-128.5c-12.958,0-23.5,10.542-23.5,23.5v16 c0,4.142,3.358,7.5,7.5,7.5h256c4.142,0,7.5-3.358,7.5-7.5v-16c0-12.958-10.542-23.5-23.5-23.5h-0.5v-97h8.031 c5.421,0,10.762,1.832,15.04,5.158l130.999,101.89c4.163,3.239,9.149,4.952,14.418,4.952c7.313,0,14.079-3.307,18.561-9.071 C514.009,403.705,512.161,388.912,501.935,380.954z" />
+							</svg>
+						)}
+						{f.icon === 'parking' && (
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class={iconClass} aria-hidden="true">
+								<path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z"/>
+							</svg>
+						)}
+						{f.icon === 'accessibility' && (
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class={iconClass} aria-hidden="true">
+								<path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1c2.76 0 5 2.24 5 5h1v1h-1v1h1v1h-1v1h1v1h-1v1h-2v-1h1v-1h-1v-1h1v-1h-1v-1h-1c0 1.66-1.34 3-3 3h-1v1h1v1H8v-1h1v-1H8v-1H6v1H5v1H3v-1h1v-1H3v-1h1v-1H3v-1h1v-1h1v-1H3v-1h1v-1h1V9H3V8h1V7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"/>
+							</svg>
+						)}
+						{f.icon === 'payment' && (
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class={iconClass} aria-hidden="true">
+								<path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+							</svg>
+						)}
+					</div>
+					<div class="flex flex-col gap-2">
+						<p class="font-display font-bold text-xl text-navy-blue">{f.title}</p>
+						<p class="text-base text-body">{f.description}</p>
+					</div>
 				</div>
 			</Card>
 		))}
