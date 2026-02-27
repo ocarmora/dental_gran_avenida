@@ -8,18 +8,24 @@ interface Props {
 }
 
 const { title = '', description = '' } = Astro.props;
+const siteName = 'Dental Gran Avenida';
+const pageTitle = title ? `${title} - ${siteName}` : siteName;
 ---
 
 <!doctype html>
+<!-- Diseñado y desarrollado por Oscar Carvajal Mora (os.carvajalmora@gmail.com) -->
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
+		<meta name="author" content="Oscar Carvajal Mora" />
+		<meta name="designer" content="Oscar Carvajal Mora" />
+		<meta name="developer" content="Oscar Carvajal Mora" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{pageTitle}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Figtree:wght@700;800&display=swap" rel="stylesheet" />
