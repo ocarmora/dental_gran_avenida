@@ -5,10 +5,16 @@
 @theme {
   --color-dark-sea-blue: #063a8d;
   --animate-hero-progress-fill: hero-progress-fill var(--hero-progress-duration, 5s) linear forwards;
+  --animate-slide-in-up: slide-in-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @keyframes hero-progress-fill {
     0% { width: 0%; }
     100% { width: 100%; }
+  }
+
+  @keyframes slide-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0);    }
   }
   --color-blue-white: #f2faff;
   --color-french-ultramarine: #001bb5;
