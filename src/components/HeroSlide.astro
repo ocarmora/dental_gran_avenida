@@ -1,16 +1,16 @@
 ---
 interface Props {
-	index: number;
+  index: number;
 }
 
 const { index } = Astro.props;
 ---
 
 <div
-	class="hero-slide absolute inset-0 opacity-0 pointer-events-none container-site flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 transition-opacity duration-500 data-[active]:relative data-[active]:opacity-100 data-[active]:pointer-events-auto"
-	data-slide
-	{...(index === 0 ? { 'data-active': '' } : {})}
-	aria-hidden={index !== 0 ? 'true' : undefined}
+  class="hero-slide absolute inset-0 opacity-0 pointer-events-none container-site flex flex-col lg:flex-row lg:items-end items-center justify-between gap-8 lg:gap-12 transition-opacity duration-500 data-[active]:relative data-[active]:opacity-100 data-[active]:pointer-events-auto data-[active]:h-full"
+  data-slide
+  {...index === 0 ? { "data-active": "" } : {}}
+  aria-hidden={index !== 0 ? "true" : undefined}
 >
-	<slot />
+  <slot />
 </div>

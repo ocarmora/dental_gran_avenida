@@ -27,7 +27,7 @@ const isActive = (href: string) => {
   if (href === "/") return pathname === full;
   return pathname === full || pathname.startsWith(full + "/");
 };
-const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
+const isSpecialtiesActive = pathname.startsWith(toHref("/especialidades"));
 ---
 
 <header
@@ -39,7 +39,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
   >
     <div class="flex gap-8 lg:gap-20 items-center">
       <a
-        href={toHref('/')}
+        href={toHref("/")}
         class="h-14 w-32 shrink-0 block focus-ring rounded-lg"
         aria-label="Dental Gran Avenida - Inicio"
       >
@@ -171,7 +171,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
 >
   <div class="container-site flex items-center justify-between gap-2">
     <a
-      href={toHref('/')}
+      href={toHref("/")}
       class="h-10 w-24 shrink-0 block focus-ring rounded-lg"
       aria-label="Dental Gran Avenida - Inicio"
     >
@@ -364,7 +364,6 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
         </svg>
       </a>
     </div>
-
   </div>
 </div>
 

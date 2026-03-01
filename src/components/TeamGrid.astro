@@ -1,18 +1,24 @@
 ---
-import TeamCard from './TeamCard.astro';
-import type { TeamMember } from '../data/team';
+import TeamCard from "./TeamCard.astro";
+import type { TeamMember } from "../data/team";
 
 interface Props {
-	members: TeamMember[];
+  members: TeamMember[];
 }
 
 const { members } = Astro.props;
 ---
 
 <div class="flex flex-wrap justify-center gap-8 w-full">
-	{members.map((member, i) => (
-		<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={(i % 4) * 60}>
-			<TeamCard member={member} />
-		</div>
-	))}
+  {
+    members.map((member, i) => (
+      <div
+        data-sal="slide-up"
+        data-sal-duration="400"
+        data-sal-delay={(i % 4) * 60}
+      >
+        <TeamCard member={member} />
+      </div>
+    ))
+  }
 </div>

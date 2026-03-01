@@ -1,6 +1,5 @@
 ---
 import { config } from '../config';
-import Card from './Card.astro';
 import SectionHeading from './SectionHeading.astro';
 
 interface Props {
@@ -34,7 +33,7 @@ const hours = [
 ---
 
 <section class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
+	<div class="container-site flex flex-col lg:flex-row items-start gap-12 lg:gap-20 lg:items-center">
 
 		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full order-2 lg:order-1">
 			{contacts.map((c, i) => (
@@ -48,32 +47,46 @@ const hours = [
 				href={c.href}
 				target={c.href.startsWith('http') ? '_blank' : undefined}
 				rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-				class="group block h-full focus-ring rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg"
-					aria-label={c.icon === 'urgency' ? 'Contactar por urgencias' : 'Contactar para atención general'}
-				>
-					<Card class={c.icon === 'urgency' ? 'bg-red-50 border border-red-700/20' : 'bg-blue-white border border-navy-blue/20'}>
-						<div class="flex flex-col gap-4">
-							<div class={`flex size-12 items-center justify-center rounded-xl shrink-0 ${c.icon === 'urgency' ? 'bg-red-700/10 text-red-700' : 'bg-navy-blue/10 text-navy-blue'}`}>
-								{c.icon === 'urgency' ? (
-									<svg viewBox="0 0 32 32" class="size-6 fill-current" aria-hidden="true">
-										<path d="M17,6h-2V4h2V6z M25.899,8.515L24.485,7.1l-1.414,1.414l1.414,1.414L25.899,8.515z M8.929,8.515 L7.515,7.1L6.101,8.515l1.414,1.414L8.929,8.515z M26,26h3v2H3v-2h3v-9c0-5.523,4.556-10,10-10s10,4.477,10,10V26z M24,17 c0-4.411-3.589-8-8-8s-8,3.589-8,8v9h16V17z M5,16H3v2h2V16z M27,16v2h2v-2H27z M10,17v7h2v-7c0-2.209,1.791-4,4-4v-2 C12.686,11,10,13.686,10,17z" />
-									</svg>
-								) : (
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6" aria-hidden="true">
-										<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-										<path d="M16 2v4"/>
-										<path d="M8 2v4"/>
-										<path d="M3 10h18"/>
-									</svg>
-								)}
-							</div>
-							<div class="flex flex-col gap-2">
-								<p class={`font-display font-bold text-xl ${c.icon === 'urgency' ? 'text-red-700' : 'text-navy-blue'}`}>{c.title}</p>
-								<p class="text-base text-body">{c.description}</p>
-							</div>
+				class="group block h-full focus-ring rounded-2xl overflow-hidden transition-transform duration-300 ease-out hover:-translate-y-1"
+				aria-label={c.icon === 'urgency' ? 'Contactar por urgencias' : 'Contactar para atención general'}
+			>
+				<div class="relative">
+					<div
+						class:list={[
+							'overflow-hidden rounded-t-2xl aspect-3/4 flex items-start justify-center pt-24 transition-transform duration-700 ease-out group-hover:scale-105',
+							c.icon === 'urgency'
+								? 'bg-linear-to-br from-red-100 via-red-200/90 to-red-300/80'
+								: 'bg-linear-to-br from-sky-100 via-french-ultramarine/15 to-navy-blue/20',
+						]}
+					>
+						<div
+							class:list={[
+								'flex items-center justify-center size-20 rounded-full shrink-0 transition-transform duration-500 ease-out group-hover:scale-110',
+								c.icon === 'urgency' ? 'bg-red-600/25 text-red-700' : 'bg-french-ultramarine/30 text-navy-blue',
+							]}
+						>
+							{c.icon === 'urgency' ? (
+								<svg viewBox="0 0 32 32" class="size-9 fill-current" aria-hidden="true">
+									<path d="M17,6h-2V4h2V6z M25.899,8.515L24.485,7.1l-1.414,1.414l1.414,1.414L25.899,8.515z M8.929,8.515 L7.515,7.1L6.101,8.515l1.414,1.414L8.929,8.515z M26,26h3v2H3v-2h3v-9c0-5.523,4.556-10,10-10s10,4.477,10,10V26z M24,17 c0-4.411-3.589-8-8-8s-8,3.589-8,8v9h16V17z M5,16H3v2h2V16z M27,16v2h2v-2H27z M10,17v7h2v-7c0-2.209,1.791-4,4-4v-2 C12.686,11,10,13.686,10,17z" />
+								</svg>
+							) : (
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-9" aria-hidden="true">
+									<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+									<path d="M16 2v4"/>
+									<path d="M8 2v4"/>
+									<path d="M3 10h18"/>
+								</svg>
+							)}
 						</div>
-					</Card>
-				</a>
+					</div>
+					<!-- Content box (same style as ImageCard overlay) -->
+					<div class="absolute bottom-3 left-3 right-3 bg-white rounded-xl px-5 py-4 shadow-lg transition-transform duration-300 ease-out group-hover:-translate-y-1">
+						<div class={c.icon === 'urgency' ? 'w-6 h-0.5 bg-red-600 rounded-full mb-2.5' : 'w-6 h-0.5 bg-french-ultramarine rounded-full mb-2.5'} aria-hidden="true" />
+						<p class={`font-display font-bold text-base text-navy-blue leading-snug`}>{c.title}</p>
+						<p class="text-sm text-body/75 mt-1 leading-relaxed">{c.description}</p>
+					</div>
+				</div>
+			</a>
 				</div>
 			))}
 		</div>

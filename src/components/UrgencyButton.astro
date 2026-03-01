@@ -28,7 +28,7 @@ const {
   rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   class:list={[
     className,
-    "group flex items-center rounded-full border border-red-700/30 bg-red-50 text-red-700 hover:bg-red-700 hover:border-red-700 hover:text-white transition-colors focus-ring",
+    "urgency-btn group flex items-center rounded-full border border-red-700/30 bg-red-50 text-red-700 hover:bg-red-700 hover:border-red-700 hover:text-white transition-colors focus-ring",
     compact && "h-10 gap-2 px-4",
     expandable && "h-12 shrink-0",
     !compact && !expandable && "h-12 gap-2 px-4",
@@ -71,3 +71,28 @@ const {
     )
   }
 </a>
+
+<style is:global>
+  @keyframes urgency-blink {
+    0%,
+    6%,
+    100% {
+      background-color: #fef2f2;
+      border-color: rgb(185 28 28 / 0.3);
+      color: #b91c1c;
+    }
+    1%,
+    5% {
+      background-color: #b91c1c;
+      border-color: #b91c1c;
+      color: #fff;
+    }
+  }
+  .urgency-btn {
+    animation: urgency-blink 10s ease-in-out infinite;
+    animation-timing-function: ease-in-out;
+  }
+  .urgency-btn:hover {
+    animation: none;
+  }
+</style>
