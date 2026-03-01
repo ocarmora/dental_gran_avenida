@@ -5,11 +5,11 @@ import Button from "./Button.astro";
 import HeroSlider from "./HeroSlider.astro";
 import HeroSlide from "./HeroSlide.astro";
 import SectionLabel from "./SectionLabel.astro";
-import heroImage from "../assets/images/hero-image.png";
 import logoMercadoPago from "../assets/images/logo-mercado-pago.svg";
-import drFelipeGuerrero from "../assets/images/dr-felipe-guerrero.png";
-import assistants from "../assets/images/assistants.png";
-import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida.png";
+import slideOne from "../assets/images/carousel/slide-one.png";
+import slideTwo from "../assets/images/carousel/slide-two.png";
+import slideTwoMobile from "../assets/images/carousel/slide-two-mobile.png";
+import slideThree from "../assets/images/carousel/slide-three.png";
 ---
 
 <section class="w-full pt-8">
@@ -59,17 +59,18 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
       <div
         data-animate
         data-animate-delay="120"
-        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-140"
+        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-128"
       >
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-32 aspect-square w-[140%] rounded-full bg-sky-200"
+          class="absolute -bottom-50 aspect-square w-full rounded-full bg-sky-200 animate-hero-circle-float"
         >
         </div>
         <Image
-          src={drFelipeGuerrero}
+          src={slideOne}
           alt="Dr. Felipe Guerrero"
-          class="relative z-10 h-full w-auto lg:mr-16"
+          class="relative z-10 h-full w-auto"
           loading="eager"
+          layout="constrained"
         />
       </div>
     </HeroSlide>
@@ -128,17 +129,25 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
       <div
         data-animate
         data-animate-delay="120"
-        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-140"
+        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-128"
       >
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-24 aspect-square w-[120%] rounded-full bg-sky-200"
+          class="absolute -bottom-50 aspect-square w-full rounded-full bg-sky-200 animate-hero-circle-float"
         >
         </div>
         <Image
-          src={assistants}
+          src={slideTwoMobile}
           alt="Asistentes de Dental Gran Avenida"
-          class="relative z-10 h-full w-auto"
+          class="relative z-10 h-full w-auto lg:hidden"
           loading="lazy"
+          layout="constrained"
+        />
+        <Image
+          src={slideTwo}
+          alt="Asistentes de Dental Gran Avenida"
+          class="relative z-10 h-full w-auto hidden lg:block"
+          loading="lazy"
+          layout="constrained"
         />
       </div>
     </HeroSlide>
@@ -188,17 +197,18 @@ import equipoDentalGranAvenida from "../assets/images/equipo-dental-gran-avenida
       <div
         data-animate
         data-animate-delay="120"
-        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-140"
+        class="opacity-0 relative flex items-end justify-center shrink-0 w-full h-72 lg:w-auto lg:h-128"
       >
         <div
-          class="absolute left-1/2 -translate-x-1/2 -bottom-32 aspect-square w-full rounded-full bg-sky-200"
+          class="absolute -bottom-50 aspect-square w-full rounded-full bg-sky-200 animate-hero-circle-float"
         >
         </div>
         <Image
-          src={equipoDentalGranAvenida}
+          src={slideThree}
           alt="Equipo de Dental Gran Avenida"
           class="relative z-10 h-full w-auto"
           loading="lazy"
+          layout="constrained"
         />
       </div>
     </HeroSlide>
