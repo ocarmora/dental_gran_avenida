@@ -23,9 +23,9 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
   rel={rel}
   class:list={[
     className,
-    "inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all [&:hover>svg]:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-french-ultramarine focus-visible:ring-offset-2",
+    "inline-flex gap-3 h-12 items-center justify-center min-w-48 px-6 rounded-full shrink-0 text-base font-normal transition-all duration-300 [&:hover>svg]:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-french-ultramarine focus-visible:ring-offset-2",
     variant === "primary"
-      ? "bg-french-ultramarine text-white hover:opacity-90"
+      ? "bg-french-ultramarine text-white hover:bg-dark-sea-blue"
       : variant === "white"
         ? "bg-white text-french-ultramarine hover:bg-blue-white"
         : variant === "link"
@@ -34,19 +34,15 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
   ]}
 >
   {label}
-  {
-    variant !== "link" && (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 18 8"
-        class="w-[18px] h-[8px] shrink-0 transition-transform duration-300"
-        aria-hidden="true"
-      >
-        <path
-          d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"
-          fill="currentColor"
-        />
-      </svg>
-    )
-  }
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 18 8"
+    class="w-[18px] h-[8px] shrink-0 transition-transform duration-300"
+    aria-hidden="true"
+  >
+    <path
+      d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"
+      fill="currentColor"
+    />
+  </svg>
 </a>
