@@ -17,12 +17,6 @@
     to   { opacity: 1; transform: translateY(0);    }
   }
 
-  @keyframes hero-circle-float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.08); }
-  }
-  --animate-hero-circle-float: hero-circle-float 6s ease-in-out infinite;
-
   --color-blue-white: #f2faff;
   --color-french-ultramarine: #001bb5;
   --color-bright-ocean: #1e8fd5;
