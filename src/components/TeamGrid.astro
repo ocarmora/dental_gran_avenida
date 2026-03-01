@@ -11,7 +11,7 @@ const { members } = Astro.props;
 
 <div class="flex flex-wrap justify-center gap-8 w-full">
 	{members.map((member, i) => (
-		<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={(i % 4) * 60} class="h-full">
+		<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={(i % 4) * 60}>
 			<TeamCard member={member} />
 		</div>
 	))}

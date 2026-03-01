@@ -1,35 +1,38 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import TopBar from '../components/TopBar.astro';
-import Header from '../components/Header.astro';
-import HeroSection from '../components/HeroSection.astro';
-import FeaturesSection from '../components/FeaturesSection.astro';
-import CtaBanner from '../components/CtaBanner.astro';
-import SpecialtiesSection from '../components/SpecialtiesSection.astro';
-import ClinicSection from '../components/ClinicSection.astro';
-import TestimonialsSection from '../components/TestimonialsSection.astro';
-import ContactSection from '../components/ContactSection.astro';
-import FooterSection from '../components/FooterSection.astro';
-import { config } from '../config';
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/TopBar.astro";
+import Header from "../components/Header.astro";
+import HeroSection from "../components/HeroSection.astro";
+import FeaturesSection from "../components/FeaturesSection.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import SpecialtiesSection from "../components/SpecialtiesSection.astro";
+import ClinicSection from "../components/ClinicSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import ContactSection from "../components/ContactSection.astro";
+import FooterSection from "../components/FooterSection.astro";
+import { config } from "../config";
 ---
 
-<Layout title="Inicio" description="Clínica dental con 40 años de experiencia en El Bosque, Santiago.">
-	<TopBar />
-	<Header />
-	<main id="main-content">
-		<HeroSection />
-		<FeaturesSection />
-		<CtaBanner
-			variant="full"
-			title="Obtén 20% de descuento en el mes de la sonrisa"
-			description="Válido para todas las especialidades durante marzo"
-			ctaLabel="Agendar hora"
-			ctaHref={config.whatsapp.url}
-		/>
-		<SpecialtiesSection />
-		<ClinicSection />
-		<TestimonialsSection />
-		<ContactSection />
-	</main>
-	<FooterSection />
+<Layout
+  title="Inicio"
+  description="Clínica dental con 40 años de experiencia en El Bosque, Santiago."
+>
+  <TopBar />
+  <Header />
+  <main id="main-content">
+    <HeroSection />
+    <SpecialtiesSection />
+    <CtaBanner
+      variant="full"
+      title="Obtén 20% de descuento en el mes de la sonrisa"
+      description="Válido para todas las especialidades durante marzo"
+      ctaLabel="Agendar hora"
+      ctaHref={config.whatsapp.url}
+    />
+    <FeaturesSection />
+    <ClinicSection />
+    <TestimonialsSection />
+    <ContactSection />
+  </main>
+  <FooterSection />
 </Layout>
