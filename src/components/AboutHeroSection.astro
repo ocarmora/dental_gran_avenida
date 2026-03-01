@@ -7,7 +7,7 @@ import heroVideoPlaceholder from "../assets/images/hero-video-placeholder.png";
 <section class="w-full">
   <div class="container-site pt-8">
     <div
-      class="video-overlay-wrapper focus-ring relative rounded-2xl overflow-hidden w-full aspect-video max-h-80 cursor-pointer hover:cursor-none"
+      class="video-overlay-wrapper group focus-ring relative rounded-2xl overflow-hidden w-full aspect-video max-h-80 cursor-pointer"
       role="button"
       tabindex="0"
       aria-label="Reproducir video"
@@ -19,27 +19,24 @@ import heroVideoPlaceholder from "../assets/images/hero-video-placeholder.png";
           src={heroVideoPlaceholder}
           formats={["avif", "webp"]}
           alt=""
-          class="w-full h-full object-cover opacity-80"
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           width={1024}
           height={576}
           layout="constrained"
         />
-        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="absolute inset-0 bg-french-ultramarine/70 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
       </div>
-      <span
-        class="video-overlay-label absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 pointer-events-none z-10 text-sm font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
-        aria-hidden="true"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          class="size-5 shrink-0 fill-current"
-          aria-hidden="true"
-        >
-          <path d="M8 5v14l11-7z"></path>
-        </svg>
-        Reproducir video
-      </span>
+      <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div class="flex flex-col items-center gap-3">
+          <div class="size-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-7 fill-white" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <span class="text-sm font-semibold text-white/90 tracking-wide">Reproducir video</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -78,37 +75,3 @@ import heroVideoPlaceholder from "../assets/images/hero-video-placeholder.png";
     </div>
   </div>
 </section>
-
-<script>
-  document.querySelectorAll(".video-overlay-wrapper").forEach((wrapper) => {
-    const label = wrapper.querySelector(".video-overlay-label");
-    if (!label) return;
-
-    wrapper.addEventListener("mouseenter", () => {
-      wrapper.classList.add("is-hovering");
-      label.classList.add("fixed", "-translate-x-1/2", "-translate-y-1/2");
-      label.classList.remove("absolute", "left-1/2", "top-1/2");
-    });
-
-    wrapper.addEventListener("mouseleave", () => {
-      wrapper.classList.remove("is-hovering");
-      label.classList.remove("fixed");
-      label.classList.add(
-        "absolute",
-        "left-1/2",
-        "top-1/2",
-        "-translate-x-1/2",
-        "-translate-y-1/2",
-      );
-      label.style.left = "";
-      label.style.top = "";
-    });
-
-    wrapper.addEventListener("mousemove", (e: MouseEvent) => {
-      if (wrapper.classList.contains("is-hovering")) {
-        label.style.left = `${e.clientX}px`;
-        label.style.top = `${e.clientY}px`;
-      }
-    });
-  });
-</script>

@@ -8,9 +8,10 @@ const hlsSrc = toHref('/videos/spot-dental-gran-avenida/master.m3u8');
 		class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4"
 		role="dialog"
 		aria-modal="true"
-		aria-label="Reproductor de video"
+		aria-labelledby="video-modal-title"
 		aria-hidden="true"
 	>
+		<h2 id="video-modal-title" class="sr-only">Reproductor de video</h2>
 		<div class="relative w-full max-w-4xl">
 			<button
 				type="button"
@@ -26,60 +27,127 @@ const hlsSrc = toHref('/videos/spot-dental-gran-avenida/master.m3u8');
 	</div>
 </video-player-modal>
 
-<link rel="stylesheet" href="https://vjs.zencdn.net/8.10.0/video-js.css" />
 <style is:global>
+	/* VideoJS base — imported via Vite from local npm package */
+
 	.vjs-dental-gran-avenida.video-js {
-		color: #f2faff;
+		color: var(--color-blue-white);
 	}
+
 	.vjs-dental-gran-avenida .vjs-big-play-button {
-		border-color: #1e8fd5;
-		background-color: rgba(43, 51, 63, 0.7);
+		width: 4rem;
+		height: 4rem;
+		border-radius: 9999px;
+		border: 2px solid rgba(255, 255, 255, 0.4);
+		background-color: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(4px);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
+		transition: transform 0.3s ease, background-color 0.3s ease;
 	}
+
 	.vjs-dental-gran-avenida:hover .vjs-big-play-button,
 	.vjs-dental-gran-avenida .vjs-big-play-button:hover,
 	.vjs-dental-gran-avenida .vjs-big-play-button:focus {
-		border-color: #001bb5;
-		background-color: rgba(43, 51, 63, 0.9);
+		background-color: var(--color-french-ultramarine);
+		border-color: var(--color-french-ultramarine);
+		transform: translate(-50%, -50%) scale(1.1);
 	}
+
+	.vjs-dental-gran-avenida .vjs-big-play-button .vjs-icon-placeholder::before {
+		font-size: 2rem;
+		line-height: 4rem;
+	}
+
 	.vjs-dental-gran-avenida .vjs-volume-level,
 	.vjs-dental-gran-avenida .vjs-play-progress,
 	.vjs-dental-gran-avenida .vjs-slider-bar {
-		background-color: #1e8fd5;
+		background-color: var(--color-bright-ocean);
 	}
+
 	.vjs-dental-gran-avenida .vjs-control-bar {
-		background: linear-gradient(to top, rgba(0, 46, 119, 0.9), rgba(0, 46, 119, 0.7));
+		background: linear-gradient(
+			to top,
+			color-mix(in srgb, var(--color-navy-blue) 90%, transparent),
+			color-mix(in srgb, var(--color-navy-blue) 70%, transparent)
+		);
 	}
+
 	.vjs-dental-gran-avenida .vjs-play-progress .vjs-svg-icon {
 		top: 50%;
 		right: -0.4em;
 		transform: translateY(-50%);
 	}
+
 	.vjs-dental-gran-avenida .vjs-slider:focus .vjs-slider-handle {
-		text-shadow: 0 0 1em #f2faff;
-		box-shadow: 0 0 1em #1e8fd5;
+		text-shadow: 0 0 1em var(--color-blue-white);
+		box-shadow: 0 0 1em var(--color-bright-ocean);
 	}
+
 	.vjs-dental-gran-avenida .vjs-button:hover,
 	.vjs-dental-gran-avenida .vjs-button:focus {
-		color: #1e8fd5;
+		color: var(--color-bright-ocean);
 	}
+
 	.vjs-dental-gran-avenida .vjs-load-progress {
-		background: rgba(242, 250, 255, 0.3);
+		background-color: color-mix(in srgb, var(--color-blue-white) 30%, transparent);
 	}
 </style>
+
 <script>
+	import 'video.js/dist/video-js.css';
 	import videojs from 'video.js';
+
+	const FOCUSABLE = [
+		'a[href]',
+		'button:not([disabled])',
+		'input:not([disabled])',
+		'select:not([disabled])',
+		'textarea:not([disabled])',
+		'[tabindex]:not([tabindex="-1"])',
+	].join(', ');
 
 	class VideoPlayerModal extends HTMLElement {
 		connectedCallback() {
 			const hlsSrc = this.dataset.hlsSrc!;
-			const modal = this.querySelector('[role="dialog"]');
+			const modal = this.querySelector<HTMLElement>('[role="dialog"]');
 			const container = this.querySelector('.video-player-container');
-			const closeBtn = this.querySelector('.video-modal-close');
+			const closeBtn = this.querySelector<HTMLElement>('.video-modal-close');
 
 			let player: ReturnType<typeof videojs> | null = null;
+			let lastFocusedTrigger: HTMLElement | null = null;
 
-			const openModal = () => {
+			/* ── Focus trap ─────────────────────────────────────── */
+
+			const trapFocus = (e: KeyboardEvent) => {
+				if (!modal || e.key !== 'Tab') return;
+				const focusable = Array.from(modal.querySelectorAll<HTMLElement>(FOCUSABLE));
+				if (focusable.length === 0) return;
+
+				const first = focusable[0];
+				const last = focusable[focusable.length - 1];
+
+				if (e.shiftKey) {
+					if (document.activeElement === first) {
+						e.preventDefault();
+						last.focus();
+					}
+				} else {
+					if (document.activeElement === last) {
+						e.preventDefault();
+						first.focus();
+					}
+				}
+			};
+
+			/* ── Open / close ───────────────────────────────────── */
+
+			const openModal = (trigger?: HTMLElement) => {
 				if (!modal || !container) return;
+				lastFocusedTrigger = trigger ?? null;
+
 				modal.classList.remove('hidden');
 				modal.classList.add('flex');
 				modal.setAttribute('aria-hidden', 'false');
@@ -101,11 +169,13 @@ const hlsSrc = toHref('/videos/spot-dental-gran-avenida/master.m3u8');
 					sources: [{ src: hlsSrc, type: 'application/x-mpegURL' }],
 				});
 				player.play();
-				(closeBtn as HTMLElement)?.focus();
+				closeBtn?.focus();
+				document.addEventListener('keydown', trapFocus);
 			};
 
 			const closeModal = () => {
 				if (!modal) return;
+				document.removeEventListener('keydown', trapFocus);
 				modal.classList.add('hidden');
 				modal.classList.remove('flex');
 				modal.setAttribute('aria-hidden', 'true');
@@ -114,18 +184,18 @@ const hlsSrc = toHref('/videos/spot-dental-gran-avenida/master.m3u8');
 					player.dispose();
 					player = null;
 				}
+				lastFocusedTrigger?.focus();
+				lastFocusedTrigger = null;
 			};
 
-			document.querySelectorAll('.video-overlay-wrapper, [aria-label*="Reproducir video"]').forEach((trigger) => {
-				trigger.addEventListener('click', (e) => {
-					if (e instanceof KeyboardEvent && e.key !== 'Enter' && e.key !== ' ') return;
-					if (e instanceof KeyboardEvent) e.preventDefault();
-					openModal();
-				});
+			/* ── Triggers ───────────────────────────────────────── */
+
+			document.querySelectorAll<HTMLElement>('.video-overlay-wrapper, [aria-label*="Reproducir video"]').forEach((trigger) => {
+				trigger.addEventListener('click', () => openModal(trigger));
 				trigger.addEventListener('keydown', (e) => {
-					if (e instanceof KeyboardEvent && (e.key === 'Enter' || e.key === ' ')) {
+					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
-						openModal();
+						openModal(trigger);
 					}
 				});
 			});
