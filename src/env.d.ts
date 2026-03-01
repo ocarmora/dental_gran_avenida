@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
 	readonly PUBLIC_WHATSAPP_PHONE?: string;
+	readonly PUBLIC_PHONE_LANDLINE?: string;
 	readonly PUBLIC_CONTACT_EMAIL?: string;
 	readonly PUBLIC_FACEBOOK_URL?: string;
 	readonly PUBLIC_INSTAGRAM_URL?: string;

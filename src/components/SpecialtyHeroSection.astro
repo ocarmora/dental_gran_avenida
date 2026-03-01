@@ -1,54 +1,71 @@
 ---
-import { Image } from 'astro:assets';
-import { config } from '../config';
-import Button from './Button.astro';
-import SectionLabel from './SectionLabel.astro';
-import servicePlaceholder from '../assets/images/service-placeholder.jpg';
-import type { Specialty } from '../data/specialties';
+import { Image } from "astro:assets";
+import { config } from "../config";
+import Button from "./Button.astro";
+import SectionLabel from "./SectionLabel.astro";
+import servicePlaceholder from "../assets/images/service-placeholder.jpg";
+import type { Specialty } from "../data/specialties";
 
 interface Props {
-	specialty: Specialty;
+  specialty: Specialty;
 }
 
 const { specialty } = Astro.props;
 ---
 
-<section class="w-full py-24 overflow-hidden">
-	<div class="container-site flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 lg:w-fit lg:mx-auto">
+<section class="w-full py-16 lg:py-24 overflow-hidden">
+  <div
+    class="container-site flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 lg:w-fit lg:mx-auto"
+  >
+    <div
+      data-sal="slide-up"
+      data-sal-duration="400"
+      data-sal-delay="80"
+      class="relative flex items-center justify-center shrink-0 w-full max-w-64 aspect-square lg:w-96"
+    >
+      <Image
+        src={specialty.image ?? servicePlaceholder}
+        alt={specialty.label}
+        class="w-full h-full object-cover rounded-2xl"
+        layout="constrained"
+      />
+    </div>
 
-		<div class="relative flex items-center justify-center shrink-0 w-full max-w-sm lg:w-96 order-2 lg:order-1" data-sal="slide-up" data-sal-duration="400">
-			<div
-				class="absolute -top-10 -left-12 size-96 rounded-full bg-blue-white"
-				aria-hidden="true"
-			/>
-			<div class="relative z-10 rounded-2xl overflow-hidden w-full max-w-sm aspect-square">
-				<Image
-					src={specialty.image ?? servicePlaceholder}
-					alt={specialty.label}
-					class="w-full h-full object-cover"
-					width={400}
-					height={400}
-				/>
-			</div>
-		</div>
-
-		<div class="flex flex-col gap-8 items-center justify-center lg:items-start text-center lg:text-left w-full max-w-lg shrink-0 order-1 lg:order-2" data-sal="slide-up" data-sal-duration="400" data-sal-delay="80">
-			<div class="flex flex-col gap-2 w-full">
-				<SectionLabel label="Especialidades" centerOnMobile />
-				<h1 class="font-display font-bold text-4xl leading-tight text-navy-blue">
-					{specialty.label}
-				</h1>
-				<p class="text-base text-body mt-2">
-					{specialty.heroDescription}
-				</p>
-			</div>
-			<Button
-				href={config.whatsapp.url}
-				label="Agendar hora"
-				variant="secondary"
-				target="_blank"
-			/>
-		</div>
-
-	</div>
+    <div
+      class="flex flex-col gap-8 items-center justify-center lg:items-start text-center lg:text-left w-full max-w-lg shrink-0"
+      data-sal="slide-up"
+      data-sal-duration="400"
+      data-sal-delay="80"
+    >
+      <div class="flex flex-col gap-2 w-full">
+        <SectionLabel label="Especialidades" centerOnMobile />
+        <div class="flex flex-col lg:flex-row items-center gap-2">
+          <h1
+            class="font-display font-bold text-4xl leading-tight text-navy-blue"
+          >
+            {specialty.label}
+          </h1>
+          {
+            specialty.offer && (
+              <span
+                class="bg-french-ultramarine rounded-full py-1 px-3 text-xs text-white"
+                aria-hidden="true"
+              >
+                {specialty.offer}
+              </span>
+            )
+          }
+        </div>
+        <p class="text-base text-body mt-2">
+          {specialty.heroDescription}
+        </p>
+      </div>
+      <Button
+        href={config.whatsapp.url}
+        label="Agendar hora"
+        variant="secondary"
+        target="_blank"
+      />
+    </div>
+  </div>
 </section>

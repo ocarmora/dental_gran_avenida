@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import TopBar from "../components/TopBar.astro";
 import Header from "../components/Header.astro";
 import HeroSection from "../components/HeroSection.astro";
-import FeaturesSection from "../components/FeaturesSection.astro";
+import FeatureCardsSection from "../components/FeatureCardsSection.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import SpecialtiesSection from "../components/SpecialtiesSection.astro";
 import ClinicSection from "../components/ClinicSection.astro";
@@ -29,7 +29,11 @@ import { config } from "../config";
       ctaLabel="Agendar hora"
       ctaHref={config.whatsapp.url}
     />
-    <FeaturesSection />
+    <FeatureCardsSection
+      label="Clínica dental"
+      title="Una atención que destaca"
+      description="En Dental Gran Avenida contamos con especialistas de primer nivel, tecnología avanzada y una infraestructura completa bajo un mismo techo para entregarte la mejor atención."
+    />
     <ClinicSection />
     <TestimonialsSection />
     <ContactSection />

@@ -15,5 +15,9 @@
     "sal.js": "^0.8.5",
     "tailwindcss": "^4.2.1",
     "video.js": "^8.23.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "typescript": "^5.9.3"
   }
 }

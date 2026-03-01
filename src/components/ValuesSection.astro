@@ -1,5 +1,6 @@
 ---
 import SectionHeading from './SectionHeading.astro';
+import { clinicValues } from '../data/values';
 
 interface Props {
 	background?: 'white' | 'blue-white';
@@ -7,19 +8,6 @@ interface Props {
 
 const { background = 'white' } = Astro.props;
 const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
-
-const values = [
-	{
-		title: 'Misión',
-		description:
-			'Brindar atención odontológica integral de alta calidad, centrada en el paciente y su familia, con tecnología de vanguardia, profesionales altamente capacitados y un trato humano y cercano.',
-	},
-	{
-		title: 'Visión',
-		description:
-			'Ser la clínica dental de referencia en El Bosque y Gran Avenida, reconocida por la excelencia clínica, la innovación continua y el compromiso con el bienestar y la sonrisa de nuestros pacientes.',
-	},
-];
 ---
 
 <section class:list={[bgClass, 'py-24 w-full']}>
@@ -35,7 +23,7 @@ const values = [
 		</div>
 
 		<div class="flex flex-col sm:flex-row gap-8 lg:gap-16 max-w-4xl mx-auto w-full">
-			{values.map((v, i) => (
+			{clinicValues.map((v, i) => (
 				<div
 					data-sal="slide-up"
 					data-sal-duration="400"

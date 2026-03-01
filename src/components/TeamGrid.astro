@@ -7,15 +7,28 @@ interface Props {
 }
 
 const { members } = Astro.props;
+
+const desktopCols = Math.min(members.length, 5);
+const lgGridCols =
+  desktopCols === 1
+    ? "lg:grid-cols-1"
+    : desktopCols === 2
+      ? "lg:grid-cols-2"
+      : desktopCols === 3
+        ? "lg:grid-cols-3"
+        : desktopCols === 4
+          ? "lg:grid-cols-4"
+          : "lg:grid-cols-5";
 ---
 
-<div class="flex flex-wrap justify-center gap-8 w-full">
+<div class:list={["gap-8 grid grid-cols-1 justify-items-center", lgGridCols]}>
   {
     members.map((member, i) => (
       <div
         data-sal="slide-up"
         data-sal-duration="400"
         data-sal-delay={(i % 4) * 60}
+        class="w-full"
       >
         <TeamCard member={member} />
       </div>
