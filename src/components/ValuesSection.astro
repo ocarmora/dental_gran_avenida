@@ -29,7 +29,7 @@ const values = [
 		<div class="flex flex-col sm:flex-row lg:flex-col gap-8 flex-1 order-2 lg:order-1 items-center lg:items-stretch">
 			{values.map((v, i) => (
 			<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={i * 100} class="flex-1 w-full sm:w-auto h-full">
-			<Card variant="blue" class="w-full sm:w-auto">
+			<Card class="bg-blue-white border border-navy-blue/20 w-full sm:w-auto">
 					<div class="flex flex-col gap-2 text-center lg:text-left">
 						<h3 class="font-display font-bold text-xl text-navy-blue">{v.title}</h3>
 						<p class="text-base text-body">{v.description}</p>

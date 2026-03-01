@@ -19,7 +19,7 @@ const { variant = "full", title, description, ctaLabel, ctaHref } = Astro.props;
 
 {
   variant === "simple" ? (
-    <section class="relative w-full overflow-hidden bg-linear-to-r from-french-ultramarine to-bright-ocean">
+    <section class="relative w-full overflow-hidden bg-linear-to-r from-french-ultramarine to-[#0f72aa]">
       <div
         class="absolute inset-0 opacity-20 pointer-events-none bg-top-left cta-pattern-layer"
         style={`background-image: url(${ctaPattern.src});`}
@@ -32,7 +32,7 @@ const { variant = "full", title, description, ctaLabel, ctaHref } = Astro.props;
           data-sal-duration="400"
         >
           <p class="font-display font-bold text-2xl text-white">{title}</p>
-          <p class="text-base text-white/80">{description}</p>
+          <p class="text-base text-white">{description}</p>
         </div>
         <Button
           href={ctaHref}

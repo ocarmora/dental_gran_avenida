@@ -1,5 +1,0 @@
-{"location":"Layout.astro:script","message":"before sal() call","data":{"salElementsCount":34,"firstElement":"DIV","disabledWillBe":false,"readyState":"complete"},"timestamp":1772213380615,"hypothesisId":"B-C"}
-{"location":"Layout.astro:script","message":"after sal() call","data":{"instanceElements":34,"instanceKeys":["elements","disable","enable","reset","update"]},"timestamp":1772213380616,"hypothesisId":"A-B"}
-{"location":"Layout.astro:script","message":"sal script loaded - checking environment","data":{"windowDefined":true,"intersectionObserverDefined":true,"prefersReducedMotion":false,"readyState":"interactive"},"timestamp":1772213393455,"hypothesisId":"A-C"}
-{"location":"Layout.astro:script","message":"before sal() call","data":{"salElementsCount":27,"firstElement":"DIV","disabledWillBe":false,"readyState":"interactive"},"timestamp":1772213393465,"hypothesisId":"B-C"}
-{"location":"Layout.astro:script","message":"after sal() call","data":{"instanceElements":27,"instanceKeys":["elements","disable","enable","reset","update"]},"timestamp":1772213393465,"hypothesisId":"A-B"}

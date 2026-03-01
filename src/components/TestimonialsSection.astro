@@ -9,6 +9,10 @@ interface Props {
 
 const { background = "blue-white", cardVariant = "default" } = Astro.props;
 const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
+const fadeFromClass = background === "white" ? "from-white" : "from-blue-white";
+const cardClass = cardVariant === "blue"
+  ? "bg-blue-white border border-navy-blue/20"
+  : "bg-white border border-navy-blue/20";
 
 const testimonials = [
 	{
@@ -66,7 +70,7 @@ const testimonials = [
 			/>
 		</div>
 
-		<div class="flex flex-col gap-6 flex-1 min-w-0 w-full overflow-hidden" data-sal="slide-up" data-sal-duration="400" data-sal-delay="100">
+		<div class="flex flex-col gap-6 flex-1 min-w-0 w-full" data-sal="slide-up" data-sal-duration="400" data-sal-delay="100">
 
 			<div class="flex items-center justify-center lg:justify-end gap-2">
 				<button
@@ -74,7 +78,7 @@ const testimonials = [
 					id="testimonials-prev"
 					aria-label="Anterior"
 					class:list={[
-						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring",
+						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
 						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
 					]}
 				>
@@ -87,7 +91,7 @@ const testimonials = [
 					id="testimonials-next"
 					aria-label="Siguiente"
 					class:list={[
-						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring",
+						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
 						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
 					]}
 				>
@@ -97,15 +101,28 @@ const testimonials = [
 				</button>
 			</div>
 
+		<div class="relative overflow-hidden">
 			<div
-				id="testimonials-scroll"
-				role="region"
-				aria-label="Testimonios de pacientes"
-				tabindex="0"
-				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 scrollbar-thin"
-			>
-				{testimonials.map((t) => (
-					<Card variant={cardVariant === "blue" ? "blue" : "default"} class="shrink-0 min-w-[280px] w-72 snap-start">
+				id="testimonials-fade-left"
+				aria-hidden="true"
+				class:list={["pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-linear-to-r to-transparent opacity-0 transition-opacity duration-300", fadeFromClass]}
+			/>
+			<div
+				id="testimonials-fade-right"
+				aria-hidden="true"
+				class:list={["pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-linear-to-l to-transparent transition-opacity duration-300", fadeFromClass]}
+			/>
+		<div
+			id="testimonials-scroll"
+			role="region"
+			aria-label="Testimonios de pacientes"
+			tabindex="0"
+			class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 scrollbar-thin"
+		>
+				{testimonials.map((t, i) => {
+				const snapClass = i === 0 ? "snap-start" : i === testimonials.length - 1 ? "snap-end" : "snap-center";
+				return (
+					<Card class:list={[cardClass, "shrink-0 min-w-[280px] w-72", snapClass]}>
 						<div class="flex flex-col gap-6">
 							<div class="flex gap-1" aria-label="5 de 5 estrellas">
 								{Array.from({ length: 5 }).map(() => (
@@ -118,11 +135,13 @@ const testimonials = [
 						</div>
 						<div class="flex flex-col">
 							<p class="text-base font-medium text-body">{t.name}</p>
-							<p class="text-sm text-body/70">{t.detail}</p>
+							<p class="text-sm text-body/80">{t.detail}</p>
 						</div>
-					</Card>
-				))}
+				</Card>
+				);
+			})}
 			</div>
+		</div>
 
 		</div>
 	</div>
@@ -133,7 +152,17 @@ const testimonials = [
 		const scrollEl = document.getElementById('testimonials-scroll');
 		const prevBtn = document.getElementById('testimonials-prev');
 		const nextBtn = document.getElementById('testimonials-next');
+		const fadeLeft = document.getElementById('testimonials-fade-left');
+		const fadeRight = document.getElementById('testimonials-fade-right');
 		const scrollAmount = 304;
+
+		function updateFades() {
+			if (!scrollEl || !fadeLeft || !fadeRight) return;
+			const atStart = scrollEl.scrollLeft <= 0;
+			const atEnd = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+			fadeLeft.style.opacity = atStart ? '0' : '1';
+			fadeRight.style.opacity = atEnd ? '0' : '1';
+		}
 
 		if (scrollEl && prevBtn && nextBtn) {
 			prevBtn.addEventListener('click', (e) => {
@@ -144,6 +173,8 @@ const testimonials = [
 				e.preventDefault();
 				scrollEl.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 			});
+			scrollEl.addEventListener('scroll', updateFades, { passive: true });
+			updateFades();
 		}
 	});
 </script>

@@ -64,7 +64,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
                   class:list={[
                     "flex gap-1.5 items-center text-base transition-colors whitespace-nowrap py-2 bg-transparent border-none cursor-pointer font-inherit",
                     isSpecialtiesActive
-                      ? "text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8"
+                      ? "text-french-ultramarine font-medium underline decoration-2 decoration-french-ultramarine underline-offset-8"
                       : "text-black font-normal hover:text-french-ultramarine",
                   ]}
                   aria-haspopup="true"
@@ -120,7 +120,7 @@ const isSpecialtiesActive = pathname.startsWith(toHref('/especialidades'));
                 class:list={[
                   "flex gap-1.5 items-center text-base transition-colors whitespace-nowrap focus-ring rounded",
                   isActive(link.href)
-                    ? "text-french-ultramarine underline decoration-dashed decoration-french-ultramarine/30 underline-offset-8"
+                    ? "text-french-ultramarine font-medium underline decoration-2 decoration-french-ultramarine underline-offset-8"
                     : "text-black font-normal hover:text-french-ultramarine",
                 ]}
                 aria-current={isActive(link.href) ? "page" : undefined}

@@ -38,19 +38,20 @@ const hours = [
 
 		<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full order-2 lg:order-1">
 			{contacts.map((c, i) => (
-				<div
-					data-sal="slide-up"
-					data-sal-duration="400"
-					data-sal-delay={i * 100}
-				>
-				<a
-					href={c.href}
-					target={c.href.startsWith('http') ? '_blank' : undefined}
-					rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-					class="group block focus-ring rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg"
+			<div
+				data-sal="slide-up"
+				data-sal-duration="400"
+				data-sal-delay={i * 100}
+				class="h-full"
+			>
+			<a
+				href={c.href}
+				target={c.href.startsWith('http') ? '_blank' : undefined}
+				rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+				class="group block h-full focus-ring rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg"
 					aria-label={c.icon === 'urgency' ? 'Contactar por urgencias' : 'Contactar para atención general'}
 				>
-					<Card variant={c.icon === 'urgency' ? 'red' : 'blue'}>
+					<Card class={c.icon === 'urgency' ? 'bg-red-50 border border-red-700/20' : 'bg-blue-white border border-navy-blue/20'}>
 						<div class="flex flex-col gap-4">
 							<div class={`flex size-12 items-center justify-center rounded-xl shrink-0 ${c.icon === 'urgency' ? 'bg-red-700/10 text-red-700' : 'bg-navy-blue/10 text-navy-blue'}`}>
 								{c.icon === 'urgency' ? (
