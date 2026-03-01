@@ -1,22 +1,22 @@
 ---
-import SectionLabel from './SectionLabel.astro';
+import SectionLabel from "./SectionLabel.astro";
 
 interface Props {
-	label?: string;
-	title: string;
-	description?: string;
-	centered?: boolean;
-	centerOnMobile?: boolean;
-	variant?: 'default' | 'overlay';
+  label?: string;
+  title: string;
+  description?: string;
+  centered?: boolean;
+  centerOnMobile?: boolean;
+  variant?: "default" | "overlay";
 }
 
-const { label, title, description, centered = false, centerOnMobile = false, variant = 'default' } = Astro.props;
-const isOverlay = variant === 'overlay';
-const alignmentClass = centered ? 'items-center text-center' : centerOnMobile ? 'items-center lg:items-start text-center lg:text-left' : '';
+const { label, title, description, centered = false, centerOnMobile = false, variant = "default" } = Astro.props;
+const isOverlay = variant === "overlay";
+const alignmentClass = centered ? "items-center text-center" : centerOnMobile ? "items-center lg:items-start text-center lg:text-left" : "";
 ---
 
-<div class:list={['flex flex-col gap-2', alignmentClass]} data-sal="slide-up" data-sal-duration="400" data-sal-easing="ease-out">
-	{label && <SectionLabel label={label} centered={centered} centerOnMobile={centerOnMobile} variant={variant} />}
-	<h2 class:list={['font-display font-bold text-3xl leading-tight', isOverlay ? 'text-white' : 'text-navy-blue']}>{title}</h2>
-	{description && <p class:list={['text-base', isOverlay ? 'text-white/90' : 'text-body']}>{description}</p>}
+<div class:list={["flex flex-col gap-2", alignmentClass]} data-sal="slide-up" data-sal-duration="400" data-sal-easing="ease-out">
+  {label && <SectionLabel label={label} centered={centered} centerOnMobile={centerOnMobile} variant={variant} />}
+  <h2 class:list={["font-display font-bold text-3xl leading-tight", isOverlay ? "text-white" : "text-navy-blue"]}>{title}</h2>
+  {description && <p class:list={["text-base", isOverlay ? "text-white/90" : "text-body"]}>{description}</p>}
 </div>

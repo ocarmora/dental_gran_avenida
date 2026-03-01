@@ -21,8 +21,8 @@ const { variant = "full", title, description, ctaLabel, ctaHref } = Astro.props;
   variant === "simple" ? (
     <section class="relative w-full overflow-hidden bg-linear-to-r from-french-ultramarine to-bright-ocean">
       <div
-        class="absolute inset-0 opacity-20 pointer-events-none bg-top-left bg-repeat"
-        style={`background-image: url(${ctaPattern.src}); background-size: 494px 494px;`}
+        class="absolute inset-0 opacity-20 pointer-events-none bg-top-left cta-pattern-layer"
+        style={`background-image: url(${ctaPattern.src});`}
         aria-hidden="true"
       />
       <div class="container-site relative flex flex-col sm:flex-row items-center gap-4 sm:gap-40 py-10 sm:justify-center">

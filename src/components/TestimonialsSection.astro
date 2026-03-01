@@ -1,14 +1,14 @@
 ---
-import Card from './Card.astro';
-import SectionHeading from './SectionHeading.astro';
+import Card from "./Card.astro";
+import SectionHeading from "./SectionHeading.astro";
 
 interface Props {
-	background?: 'white' | 'blue-white';
-	cardVariant?: 'default' | 'blue';
+  background?: "white" | "blue-white";
+  cardVariant?: "default" | "blue";
 }
 
-const { background = 'blue-white', cardVariant = 'default' } = Astro.props;
-const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+const { background = "blue-white", cardVariant = "default" } = Astro.props;
+const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
 
 const testimonials = [
 	{
@@ -74,8 +74,8 @@ const testimonials = [
 					id="testimonials-prev"
 					aria-label="Anterior"
 					class:list={[
-						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring',
-						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
+						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring",
+						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
 					]}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors" aria-hidden="true">
@@ -87,8 +87,8 @@ const testimonials = [
 					id="testimonials-next"
 					aria-label="Siguiente"
 					class:list={[
-						'group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring',
-						cardVariant === 'blue' ? 'bg-blue-white' : 'bg-white',
+						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine transition-colors shrink-0 cursor-pointer touch-manipulation focus-ring",
+						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
 					]}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body group-hover:fill-white transition-colors" aria-hidden="true">
@@ -102,11 +102,10 @@ const testimonials = [
 				role="region"
 				aria-label="Testimonios de pacientes"
 				tabindex="0"
-				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2"
-				style="scrollbar-width: thin; -webkit-overflow-scrolling: touch;"
+				class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 scrollbar-thin"
 			>
 				{testimonials.map((t) => (
-					<Card variant={cardVariant === 'blue' ? 'blue' : 'default'} class="shrink-0 min-w-[280px] w-72 snap-start">
+					<Card variant={cardVariant === "blue" ? "blue" : "default"} class="shrink-0 min-w-[280px] w-72 snap-start">
 						<div class="flex flex-col gap-6">
 							<div class="flex gap-1" aria-label="5 de 5 estrellas">
 								{Array.from({ length: 5 }).map(() => (

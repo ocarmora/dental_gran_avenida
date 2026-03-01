@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "sal.js/dist/sal.css";
 import VideoPlayerModal from "../components/VideoPlayerModal.astro";
+import SalInit from "../components/SalInit.astro";
 import { toHref } from "../config";
 
 interface Props {
@@ -41,24 +42,12 @@ const pageTitle = title ? `${title} - ${siteName}` : siteName;
   >
     <a
       href="#main-content"
-      class="fixed left-4 top-0 -translate-y-full focus:translate-y-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-french-ultramarine focus:text-white focus:rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-french-ultramarine"
+      class="fixed left-4 top-0 -translate-y-full focus:translate-y-4 focus:z-100 focus:px-4 focus:py-2 focus:bg-french-ultramarine focus:text-white focus:rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-french-ultramarine"
     >
       Saltar al contenido
     </a>
     <slot />
     <VideoPlayerModal />
-    <script>
-      import sal from "sal.js";
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          sal({
-            root: null,
-            threshold: 0.3,
-            once: true,
-          });
-        });
-      });
-    </script>
+    <SalInit />
   </body>
 </html>

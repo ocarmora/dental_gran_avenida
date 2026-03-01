@@ -61,4 +61,24 @@
       padding-inline: 2.5rem;
     }
   }
+
+  .cta-pattern-layer {
+    background-size: 494px 494px;
+    background-repeat: repeat;
+  }
+
+  .card-image-overlay {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.8) 70%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
 }

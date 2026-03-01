@@ -1,0 +1,15 @@
+---
+---
+<script>
+  import sal from "sal.js";
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      sal({
+        root: null,
+        threshold: 0.3,
+        once: true,
+      });
+    });
+  });
+</script>
