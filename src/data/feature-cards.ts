@@ -1,7 +1,7 @@
 import type { ImageMetadata } from "astro";
-import featureXRay from "../assets/images/feature-x-ray.png";
-import featureLaboratory from "../assets/images/feature-laboratory.png";
-import featureParking from "../assets/images/feature-parking.png";
+import xRay from "../assets/images/x-ray.png";
+import sameDayResults from "../assets/images/same-day-results.png";
+import universalAccessibility from "../assets/images/universal-accessibility.png";
 import painlessTreatment from "../assets/images/painless-treatment.png";
 
 export type FeatureCard = {
@@ -12,22 +12,22 @@ export type FeatureCard = {
 
 export const featureCards: FeatureCard[] = [
   {
+    title: "Tratamientos inmediatos",
+    description:
+      "En Dental Gran Avenida obtienes tratamientos con la urgencia que necesitas.",
+    image: sameDayResults,
+  },
+  {
     title: "Mejor tecnología",
     description:
       "Sala de rayos X, scanner 3D y equipos de última generación para diagnósticos precisos.",
-    image: featureXRay,
-  },
-  {
-    title: "Laboratorio propio",
-    description:
-      "Laboratorio de patología oral en la misma clínica para resultados en tiempo récord.",
-    image: featureLaboratory,
+    image: xRay,
   },
   {
     title: "Acceso para todos",
     description:
       "Estacionamiento gratuito y acceso para personas en situación de discapacidad.",
-    image: featureParking,
+    image: universalAccessibility,
   },
   {
     title: "Tratamiento sin dolor",
