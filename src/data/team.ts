@@ -57,7 +57,7 @@ export const teamMembers: TeamMember[] = [
   {
     slug: "dra-camila-rusque",
     name: "Dra. Camila Rusque",
-    specialty: "Endodoncia",
+    specialty: "Ortodoncia",
     image: draCamilaRusque,
   },
   {
