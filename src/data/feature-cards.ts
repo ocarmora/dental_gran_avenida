@@ -1,9 +1,8 @@
 import type { ImageMetadata } from "astro";
-import placeholder from "../assets/images/service-placeholder.jpg";
 import featureXRay from "../assets/images/feature-x-ray.png";
 import featureLaboratory from "../assets/images/feature-laboratory.png";
 import featureParking from "../assets/images/feature-parking.png";
-import featurePainless from "../assets/images/feature-painless.png";
+import painlessTreatment from "../assets/images/painless-treatment.png";
 
 export type FeatureCard = {
   title: string;
@@ -34,6 +33,6 @@ export const featureCards: FeatureCard[] = [
     title: "Tratamiento sin dolor",
     description:
       "Técnicas modernas y sedación consciente para que tu visita sea completamente confortable.",
-    image: featurePainless,
+    image: painlessTreatment,
   },
 ];
