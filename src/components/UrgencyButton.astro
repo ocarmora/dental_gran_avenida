@@ -9,7 +9,7 @@ interface Props {
    * Mobile sticky header: compact height (h-10) with smaller text.
    */
   compact?: boolean;
-  target?: '_blank' | '_self';
+  target?: "_blank" | "_self";
   class?: string;
 }
 
@@ -25,10 +25,10 @@ const {
 <a
   href={href}
   target={target}
-  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+  rel={target === "_blank" ? "noopener noreferrer" : undefined}
   class:list={[
     className,
-    "urgency-btn group flex items-center rounded-full border border-red-700/30 bg-red-50 text-red-700 hover:bg-red-700 hover:border-red-700 hover:text-white transition-colors focus-ring",
+    "group flex items-center rounded-full border border-red-700/30 bg-red-50 text-red-700 hover:bg-red-700 hover:border-red-700 hover:text-white transition-colors focus-ring",
     compact && "h-10 gap-2 px-4",
     expandable && "h-12 shrink-0",
     !compact && !expandable && "h-12 gap-2 px-4",
@@ -89,7 +89,7 @@ const {
     }
   }
   .urgency-btn {
-    animation: urgency-blink 10s ease-in-out infinite;
+    animation: urgency-blink 3s ease-in-out infinite;
     animation-timing-function: ease-in-out;
   }
   .urgency-btn:hover {

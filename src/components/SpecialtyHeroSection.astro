@@ -13,7 +13,7 @@ interface Props {
 const { specialty } = Astro.props;
 ---
 
-<section class="w-full py-16 lg:py-24 overflow-hidden">
+<section class="w-full py-16 overflow-hidden">
   <div
     class="container-site flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-20 lg:w-fit lg:mx-auto"
   >
@@ -21,7 +21,7 @@ const { specialty } = Astro.props;
       data-sal="slide-up"
       data-sal-duration="400"
       data-sal-delay="80"
-      class="relative flex items-center justify-center shrink-0 w-full max-w-64 aspect-square lg:w-96"
+      class="relative flex items-center justify-center shrink-0 w-full max-w-64 aspect-square lg:w-96 lg:max-w-none lg:aspect-auto"
     >
       <Image
         src={specialty.image ?? servicePlaceholder}
