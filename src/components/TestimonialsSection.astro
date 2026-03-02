@@ -1,6 +1,6 @@
 ---
 import SectionHeading from "./SectionHeading.astro";
-import { testimonials } from "../data/testimonials";
+import { testimonials } from "../data/site-data";
 
 interface Props {
   background?: "white" | "blue-white";
@@ -10,122 +10,173 @@ interface Props {
 const { background = "blue-white", cardVariant = "default" } = Astro.props;
 const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
 const fadeFromClass = background === "white" ? "from-white" : "from-blue-white";
-const cardClass = cardVariant === "blue"
-  ? "bg-blue-white border border-navy-blue/20"
-  : "bg-white border border-navy-blue/20";
+const cardClass =
+  cardVariant === "blue"
+    ? "bg-blue-white border border-navy-blue/20"
+    : "bg-white border border-navy-blue/20";
 ---
 
-<section class:list={[bgClass, 'py-24 w-full overflow-x-hidden']}>
-	<div class="container-site flex flex-col lg:flex-row items-center lg:items-center gap-8 lg:gap-20">
+<section class:list={[bgClass, "py-24 w-full overflow-x-hidden"]}>
+  <div
+    class="container-site flex flex-col lg:flex-row items-center lg:items-center gap-8 lg:gap-20"
+  >
+    <div
+      class="flex-1 min-w-0 w-full flex flex-col items-center lg:items-start justify-center text-center lg:text-left"
+      data-sal="slide-up"
+      data-sal-duration="400"
+    >
+      <SectionHeading
+        label="Testimonios"
+        title="Nuestros pacientes nos prefieren"
+        description="Miles de familias de El Bosque y sus alrededores confían en Dental Gran Avenida para el cuidado de su salud bucal."
+        centerOnMobile
+      />
+    </div>
 
-		<div class="flex-1 min-w-0 w-full flex flex-col items-center lg:items-start justify-center text-center lg:text-left" data-sal="slide-up" data-sal-duration="400">
-			<SectionHeading
-				label="Testimonios"
-				title="Nuestros pacientes nos prefieren"
-				description="Miles de familias de El Bosque y sus alrededores confían en Dental Gran Avenida para el cuidado de su salud bucal."
-				centerOnMobile
-			/>
-		</div>
+    <div
+      class="flex flex-col gap-6 flex-1 min-w-0 w-full"
+      data-sal="slide-up"
+      data-sal-duration="400"
+      data-sal-delay="100"
+    >
+      <div class="flex items-center justify-center lg:justify-end gap-2">
+        <button
+          type="button"
+          id="testimonials-prev"
+          aria-label="Anterior"
+          class:list={[
+            "group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
+            cardVariant === "blue" ? "bg-blue-white" : "bg-white",
+          ]}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 18 8"
+            class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors"
+            aria-hidden="true"
+          >
+            <path
+              d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"
+            ></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="testimonials-next"
+          aria-label="Siguiente"
+          class:list={[
+            "group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
+            cardVariant === "blue" ? "bg-blue-white" : "bg-white",
+          ]}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 18 8"
+            class="w-4 h-auto fill-body group-hover:fill-white transition-colors"
+            aria-hidden="true"
+          >
+            <path
+              d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
 
-		<div class="flex flex-col gap-6 flex-1 min-w-0 w-full" data-sal="slide-up" data-sal-duration="400" data-sal-delay="100">
-
-			<div class="flex items-center justify-center lg:justify-end gap-2">
-				<button
-					type="button"
-					id="testimonials-prev"
-					aria-label="Anterior"
-					class:list={[
-						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
-						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
-					]}
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto rotate-180 fill-body group-hover:fill-white transition-colors" aria-hidden="true">
-						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
-					</svg>
-				</button>
-				<button
-					type="button"
-					id="testimonials-next"
-					aria-label="Siguiente"
-					class:list={[
-						"group flex items-center justify-center size-10 rounded-full hover:bg-french-ultramarine hover:border-french-ultramarine transition-colors duration-300 shrink-0 cursor-pointer touch-manipulation focus-ring border border-navy-blue/55",
-						cardVariant === "blue" ? "bg-blue-white" : "bg-white",
-					]}
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 8" class="w-4 h-auto fill-body group-hover:fill-white transition-colors" aria-hidden="true">
-						<path d="M17.354 4.354a.5.5 0 0 0 0-.708L14.172.464a.5.5 0 1 0-.708.708L16.293 4l-2.829 2.828a.5.5 0 1 0 .708.708l3.182-3.182ZM0 4.5h17v-1H0v1Z"/>
-					</svg>
-				</button>
-			</div>
-
-		<div class="relative overflow-hidden">
-			<div
-				id="testimonials-fade-left"
-				aria-hidden="true"
-				class:list={["pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-linear-to-r to-transparent opacity-0 transition-opacity duration-300", fadeFromClass]}
-			/>
-			<div
-				id="testimonials-fade-right"
-				aria-hidden="true"
-				class:list={["pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-linear-to-l to-transparent transition-opacity duration-300", fadeFromClass]}
-			/>
-		<div
-			id="testimonials-scroll"
-			role="region"
-			aria-label="Testimonios de pacientes"
-			tabindex="0"
-			class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 scrollbar-thin"
-		>
-				{testimonials.map((t, i) => {
-				const snapClass = i === 0 ? "snap-start" : i === testimonials.length - 1 ? "snap-end" : "snap-center";
-				return (
-					<article class:list={[cardClass, "relative shrink-0 min-w-[280px] w-72 rounded-2xl px-7 pt-6 pb-7 flex flex-col justify-between gap-6 overflow-hidden", snapClass]}>
-						<svg class="absolute top-5 left-6 size-8 fill-french-ultramarine/15 pointer-events-none" viewBox="0 0 32 24" aria-hidden="true">
-							<path d="M0 24V13.5C0 5.833 4.667.667 14 0l1.667 3C11 4.333 8.5 7.167 8 11.5h6V24H0zm18 0V13.5C18 5.833 22.667.667 32 0l1.667 3C29 4.333 26.5 7.167 26 11.5h6V24H18z"/>
-						</svg>
-						<p class="relative text-base text-body leading-relaxed pt-10">{t.quote}</p>
-						<div class="flex flex-col gap-0.5 border-t border-navy-blue/10 pt-4">
-							<p class="text-sm font-semibold text-navy-blue">{t.name}</p>
-							<p class="text-xs text-body/60">{t.detail}</p>
-						</div>
-					</article>
-				);
-			})}
-			</div>
-		</div>
-
-		</div>
-	</div>
+      <div class="relative overflow-hidden">
+        <div
+          id="testimonials-fade-left"
+          aria-hidden="true"
+          class:list={[
+            "pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-linear-to-r to-transparent opacity-0 transition-opacity duration-300",
+            fadeFromClass,
+          ]}
+        >
+        </div>
+        <div
+          id="testimonials-fade-right"
+          aria-hidden="true"
+          class:list={[
+            "pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-linear-to-l to-transparent transition-opacity duration-300",
+            fadeFromClass,
+          ]}
+        >
+        </div>
+        <div
+          id="testimonials-scroll"
+          role="region"
+          aria-label="Testimonios de pacientes"
+          tabindex="0"
+          class="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory pb-2 scrollbar-thin"
+        >
+          {
+            testimonials.map((t, i) => {
+              const snapClass =
+                i === 0
+                  ? "snap-start"
+                  : i === testimonials.length - 1
+                    ? "snap-end"
+                    : "snap-center";
+              return (
+                <article
+                  class:list={[
+                    cardClass,
+                    "relative shrink-0 min-w-[280px] w-72 rounded-2xl px-7 pt-6 pb-7 flex flex-col justify-between gap-6 overflow-hidden",
+                    snapClass,
+                  ]}
+                >
+                  <svg
+                    class="absolute top-5 left-6 size-8 fill-french-ultramarine/15 pointer-events-none"
+                    viewBox="0 0 32 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M0 24V13.5C0 5.833 4.667.667 14 0l1.667 3C11 4.333 8.5 7.167 8 11.5h6V24H0zm18 0V13.5C18 5.833 22.667.667 32 0l1.667 3C29 4.333 26.5 7.167 26 11.5h6V24H18z" />
+                  </svg>
+                  <p class="relative text-base text-body leading-relaxed pt-10">
+                    {t.quote}
+                  </p>
+                  <div class="flex flex-col gap-0.5 border-t border-navy-blue/10 pt-4">
+                    <p class="text-sm font-semibold text-navy-blue">{t.name}</p>
+                    <p class="text-xs text-body/60">{t.detail}</p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const scrollEl = document.getElementById('testimonials-scroll');
-		const prevBtn = document.getElementById('testimonials-prev');
-		const nextBtn = document.getElementById('testimonials-next');
-		const fadeLeft = document.getElementById('testimonials-fade-left');
-		const fadeRight = document.getElementById('testimonials-fade-right');
-		const scrollAmount = 304;
+  document.addEventListener("DOMContentLoaded", () => {
+    const scrollEl = document.getElementById("testimonials-scroll");
+    const prevBtn = document.getElementById("testimonials-prev");
+    const nextBtn = document.getElementById("testimonials-next");
+    const fadeLeft = document.getElementById("testimonials-fade-left");
+    const fadeRight = document.getElementById("testimonials-fade-right");
+    const scrollAmount = 304;
 
-		function updateFades() {
-			if (!scrollEl || !fadeLeft || !fadeRight) return;
-			const atStart = scrollEl.scrollLeft <= 0;
-			const atEnd = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
-			fadeLeft.style.opacity = atStart ? '0' : '1';
-			fadeRight.style.opacity = atEnd ? '0' : '1';
-		}
+    function updateFades() {
+      if (!scrollEl || !fadeLeft || !fadeRight) return;
+      const atStart = scrollEl.scrollLeft <= 0;
+      const atEnd =
+        scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+      fadeLeft.style.opacity = atStart ? "0" : "1";
+      fadeRight.style.opacity = atEnd ? "0" : "1";
+    }
 
-		if (scrollEl && prevBtn && nextBtn) {
-			prevBtn.addEventListener('click', (e) => {
-				e.preventDefault();
-				scrollEl.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-			});
-			nextBtn.addEventListener('click', (e) => {
-				e.preventDefault();
-				scrollEl.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-			});
-			scrollEl.addEventListener('scroll', updateFades, { passive: true });
-			updateFades();
-		}
-	});
+    if (scrollEl && prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollEl.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      });
+      nextBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollEl.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
+      scrollEl.addEventListener("scroll", updateFades, { passive: true });
+      updateFades();
+    }
+  });
 </script>

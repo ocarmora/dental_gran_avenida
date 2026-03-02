@@ -1,31 +1,29 @@
 ---
-import SectionHeading from './SectionHeading.astro';
-import TeamGrid from './TeamGrid.astro';
-import type { TeamMember } from '../data/team';
+import SectionHeading from "./SectionHeading.astro";
+import TeamGrid from "./TeamGrid.astro";
+import type { TeamMember } from "../data/site-data";
 
 interface Props {
-	specialtyLabel: string;
-	members: TeamMember[];
-	background?: 'white' | 'blue-white';
+  specialtyLabel: string;
+  members: TeamMember[];
+  background?: "white" | "blue-white";
 }
 
-const { specialtyLabel, members, background = 'blue-white' } = Astro.props;
-const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+const { specialtyLabel, members, background = "blue-white" } = Astro.props;
+const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
 ---
 
-<section class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col gap-16 items-center">
+<section class:list={[bgClass, "py-24 w-full"]}>
+  <div class="container-site flex flex-col gap-16 items-center">
+    <div data-sal="slide-up" data-sal-duration="400">
+      <SectionHeading
+        label="Nuestro equipo"
+        title={`Especialistas en ${specialtyLabel}`}
+        description="Profesionales con formación especializada y años de experiencia clínica que te acompañarán en todo tu tratamiento."
+        centered
+      />
+    </div>
 
-		<div data-sal="slide-up" data-sal-duration="400">
-		<SectionHeading
-			label="Nuestro equipo"
-			title={`Especialistas en ${specialtyLabel}`}
-			description="Profesionales con formación especializada y años de experiencia clínica que te acompañarán en todo tu tratamiento."
-			centered
-		/>
-		</div>
-
-		<TeamGrid members={members} />
-
-	</div>
+    <TeamGrid members={members} />
+  </div>
 </section>

@@ -1,29 +1,27 @@
 ---
-import SectionHeading from './SectionHeading.astro';
-import TeamGrid from './TeamGrid.astro';
-import { teamMembers } from '../data/team';
+import SectionHeading from "./SectionHeading.astro";
+import TeamGrid from "./TeamGrid.astro";
+import { teamMembers } from "../data/site-data";
 
 interface Props {
-	background?: 'white' | 'blue-white';
+  background?: "white" | "blue-white";
 }
 
-const { background = 'blue-white' } = Astro.props;
-const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+const { background = "blue-white" } = Astro.props;
+const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
 ---
 
-<section id="equipo" class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col gap-12 items-center">
+<section id="equipo" class:list={[bgClass, "py-24 w-full"]}>
+  <div class="container-site flex flex-col gap-12 items-center">
+    <div data-sal="slide-up" data-sal-duration="400">
+      <SectionHeading
+        label="El equipo"
+        title="Profesionales con experiencia"
+        description="Nuestros especialistas combinan formación de primer nivel con un trato cercano, asegurando la mejor atención para ti y tu familia."
+        centered
+      />
+    </div>
 
-		<div data-sal="slide-up" data-sal-duration="400">
-		<SectionHeading
-			label="El equipo"
-			title="Profesionales con experiencia"
-			description="Nuestros especialistas combinan formación de primer nivel con un trato cercano, asegurando la mejor atención para ti y tu familia."
-			centered
-		/>
-		</div>
-
-		<TeamGrid members={teamMembers} />
-
-	</div>
+    <TeamGrid members={teamMembers} />
+  </div>
 </section>

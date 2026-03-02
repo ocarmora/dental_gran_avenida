@@ -1,39 +1,56 @@
 ---
-import ImageCard from './ImageCard.astro';
-import SectionHeading from './SectionHeading.astro';
-import { featureCards } from '../data/feature-cards';
+import ImageCard from "./ImageCard.astro";
+import SectionHeading from "./SectionHeading.astro";
+import { featureCards } from "../data/site-data";
 
 interface Props {
-	label: string;
-	title: string;
-	description: string;
-	id?: string;
-	background?: 'white' | 'blue-white';
+  label: string;
+  title: string;
+  description: string;
+  id?: string;
+  background?: "white" | "blue-white";
 }
 
-const { label, title, description, id, background = 'blue-white' } = Astro.props;
-const bgClass = background === 'white' ? 'bg-white' : 'bg-blue-white';
+const {
+  label,
+  title,
+  description,
+  id,
+  background = "blue-white",
+} = Astro.props;
+const bgClass = background === "white" ? "bg-white" : "bg-blue-white";
 ---
 
-<section id={id} class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col gap-12">
+<section id={id} class:list={[bgClass, "py-24 w-full"]}>
+  <div class="container-site flex flex-col gap-12">
+    <div
+      class="w-full max-w-2xl mx-auto flex flex-col items-center text-center"
+    >
+      <SectionHeading
+        label={label}
+        title={title}
+        description={description}
+        centered
+      />
+    </div>
 
-		<div class="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
-			<SectionHeading
-				label={label}
-				title={title}
-				description={description}
-				centered
-			/>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-			{featureCards.map((card, i) => (
-				<div data-sal="slide-up" data-sal-duration="400" data-sal-delay={i * 80} class="h-full">
-					<ImageCard title={card.title} description={card.description} image={card.image} />
-				</div>
-			))}
-		</div>
-
-	</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        featureCards.map((card, i) => (
+          <div
+            data-sal="slide-up"
+            data-sal-duration="400"
+            data-sal-delay={i * 80}
+            class="h-full"
+          >
+            <ImageCard
+              title={card.title}
+              description={card.description}
+              image={card.image}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>

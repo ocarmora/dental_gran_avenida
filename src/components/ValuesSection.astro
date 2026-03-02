@@ -1,43 +1,52 @@
 ---
-import SectionHeading from './SectionHeading.astro';
-import { clinicValues } from '../data/values';
+import SectionHeading from "./SectionHeading.astro";
+import { clinicValues } from "../data/site-data";
 
 interface Props {
-	background?: 'white' | 'blue-white';
+  background?: "white" | "blue-white";
 }
 
-const { background = 'white' } = Astro.props;
-const bgClass = background === 'blue-white' ? 'bg-blue-white' : 'bg-white';
+const { background = "white" } = Astro.props;
+const bgClass = background === "blue-white" ? "bg-blue-white" : "bg-white";
 ---
 
-<section class:list={[bgClass, 'py-24 w-full']}>
-	<div class="container-site flex flex-col gap-14">
+<section class:list={[bgClass, "py-24 w-full"]}>
+  <div class="container-site flex flex-col gap-14">
+    <div
+      class="w-full max-w-2xl mx-auto flex flex-col items-center text-center"
+    >
+      <SectionHeading
+        label="Misión y más"
+        title="Conoce nuestros valores y propósito"
+        description="Llevamos más de 40 años comprometidos con la salud bucal de las familias de El Bosque. Nuestros valores guían cada decisión clínica y cada interacción con nuestros pacientes."
+        centered
+      />
+    </div>
 
-		<div class="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
-			<SectionHeading
-				label="Misión y más"
-				title="Conoce nuestros valores y propósito"
-				description="Llevamos más de 40 años comprometidos con la salud bucal de las familias de El Bosque. Nuestros valores guían cada decisión clínica y cada interacción con nuestros pacientes."
-				centered
-			/>
-		</div>
-
-		<div class="flex flex-col sm:flex-row gap-8 lg:gap-16 max-w-4xl mx-auto w-full">
-			{clinicValues.map((v, i) => (
-				<div
-					data-sal="slide-up"
-					data-sal-duration="400"
-					data-sal-delay={i * 100}
-					class="flex gap-5 flex-1"
-				>
-					<div class="w-0.5 shrink-0 bg-french-ultramarine rounded-full mt-1" aria-hidden="true" />
-					<div class="flex flex-col gap-2">
-						<h3 class="font-display font-bold text-xl text-navy-blue">{v.title}</h3>
-						<p class="text-base text-body leading-relaxed">{v.description}</p>
-					</div>
-				</div>
-			))}
-		</div>
-
-	</div>
+    <div
+      class="flex flex-col sm:flex-row gap-8 lg:gap-16 max-w-4xl mx-auto w-full"
+    >
+      {
+        clinicValues.map((v, i) => (
+          <div
+            data-sal="slide-up"
+            data-sal-duration="400"
+            data-sal-delay={i * 100}
+            class="flex gap-5 flex-1"
+          >
+            <div
+              class="w-0.5 shrink-0 bg-french-ultramarine rounded-full mt-1"
+              aria-hidden="true"
+            />
+            <div class="flex flex-col gap-2">
+              <h3 class="font-display font-bold text-xl text-navy-blue">
+                {v.title}
+              </h3>
+              <p class="text-base text-body leading-relaxed">{v.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>
