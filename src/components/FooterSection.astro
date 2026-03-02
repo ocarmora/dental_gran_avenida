@@ -1,78 +1,107 @@
 ---
-import { Image } from 'astro:assets';
-import { config, toHref } from '../config';
-import Link from './Link.astro';
-import SocialIcons from './SocialIcons.astro';
-import logoWhite from '../assets/images/logo-white.png';
+import { Image } from "astro:assets";
+import { config, toHref } from "../config";
+import Link from "./Link.astro";
+import SocialIcons from "./SocialIcons.astro";
+import logoWhite from "../assets/images/logo-white.png";
 
 const menus = [
-	{
-		title: 'Redes sociales',
-		links: [
-			{ label: 'Instagram', href: config.social.instagram },
-			{ label: 'Facebook', href: config.social.facebook },
-			{ label: 'WhatsApp', href: config.whatsapp.url },
-		],
-	},
-	{
-		title: 'Sobre la clínica',
-		links: [
-			{ label: 'El equipo', href: toHref('/conoce-la-clinica#equipo') },
-			{ label: 'Infraestructura y tecnología', href: toHref('/conoce-la-clinica#tecnologia') },
-			{ label: 'Conoce la Clínica', href: toHref('/conoce-la-clinica') },
-			{ label: 'Contacto', href: toHref('/contacto') },
-		],
-	},
-	{
-		title: 'Contacto',
-		links: [
-			{ label: 'Gran Avenida 10063, El Bosque, Región Metropolitana', href: config.location.mapsUrl },
-			{ label: config.contact.email, href: `mailto:${config.contact.email}` },
-			{ label: config.whatsapp.phoneFormatted, href: config.whatsapp.url },
-			{ label: config.contact.phoneLandlineFormatted, href: config.whatsapp.url },
-		],
-	},
+  {
+    title: "Redes sociales",
+    links: [
+      { label: "Instagram", href: config.social.instagram },
+      { label: "Facebook", href: config.social.facebook },
+      { label: "WhatsApp", href: config.whatsapp.url },
+    ],
+  },
+  {
+    title: "Sobre la clínica",
+    links: [
+      { label: "El equipo", href: toHref("/conoce-la-clinica#equipo") },
+      {
+        label: "Infraestructura y tecnología",
+        href: toHref("/conoce-la-clinica#tecnologia"),
+      },
+      { label: "Conoce la Clínica", href: toHref("/conoce-la-clinica") },
+      { label: "Contacto", href: toHref("/contacto") },
+    ],
+  },
+  {
+    title: "Contacto",
+    links: [
+      {
+        label: "Gran Avenida 10063, El Bosque, Región Metropolitana",
+        href: config.location.mapsUrl,
+      },
+      { label: config.contact.email, href: `mailto:${config.contact.email}` },
+      { label: config.whatsapp.phoneFormatted, href: config.whatsapp.url },
+      {
+        label: config.contact.phoneLandlineFormatted,
+        href: config.whatsapp.url,
+      },
+    ],
+  },
 ];
 ---
 
 <footer class="bg-dark-sea-blue w-full flex flex-col gap-20 pt-20 pb-10">
-	<div class="container-site flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-12">
-		<div class="flex flex-col gap-4 shrink-0 max-w-xl">
-			<a href={toHref('/')} aria-label="Dental Gran Avenida - Inicio" class="block h-14 w-32 shrink-0 focus-ring-on-dark rounded">
-				<Image src={logoWhite} alt="Dental Gran Avenida" class="h-full w-auto object-contain object-left" />
-			</a>
-			<p class="text-base text-white/90">
-				40 años cuidando la sonrisa de las familias de El Bosque y sus alrededores.
-			</p>
-			<div class="flex gap-3 items-center">
-				<SocialIcons variant="light" size="md" />
-			</div>
-		</div>
+  <div
+    class="container-site flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-12"
+  >
+    <div class="flex flex-col gap-4 shrink-0 max-w-xl">
+      <a
+        href={toHref("/")}
+        aria-label="Dental Gran Avenida - Inicio"
+        class="block h-14 w-32 shrink-0 focus-ring-on-dark rounded"
+      >
+        <Image
+          src={logoWhite}
+          alt="Dental Gran Avenida"
+          class="h-full w-auto object-contain object-left"
+        />
+      </a>
+      <p class="text-base text-white/90">
+        40 años cuidando la sonrisa de las familias de El Bosque y sus
+        alrededores.
+      </p>
+      <div class="flex gap-2 items-center">
+        <SocialIcons variant="light" size="md" />
+      </div>
+    </div>
 
-		<nav class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 shrink-0 lg:max-w-[40%]" aria-label="Footer navigation">
-			{menus.map((menu) => (
-				<div class="flex flex-col gap-4">
-					<h3 class="font-display text-lg font-semibold text-white">{menu.title}</h3>
-					<ul class="flex flex-col gap-3">
-					{menu.links.map((link) => (
-						<li>
-							<Link
-								href={link.href}
-								label={link.label}
-								target={link.href.startsWith('http') ? '_blank' : undefined}
-								variant="on-dark"
-							/>
-						</li>
-					))}
-					</ul>
-				</div>
-			))}
-		</nav>
-	</div>
+    <nav
+      class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 shrink-0 lg:max-w-[40%]"
+      aria-label="Footer navigation"
+    >
+      {
+        menus.map((menu) => (
+          <div class="flex flex-col gap-4">
+            <h3 class="font-display text-lg font-semibold text-white">
+              {menu.title}
+            </h3>
+            <ul class="flex flex-col gap-3">
+              {menu.links.map((link) => (
+                <li>
+                  <Link
+                    href={link.href}
+                    label={link.label}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    variant="on-dark"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </div>
 
-	<div class="container-site border-t border-white/10 pt-10 flex justify-center">
-		<p class="text-base text-white/80 text-center">
-			&copy; {new Date().getFullYear()} Dental Gran Avenida. Todos los derechos reservados.
-		</p>
-	</div>
+  <div
+    class="container-site border-t border-white/10 pt-10 flex justify-center"
+  >
+    <p class="text-base text-white/80 text-center">
+      &copy; {new Date().getFullYear()} Dental Gran Avenida. Todos los derechos reservados.
+    </p>
+  </div>
 </footer>
