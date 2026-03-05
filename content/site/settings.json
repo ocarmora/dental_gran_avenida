@@ -1,0 +1,24 @@
+{
+  "siteName": "Dental Gran Avenida",
+  "yearsExperience": 40,
+  "whatsapp": {
+    "phone": "56948446632",
+    "message": ""
+  },
+  "contact": {
+    "email": "contacto@dentalgranavenida.cl",
+    "phoneLandline": "56225272911",
+    "phoneLandlineFormatted": "+56 2 2527 2911"
+  },
+  "social": {
+    "facebook": "https://facebook.com/dentalgranavenida",
+    "instagram": "https://instagram.com/dentalgranavenida"
+  },
+  "location": {
+    "mapsUrl": "https://maps.app.goo.gl/ZuKAfvAUwmX4s5j78"
+  },
+  "address": {
+    "full": "Gran Avenida 10063, El Bosque, Región Metropolitana",
+    "short": "Gran Avenida 10063, El Bosque"
+  }
+}
