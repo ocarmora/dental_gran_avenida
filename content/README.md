@@ -13,12 +13,12 @@ This folder holds content managed by [Pages CMS](https://pagescms.org). The sche
 | `pages/home.md` | File | Home page content |
 | `pages/contact.md` | File | Contact page |
 | `pages/about.md` | File | About / Conoce la clínica |
-| `specialties/*.md` | Collection | One file per specialty (slug = filename) |
-| `team/*.md` | Collection | One file per team member |
-| `testimonials/*.md` | Collection | Testimonials |
-| `blog/*.md` | Collection | Blog posts |
-| `banners/*.md` | Collection | Promotional banners |
-| `gallery/*.md` | Collection | Before/after cases |
+| `specialties/*.md` | Collection | One file per specialty (9 seeded) |
+| `team/*.md` | Collection | One file per team member (10 seeded) |
+| `testimonials/*.md` | Collection | Testimonials (8 seeded) |
+| `blog/*.md` | Collection | Blog posts (1 placeholder) |
+| `banners/*.md` | Collection | Promotional banners (1 placeholder) |
+| `gallery/*.md` | Collection | Before/after cases (1 placeholder) |
 
 ## Media
 
