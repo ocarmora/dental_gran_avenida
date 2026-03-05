@@ -1,0 +1,11 @@
+media:
+  input: src/assets/images
+  output: /images
+content:
+  - name: services
+    label: Servicesa
+    type: collection
+    path: src/_services
+    fields: 
+      - name: title
+        type: string
