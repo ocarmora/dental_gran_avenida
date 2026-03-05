@@ -3,9 +3,37 @@ media:
   output: /images
 content:
   - name: services
-    label: Servicesa
+    label: Servicios
     type: collection
     path: src/_services
-    fields: 
+    fields:
       - name: title
+        label: Nombre del servicio
         type: string
+        required: true
+      - name: slug
+        label: Slug
+        type: string
+        description: Identificador para URLs (ej. implantologia, ortodoncia)
+        required: true
+      - name: description
+        label: Descripción breve
+        type: text
+        description: Para listados y tarjetas
+      - name: heroDescription
+        label: Descripción hero
+        type: text
+        description: Texto más extenso para la página del servicio
+      - name: teamMemberSlugs
+        label: Slugs del equipo
+        type: string
+        list: true
+        description: Slugs de los profesionales que atienden este servicio (ej. dr-marco-guerrero-m)
+      - name: offer
+        label: Oferta
+        type: string
+        description: Opcional (ej. 20% dscto.)
+      - name: body
+        label: Contenido
+        type: rich-text
+        description: Contenido principal de la página (procedimientos, beneficios, etc.)
